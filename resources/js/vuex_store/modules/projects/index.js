@@ -1,6 +1,6 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost/api'
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.baseURL = 'http://46.101.114.150/api'
+/* axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; */
 
 const state = {
     ProjectItems: [],
