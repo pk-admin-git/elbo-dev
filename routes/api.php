@@ -18,7 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'cors'], function () {
 
         Route::get('/projects', 'ProjectController@index');
 
@@ -27,4 +26,3 @@ Route::group(['middleware' => 'cors'], function () {
         Route::patch('/projects/{project}', 'ProjectController@update');
 
         Route::delete('/projects/{project}', 'ProjectController@destroy');
-});
