@@ -22,7 +22,6 @@ class CreateProjectsTable extends Migration
 
             $table->string('OrderIdInternal', 30);
             $table->string('OrderIdCustomer', 50);
-            $table->date('ProjectStart');
             $table->timestamps();
         });
     }
