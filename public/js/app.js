@@ -1929,7 +1929,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCategoryElement',
-  props: ['element', 'index'],
+  props: ['docuObject'],
   methods: {
     elementIndex: function elementIndex(index) {
       return "category" + index;
@@ -1952,7 +1952,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCategoryElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCategoryElement.vue");
-//
 //
 //
 //
@@ -38724,7 +38723,7 @@ var render = function() {
             attrs: {
               type: "button",
               "data-toggle": "collapse",
-              "data-target": _vm.setElementIndex(_vm.index)
+              "data-target": _vm.setElementIndex(_vm.docuObject.id)
             }
           },
           [
@@ -38743,7 +38742,7 @@ var render = function() {
       {
         staticClass: "collapse",
         attrs: {
-          id: _vm.elementIndex(_vm.index),
+          id: _vm.elementIndex(_vm.docuObject.id),
           "aria-labelledby": "headingOne",
           "data-parent": "#accordionExample"
         }
@@ -38843,7 +38842,7 @@ var render = function() {
       _vm._l(_vm.docuObjects, function(docuObject) {
         return _c("docuCategoryElement", {
           key: docuObject.id,
-          attrs: { element: _vm.element, index: _vm.index }
+          attrs: { docuObject: docuObject }
         })
       }),
       1

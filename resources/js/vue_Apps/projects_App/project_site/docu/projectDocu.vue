@@ -16,8 +16,7 @@
             
         <docuCategoryElement v-for="docuObject in docuObjects" 
                             :key="docuObject.id"
-                            :element="element"
-                            :index="index"/>
+                            :docuObject="docuObject"/>
         </div>
     </div>
 </template>
