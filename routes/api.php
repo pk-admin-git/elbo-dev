@@ -19,10 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-        Route::get('/projects', 'ProjectController@index');
+        Route::get('/projects', 'ProjectController@index')->middleware('cors');
 
-        Route::post('/projects', 'ProjectController@store');
+        Route::post('/projects', 'ProjectController@store')->middleware('cors');
 
-        Route::patch('/projects/{project}', 'ProjectController@update');
+        Route::patch('/projects/{project}', 'ProjectController@update')->middleware('cors');
 
-        Route::delete('/projects/{project}', 'ProjectController@destroy');
+        Route::delete('/projects/{project}', 'ProjectController@destroy')->middleware('cors');
