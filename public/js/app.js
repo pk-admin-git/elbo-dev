@@ -57115,7 +57115,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = 'http://127.0.0.1:8000/api';
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = 'http://46.101.114.150/api';
+var axiosConfig = {
+  headers: {
+    "Content-Type": "Content-Type: application/json",
+    "X-Metabase-Session": "id",
+    "Access-Control-Allow-Origin": "*"
+  }
+};
 var state = {
   ProjectItems: []
 };
@@ -57127,7 +57134,7 @@ var mutations = {
 var actions = {
   getProjectItems: function getProjectItems(_ref) {
     var commit = _ref.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/projects').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/projects', axiosConfig).then(function (response) {
       commit('UPDATE_PROJECT_ITEMS', response.data);
     });
   },
