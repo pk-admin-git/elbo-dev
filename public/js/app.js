@@ -38811,14 +38811,17 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "btn btn-success mr-2", attrs: { type: "button" } },
+            {
+              staticClass: "btn btn-success mr-2 mt-2 mt-sm-0",
+              attrs: { type: "button" }
+            },
             [_vm._v("Anlegen")]
           ),
           _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "btn btn-secondary mr-2",
+              staticClass: "btn btn-secondary mr-2 mt-2 mt-sm-0",
               attrs: { type: "button" }
             },
             [_vm._v("Schließen")]

@@ -8,8 +8,8 @@
 
         <form class="form-inline" v-if="newObjectFormVisible">
             <input type="text" class="form-control mr-2" id="ObjectName" placeholder="Name" v-model="name">
-            <button type="button" class="btn btn-success mr-2">Anlegen</button>
-            <button type="button" class="btn btn-secondary mr-2">Schließen</button>
+            <button type="button" class="btn btn-success mr-2 mt-2 mt-sm-0">Anlegen</button>
+            <button type="button" class="btn btn-secondary mr-2 mt-2 mt-sm-0">Schließen</button>
         </form>
 
         <div class="accordion" id="accordionExample">

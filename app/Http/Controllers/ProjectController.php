@@ -24,7 +24,7 @@ class ProjectController extends Controller
         
         return $projects;
 
-        /* return project::all(); */
+        
     }
 
 
