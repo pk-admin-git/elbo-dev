@@ -57019,14 +57019,15 @@ var axiosConfig = {
   }
 };
 var state = {
-  ProjectItems: []
+  ProjectItems: [],
+  DocuObjectItems: []
 };
 var mutations = {
   UPDATE_PROJECT_ITEMS: function UPDATE_PROJECT_ITEMS(state, payload) {
     state.ProjectItems = payload;
   },
   UPDATE_DOCU_OBJECT_ITEMS: function UPDATE_DOCU_OBJECT_ITEMS(state, payload) {
-    state.ProjectItems = payload;
+    state.DocuObjectItems = payload;
   }
 };
 var actions = {
@@ -57045,13 +57046,13 @@ var actions = {
   getDocuObjectItems: function getDocuObjectItems(_ref3) {
     var commit = _ref3.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/docuObjects', axiosConfig).then(function (response) {
-      commit('UPDATE_PROJECT_ITEMS', response.data);
+      commit('UPDATE_DOCU_OBJECT_ITEMS', response.data);
     });
   },
   addNewDocuObject: function addNewDocuObject(_ref4, payload) {
     var commit = _ref4.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
-      commit('UPDATE_PROJECT_ITEMS', response.data);
+      commit('UPDATE_DOCU_OBJECT_ITEMS', response.data);
     });
   }
 };
