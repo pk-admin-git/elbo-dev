@@ -1992,7 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getDocuObjectItems');
   },
   computed: {
-    DocuObjects: function DocuObjects() {
+    docuObjects: function docuObjects() {
       return this.$store.getters.docuObject;
     }
   },

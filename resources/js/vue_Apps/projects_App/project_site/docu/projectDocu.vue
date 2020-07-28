@@ -41,7 +41,7 @@ import docuCategoryElement from './docuCategoryElement.vue'
             this.$store.dispatch('getDocuObjectItems');
         },
         computed: {
-            DocuObjects() {
+            docuObjects() {
                 return this.$store.getters.docuObject;
             }
         },
