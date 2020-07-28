@@ -30,9 +30,9 @@ class DocuObjectController extends Controller
             'ProjectId' => 'required',
         ]);
 
-        $docuProject = project::create($data);
+        $docuObject = docuObject::create($data);
 
-        return response($docuProject, 201);
+        return response($docuObject, 201);
     }
 
     /**
