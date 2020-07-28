@@ -1988,6 +1988,14 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     docuCategoryElement: _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  created: function created() {
+    this.$store.dispatch('getDocuObjectItems');
+  },
+  computed: {
+    DocuObjects: function DocuObjects() {
+      return this.$store.getters.docuObject;
+    }
+  },
   methods: {
     collapseNewObjectForm: function collapseNewObjectForm() {
       this.newObjectFormVisible = !this.newObjectFormVisible;
@@ -38832,10 +38840,10 @@ var render = function() {
     _c(
       "div",
       { staticClass: "accordion", attrs: { id: "accordionExample" } },
-      _vm._l(5, function(element, index) {
+      _vm._l(_vm.docuObjects, function(docuObject) {
         return _c("docuCategoryElement", {
-          key: index,
-          attrs: { element: element, index: index }
+          key: docuObject.id,
+          attrs: { element: _vm.element, index: _vm.index }
         })
       }),
       1
@@ -57017,6 +57025,9 @@ var state = {
 var mutations = {
   UPDATE_PROJECT_ITEMS: function UPDATE_PROJECT_ITEMS(state, payload) {
     state.ProjectItems = payload;
+  },
+  UPDATE_DOCU_OBJECT_ITEMS: function UPDATE_DOCU_OBJECT_ITEMS(state, payload) {
+    state.ProjectItems = payload;
   }
 };
 var actions = {
@@ -57028,6 +57039,18 @@ var actions = {
   },
   addNewProject: function addNewProject(_ref2, payload) {
     var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
+      commit('UPDATE_PROJECT_ITEMS', response.data);
+    });
+  },
+  getDocuObjectItems: function getDocuObjectItems(_ref3) {
+    var commit = _ref3.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/docuObjects', axiosConfig).then(function (response) {
+      commit('UPDATE_PROJECT_ITEMS', response.data);
+    });
+  },
+  addNewDocuObject: function addNewDocuObject(_ref4, payload) {
+    var commit = _ref4.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
       commit('UPDATE_PROJECT_ITEMS', response.data);
     });

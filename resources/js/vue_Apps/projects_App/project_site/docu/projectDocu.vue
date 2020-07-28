@@ -14,8 +14,8 @@
 
         <div class="accordion" id="accordionExample">
             
-        <docuCategoryElement v-for="(element, index) in 5" 
-                            :key="index"
+        <docuCategoryElement v-for="docuObject in docuObjects" 
+                            :key="docuObject.id"
                             :element="element"
                             :index="index"/>
         </div>
@@ -36,6 +36,14 @@ import docuCategoryElement from './docuCategoryElement.vue'
         },
         components: {
             docuCategoryElement,
+        },
+        created() {
+            this.$store.dispatch('getDocuObjectItems');
+        },
+        computed: {
+            DocuObjects() {
+                return this.$store.getters.docuObject;
+            }
         },
         methods: {
             collapseNewObjectForm: function() {
