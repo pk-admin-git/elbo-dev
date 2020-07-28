@@ -52,7 +52,7 @@ const actions = {
 
 const getters = {
     ProjectItems: state => state.ProjectItems,
-    ProjectItems: state => state.DocuObjectItems,
+    DocuObjects: state => state.DocuObjectItems,
     ProjectItemById: state => id => state.ProjectItems.find(ProjectItem => ProjectItem.id === id ),
 };
 

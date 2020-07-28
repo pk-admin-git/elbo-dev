@@ -1993,7 +1993,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     docuObjects: function docuObjects() {
-      return this.$store.getters.docuObject;
+      return this.$store.getters.DocuObjects;
     }
   },
   methods: {
@@ -57009,10 +57009,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-var _getters;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 /* axios.defaults.baseURL = 'http://46.101.114.150/api' */
 
@@ -57061,19 +57057,21 @@ var actions = {
     });
   }
 };
-var getters = (_getters = {
+var getters = {
   ProjectItems: function ProjectItems(state) {
     return state.ProjectItems;
+  },
+  DocuObjects: function DocuObjects(state) {
+    return state.DocuObjectItems;
+  },
+  ProjectItemById: function ProjectItemById(state) {
+    return function (id) {
+      return state.ProjectItems.find(function (ProjectItem) {
+        return ProjectItem.id === id;
+      });
+    };
   }
-}, _defineProperty(_getters, "ProjectItems", function ProjectItems(state) {
-  return state.DocuObjectItems;
-}), _defineProperty(_getters, "ProjectItemById", function ProjectItemById(state) {
-  return function (id) {
-    return state.ProjectItems.find(function (ProjectItem) {
-      return ProjectItem.id === id;
-    });
-  };
-}), _getters);
+};
 var projectsModul = {
   state: state,
   mutations: mutations,

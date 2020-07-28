@@ -42,7 +42,7 @@ import docuCategoryElement from './docuCategoryElement.vue'
         },
         computed: {
             docuObjects() {
-                return this.$store.getters.docuObject;
+                return this.$store.getters.DocuObjects;
             }
         },
         methods: {
