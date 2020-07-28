@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-        Route::get('/projects', 'ProjectController@index')->middleware('cors');
+        Route::get('/projects', 'ProjectController@index')->middleware('cors','auth');
 
         Route::post('/projects', 'ProjectController@store')->middleware('cors');
 
