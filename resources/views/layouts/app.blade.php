@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </nav>    
-                
+                @endauth
 
                 
                 <main class="col-md-10 col-lg-10 mt-3">
@@ -83,7 +83,7 @@
                         @yield('content')
                     
                 </main>
-                @endauth
+                
             
             
             </div>
