@@ -1988,6 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
     docuCategoryElement: _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
+    this.$store.dispatch('getProjectItems');
     this.$store.dispatch('getDocuObjectItems');
   },
   computed: {
