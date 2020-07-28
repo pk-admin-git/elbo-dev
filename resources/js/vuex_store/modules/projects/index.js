@@ -1,6 +1,12 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'http://46.101.114.150/api'
-/* axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; */
+let axiosConfig = {
+    headers: {
+        "Content-Type": "Content-Type: application/json",
+        "X-Metabase-Session": "id",
+        "Access-Control-Allow-Origin": "*",
+    }
+}
 
 const state = {
     ProjectItems: [],
@@ -15,7 +21,7 @@ const mutations = {
 
 const actions = {
     getProjectItems({ commit }){
-        axios.get('/projects')
+        axios.get('/projects', axiosConfig)
             .then((response) => {
                 commit('UPDATE_PROJECT_ITEMS', response.data)
             });
