@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://46.101.114.150/api'
+/* axios.defaults.baseURL = 'http://46.101.114.150/api' */
 let axiosConfig = {
     headers: {
         "Content-Type": "Content-Type: application/json",
@@ -21,13 +21,13 @@ const mutations = {
 
 const actions = {
     getProjectItems({ commit }){
-        axios.get('/projects', axiosConfig)
+        axios.get('http://46.101.114.150/api/projects', axiosConfig)
             .then((response) => {
                 commit('UPDATE_PROJECT_ITEMS', response.data)
             });
     },
     addNewProject({ commit }, payload){
-        axios.post('/projects', payload)
+        axios.post('http://46.101.114.150/api/projects', payload)
             .then((response) => {
                 commit('UPDATE_PROJECT_ITEMS', response.data);
             });

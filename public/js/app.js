@@ -57115,7 +57115,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = 'http://46.101.114.150/api';
+/* axios.defaults.baseURL = 'http://46.101.114.150/api' */
+
 var axiosConfig = {
   headers: {
     "Content-Type": "Content-Type: application/json",
@@ -57134,13 +57135,13 @@ var mutations = {
 var actions = {
   getProjectItems: function getProjectItems(_ref) {
     var commit = _ref.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/projects', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/projects', axiosConfig).then(function (response) {
       commit('UPDATE_PROJECT_ITEMS', response.data);
     });
   },
   addNewProject: function addNewProject(_ref2, payload) {
     var commit = _ref2.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/projects', payload).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
       commit('UPDATE_PROJECT_ITEMS', response.data);
     });
   }
