@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocuObject extends Model
 {
-    public function project(){
+    
+   protected $guarded = [];
+
+   public function project(){
     
        return $this->belongsTo('App\project');
     }
