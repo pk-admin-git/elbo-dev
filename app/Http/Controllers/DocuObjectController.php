@@ -9,9 +9,9 @@ class DocuObjectController extends Controller
 {
     public function index()
     {
-        $docuProjects = docuObject::all();
+        $docuObjects = docuObject::all();
         
-        return $docuProject;
+        return $docuObjects;
 
         
     }
