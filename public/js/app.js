@@ -1932,10 +1932,10 @@ __webpack_require__.r(__webpack_exports__);
   props: ['element', 'index'],
   methods: {
     elementIndex: function elementIndex(index) {
-      return "specification" + index;
+      return "category" + index;
     },
     setElementIndex: function setElementIndex(index) {
-      return "#specification" + index;
+      return "#category" + index;
     }
   }
 });
@@ -1977,45 +1977,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'projectDocu',
+  data: function data() {
+    return {
+      newObjectFormVisible: false
+    };
+  },
   components: {
     docuCategoryElement: _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    collapseNewObjectForm: function collapseNewObjectForm() {
+      this.newObjectFormVisible = !this.newObjectFormVisible;
+    }
   }
 });
 
@@ -38730,7 +38706,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "card my-4" }, [
     _c("div", { staticClass: "card-header", attrs: { id: "headingOne" } }, [
       _c("h2", { staticClass: "mb-0" }, [
         _c(
@@ -38757,7 +38733,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "collapse show",
+        staticClass: "collapse",
         attrs: {
           id: _vm.elementIndex(_vm.index),
           "aria-labelledby": "headingOne",
@@ -38766,9 +38742,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "card-body" }, [
-          _vm._v(
-            "\n        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.\n    "
-          )
+          _vm._v("\n        Anim pariatur cliche reprehenderit\n    ")
         ])
       ]
     )
@@ -38796,166 +38770,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "h1 my-4" }, [_vm._v("Dokumentation")]),
-      _vm._v(" "),
+  return _c("div", [
+    _c("h1", { staticClass: "h1 my-4" }, [_vm._v("Dokumentation")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row col-12 my-3" }, [
       _c(
-        "div",
-        { staticClass: "accordion", attrs: { id: "accordionExample" } },
-        [
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              { staticClass: "card-header", attrs: { id: "headingOne" } },
-              [
-                _c("h2", { staticClass: "mb-0" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block text-left",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "collapse",
-                        "data-target": "#c"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                Collapsible Group Item #1\n                "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse show",
-                attrs: {
-                  id: "c",
-                  "aria-labelledby": "headingOne",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _vm._v(
-                    "\n                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.\n            "
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              { staticClass: "card-header", attrs: { id: "headingTwo" } },
-              [
-                _c("h2", { staticClass: "mb-0" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-link btn-block text-left collapsed",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "collapse",
-                        "data-target": "#collapseTwo",
-                        "aria-expanded": "false",
-                        "aria-controls": "collapseTwo"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                Collapsible Group Item #2\n                "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "collapseTwo",
-                  "aria-labelledby": "headingTwo",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _vm._v(
-                    "\n                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.\n            "
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card" }, [
-            _c(
-              "div",
-              { staticClass: "card-header", attrs: { id: "headingThree" } },
-              [
-                _c("h2", { staticClass: "mb-0" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-link btn-block text-left collapsed",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "collapse",
-                        "data-target": "#collapseThree",
-                        "aria-expanded": "false",
-                        "aria-controls": "collapseThree"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                Collapsible Group Item #3\n                "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse",
-                attrs: {
-                  id: "collapseThree",
-                  "aria-labelledby": "headingThree",
-                  "data-parent": "#accordionExample"
-                }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _vm._v(
-                    "\n                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.\n            "
-                  )
-                ])
-              ]
-            )
-          ])
-        ]
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: { click: _vm.collapseNewObjectForm }
+        },
+        [_vm._v("Objekt anlegen")]
       )
-    ])
-  }
-]
+    ]),
+    _vm._v(" "),
+    _vm.newObjectFormVisible
+      ? _c("form", { staticClass: "form-inline" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "form-control mr-2",
+            attrs: { type: "text", id: "ObjectName", placeholder: "Name" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-success mr-2", attrs: { type: "button" } },
+            [_vm._v("Anlegen")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary mr-2",
+              attrs: { type: "button" }
+            },
+            [_vm._v("Schließen")]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "accordion", attrs: { id: "accordionExample" } },
+      _vm._l(5, function(element, index) {
+        return _c("docuCategoryElement", {
+          key: index,
+          attrs: { element: element, index: index }
+        })
+      }),
+      1
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
