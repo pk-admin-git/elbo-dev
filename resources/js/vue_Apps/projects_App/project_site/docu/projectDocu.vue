@@ -7,9 +7,10 @@
         </div>
 
         <form class="form-inline" v-if="newObjectFormVisible">
-            <input type="text" class="form-control mr-2" id="ObjectName" placeholder="Name" v-model="name">
+            <input type="text" class="form-control mr-2" id="ObjectName" placeholder="Name" v-model="object">
             <button type="button" class="btn btn-success mr-2 mt-2 mt-sm-0" @click="addNewDocuObject">Anlegen</button>
-            <button type="button" class="btn btn-secondary mr-2 mt-2 mt-sm-0">Schließen</button>
+            <button type="button" class="btn btn-secondary mr-2 mt-2 mt-sm-0" 
+            @click="collapseNewObjectForm">Schließen</button>
         </form>
 
         <div class="accordion" id="accordionExample">
@@ -34,15 +35,15 @@ import docuCategoryElement from './docuCategoryElement.vue'
         data() {
             return {
                 newObjectFormVisible: false,
-                object: ''
+                object: '',
+                
             }
         },
         components: {
             docuCategoryElement,
         },
         created() {
-            this.$store.dispatch('getProjectItems');
-            this.$store.dispatch('getDocuObjectItems');
+            this.$store.dispatch('getDocuObjectItems')
         },
         computed: {
             docuObjects() {
@@ -59,7 +60,7 @@ import docuCategoryElement from './docuCategoryElement.vue'
                 ProjectId: this.id
             }
             this.$store.dispatch('addNewDocuObject', NewDocuObject)
-            this.$store.dispatch('getProjectItems');
+            
         } 
         }
     }

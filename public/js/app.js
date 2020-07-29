@@ -1976,6 +1976,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'projectDocu',
@@ -1990,7 +1991,6 @@ __webpack_require__.r(__webpack_exports__);
     docuCategoryElement: _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
-    this.$store.dispatch('getProjectItems');
     this.$store.dispatch('getDocuObjectItems');
   },
   computed: {
@@ -2008,7 +2008,6 @@ __webpack_require__.r(__webpack_exports__);
         ProjectId: this.id
       };
       this.$store.dispatch('addNewDocuObject', NewDocuObject);
-      this.$store.dispatch('getProjectItems');
     }
   }
 });
@@ -38800,19 +38799,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
+                value: _vm.object,
+                expression: "object"
               }
             ],
             staticClass: "form-control mr-2",
             attrs: { type: "text", id: "ObjectName", placeholder: "Name" },
-            domProps: { value: _vm.name },
+            domProps: { value: _vm.object },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.name = $event.target.value
+                _vm.object = $event.target.value
               }
             }
           }),
@@ -38831,7 +38830,8 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-secondary mr-2 mt-2 mt-sm-0",
-              attrs: { type: "button" }
+              attrs: { type: "button" },
+              on: { click: _vm.collapseNewObjectForm }
             },
             [_vm._v("Schließen")]
           )
@@ -57030,6 +57030,9 @@ var mutations = {
   },
   UPDATE_DOCU_OBJECT_ITEMS: function UPDATE_DOCU_OBJECT_ITEMS(state, payload) {
     state.DocuObjectItems = payload;
+  },
+  UPDATE_NEW_DOCU_OBJECT_ITEM: function UPDATE_NEW_DOCU_OBJECT_ITEM(state, payload) {
+    state.DocuObjectItems.push(payload);
   }
 };
 var actions = {
@@ -57053,8 +57056,8 @@ var actions = {
   },
   addNewDocuObject: function addNewDocuObject(_ref4, payload) {
     var commit = _ref4.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
-      commit('UPDATE_DOCU_OBJECT_ITEMS', response.data);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuObjects', payload).then(function (response) {
+      commit('UPDATE_NEW_DOCU_OBJECT_ITEM', response.data);
     });
   }
 };

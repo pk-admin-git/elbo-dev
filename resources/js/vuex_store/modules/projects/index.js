@@ -20,6 +20,9 @@ const mutations = {
     },
     UPDATE_DOCU_OBJECT_ITEMS(state, payload){
         state.DocuObjectItems = payload;
+    },
+    UPDATE_NEW_DOCU_OBJECT_ITEM(state, payload){
+        state.DocuObjectItems.push(payload);
     }
 };
 
@@ -43,9 +46,9 @@ const actions = {
             });
     },
     addNewDocuObject({ commit }, payload){
-        axios.post('http://46.101.114.150/api/projects', payload)
+        axios.post('http://46.101.114.150/api/docuObjects', payload)
             .then((response) => {
-                commit('UPDATE_DOCU_OBJECT_ITEMS', response.data);
+                commit('UPDATE_NEW_DOCU_OBJECT_ITEM', response.data);
             });
     }
 };
