@@ -1979,9 +1979,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'projectDocu',
+  props: ['id'],
   data: function data() {
     return {
-      newObjectFormVisible: false
+      newObjectFormVisible: false,
+      object: ''
     };
   },
   components: {
@@ -1999,6 +2001,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     collapseNewObjectForm: function collapseNewObjectForm() {
       this.newObjectFormVisible = !this.newObjectFormVisible;
+    },
+    addNewDocuObject: function addNewDocuObject() {
+      var NewDocuObject = {
+        Object: this.object,
+        ProjectId: this.id
+      };
+      this.$store.dispatch('addNewDocuObject', NewDocuObject);
+      this.$store.dispatch('getProjectItems');
     }
   }
 });
@@ -38727,13 +38737,7 @@ var render = function() {
               "data-target": _vm.setElementIndex(_vm.docuObject.id)
             }
           },
-          [
-            _vm._v(
-              "\n        Collapsible Group Item " +
-                _vm._s(_vm.index) +
-                "\n        "
-            )
-          ]
+          [_vm._v("\n        " + _vm._s(_vm.docuObject.Object) + "\n        ")]
         )
       ])
     ]),
@@ -38748,11 +38752,7 @@ var render = function() {
           "data-parent": "#accordionExample"
         }
       },
-      [
-        _c("div", { staticClass: "card-body" }, [
-          _vm._v("\n        Anim pariatur cliche reprehenderit\n    ")
-        ])
-      ]
+      [_c("div", { staticClass: "card-body" })]
     )
   ])
 }
@@ -38821,7 +38821,8 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success mr-2 mt-2 mt-sm-0",
-              attrs: { type: "button" }
+              attrs: { type: "button" },
+              on: { click: _vm.addNewDocuObject }
             },
             [_vm._v("Anlegen")]
           ),
