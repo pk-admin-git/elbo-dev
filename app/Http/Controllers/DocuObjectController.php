@@ -7,9 +7,11 @@ use App\DocuObject;
 
 class DocuObjectController extends Controller
 {
-    public function index()
+    public function index($project)
     {
         $docuObjects = docuObject::all();
+
+        $docuObjectsFiltered = $docuObjects->where('ProjectId', $project);
         
         return $docuObjects;
 

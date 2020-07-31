@@ -36,7 +36,7 @@ class project extends Model
 
     public function docuCategories(){
     
-        $this->hasMany('App\docuCategory');
+        return $this->hasMany('App\docuCategory');
     }
 
     public function docuObjects(){

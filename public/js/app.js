@@ -57028,6 +57028,9 @@ var mutations = {
   UPDATE_PROJECT_ITEMS: function UPDATE_PROJECT_ITEMS(state, payload) {
     state.ProjectItems = payload;
   },
+  UPDATE_NEW_PROJECT_ITEM: function UPDATE_NEW_PROJECT_ITEM(state, payload) {
+    state.ProjectItems.push(payload);
+  },
   UPDATE_DOCU_OBJECT_ITEMS: function UPDATE_DOCU_OBJECT_ITEMS(state, payload) {
     state.DocuObjectItems = payload;
   },
@@ -57045,7 +57048,7 @@ var actions = {
   addNewProject: function addNewProject(_ref2, payload) {
     var commit = _ref2.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
-      commit('UPDATE_PROJECT_ITEMS', response.data);
+      commit('UPDATE_NEW_PROJECT_ITEM', response.data);
     });
   },
   getDocuObjectItems: function getDocuObjectItems(_ref3) {

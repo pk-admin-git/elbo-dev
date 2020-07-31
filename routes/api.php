@@ -25,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::patch('/projects/{project}', 'ProjectController@update')->middleware('cors');
         Route::delete('/projects/{project}', 'ProjectController@destroy')->middleware('cors');
 
-        Route::get('/docuObjects', 'DocuObjectController@index')->middleware('cors');
+        Route::get('/project/{project}/docuObjects', 'DocuObjectController@index')->middleware('cors');
         Route::post('/docuObjects', 'DocuObjectController@store')->middleware('cors');
         Route::patch('/docuObjects/{object}', 'DocuObjectController@update')->middleware('cors');
         Route::delete('/docuObjects/{object}', 'DocuObjectController@destroy')->middleware('cors');
