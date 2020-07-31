@@ -1991,7 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
     docuCategoryElement: _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
-    this.$store.dispatch('getDocuObjectItems');
+    this.$store.dispatch('getDocuObjectItems', [this.id]);
   },
   computed: {
     docuObjects: function docuObjects() {
@@ -57025,12 +57025,15 @@ var state = {
   DocuObjectItems: []
 };
 var mutations = {
+  /* Projekte */
   UPDATE_PROJECT_ITEMS: function UPDATE_PROJECT_ITEMS(state, payload) {
     state.ProjectItems = payload;
   },
   UPDATE_NEW_PROJECT_ITEM: function UPDATE_NEW_PROJECT_ITEM(state, payload) {
     state.ProjectItems.push(payload);
   },
+
+  /* Dokumentationen */
   UPDATE_DOCU_OBJECT_ITEMS: function UPDATE_DOCU_OBJECT_ITEMS(state, payload) {
     state.DocuObjectItems = payload;
   },
@@ -57039,6 +57042,7 @@ var mutations = {
   }
 };
 var actions = {
+  /* Projekte */
   getProjectItems: function getProjectItems(_ref) {
     var commit = _ref.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/projects', axiosConfig).then(function (response) {
@@ -57051,9 +57055,11 @@ var actions = {
       commit('UPDATE_NEW_PROJECT_ITEM', response.data);
     });
   },
-  getDocuObjectItems: function getDocuObjectItems(_ref3) {
+
+  /* Dokumentationen */
+  getDocuObjectItems: function getDocuObjectItems(_ref3, id) {
     var commit = _ref3.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/docuObjects', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_OBJECT_ITEMS', response.data);
     });
   },

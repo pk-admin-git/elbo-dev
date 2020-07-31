@@ -10,17 +10,21 @@ let axiosConfig = {
 
 const state = {
     ProjectItems: [],
-    DocuObjectItems: []
+    DocuObjectItems: [],
     
 };
 
 const mutations = {
+
+    /* Projekte */
     UPDATE_PROJECT_ITEMS(state, payload){
         state.ProjectItems = payload;
     },
     UPDATE_NEW_PROJECT_ITEM(state, payload){
         state.ProjectItems.push(payload);
     },
+
+    /* Dokumentationen */
     UPDATE_DOCU_OBJECT_ITEMS(state, payload){
         state.DocuObjectItems = payload;
     },
@@ -30,6 +34,8 @@ const mutations = {
 };
 
 const actions = {
+
+    /* Projekte */
     getProjectItems({ commit }){
         axios.get('http://46.101.114.150/api/projects', axiosConfig)
             .then((response) => {
@@ -42,8 +48,10 @@ const actions = {
                 commit('UPDATE_NEW_PROJECT_ITEM', response.data);
             });
     },
-    getDocuObjectItems({ commit }){
-        axios.get('http://46.101.114.150/api/docuObjects', axiosConfig)
+
+    /* Dokumentationen */
+    getDocuObjectItems({ commit }, id){
+        axios.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_OBJECT_ITEMS', response.data)
             });
