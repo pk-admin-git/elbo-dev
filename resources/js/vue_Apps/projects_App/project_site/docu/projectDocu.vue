@@ -2,22 +2,11 @@
     <div>
         <h1 class="h1 my-4">Dokumentation</h1>
 
-        <div class="row col-12 my-3">
-            <button type="button" class="btn btn-primary" @click="collapseNewObjectForm">Objekt anlegen</button>
-        </div>
-
-        <form class="form-inline" v-if="newObjectFormVisible">
-            <input type="text" class="form-control mr-2" id="ObjectName" placeholder="Name" v-model="object">
-            <button type="button" class="btn btn-success mr-2 mt-2 mt-sm-0" @click="addNewDocuObject">Anlegen</button>
-            <button type="button" class="btn btn-secondary mr-2 mt-2 mt-sm-0" 
-            @click="collapseNewObjectForm">Schließen</button>
-        </form>
-
-        <div class="accordion" id="accordionExample">
-            
-        <docuCategoryElement v-for="docuObject in docuObjects" 
-                            :key="docuObject.id"
-                            :docuObject="docuObject"/>
+        <div class="accordion" id="accordionCategory">
+            <docuCategoryElement v-for="(docuCategory, index) in 3"
+                                        :key="index"
+                                        :index="index"
+                                        :docuCategory="docuCategory"/>
         </div>
     </div>
 </template>
@@ -34,8 +23,7 @@ import docuCategoryElement from './docuCategoryElement.vue'
         ],
         data() {
             return {
-                newObjectFormVisible: false,
-                object: '',
+                
                 
             }
         },
@@ -50,18 +38,6 @@ import docuCategoryElement from './docuCategoryElement.vue'
                 return this.$store.getters.DocuObjects;
             }
         },
-        methods: {
-            collapseNewObjectForm: function() {
-                this.newObjectFormVisible = !this.newObjectFormVisible;
-            },
-            addNewDocuObject(){
-            const NewDocuObject = {
-                Object: this.object,
-                ProjectId: this.id
-            }
-            this.$store.dispatch('addNewDocuObject', NewDocuObject)
-            
-        } 
-        }
+        
     }
 </script>
