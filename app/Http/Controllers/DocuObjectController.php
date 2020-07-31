@@ -11,7 +11,7 @@ class DocuObjectController extends Controller
     {
         $docuObjects = docuObject::all();
 
-        $docuObjectsFiltered = $docuObjects->where('ProjectId', $project)->toArray();
+        $docuObjectsFiltered = $docuObjects->where('ProjectId', $project)->get();
         
         return $docuObjectsFiltered;
 
