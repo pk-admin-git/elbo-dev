@@ -9,7 +9,7 @@ class DocuObjectController extends Controller
 {
     public function index($project)
     {
-        $docuObjects = docuObject::where('ProjectId, $project')->get();
+        $docuObjects = docuObject::where('ProjectId', $project)->get();
 
         return $docuObjects;
 
