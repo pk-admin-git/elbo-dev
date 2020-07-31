@@ -9,11 +9,13 @@ class DocuObjectController extends Controller
 {
     public function index($project)
     {
-        $docuObjects = docuObject::all();
+        $docuObjects = docuObject::where('ProjectId, $project')->get();
 
-        $docuObjectsFiltered = $docuObjects->where('ProjectId', $project)->get();
+        return $docuObjects;
+
+        /* $docuObjectsFiltered = $docuObjects->where('ProjectId', $project)->get();
         
-        return $docuObjectsFiltered;
+        return $docuObjectsFiltered; */
 
         
     }
