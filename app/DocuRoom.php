@@ -8,11 +8,16 @@ class DocuRoom extends Model
 {
     public function project(){
     
-        $this->belongsTo('App\project');
+        return $this->belongsTo('App\project');
+    }
+
+    public function docuFloor(){
+    
+        return $this->belongsTo('App\docuFloor');
     }
 
     public function documentations(){
     
-        $this->hasMany('App\documentation');
+        return $this->hasMany('App\documentation');
     }
 }

@@ -8,11 +8,21 @@ class DocuFloor extends Model
 {
     public function project(){
     
-        $this->belongsTo('App\project');
+        return $this->belongsTo('App\project');
+    }
+
+    public function docuObject(){
+    
+        return $this->belongsTo('App\docuObject');
+    }
+
+    public function docuRooms(){
+    
+        return $this->hasMany('App\docuRoom');
     }
 
     public function documentations(){
     
-        $this->hasMany('App\documentation');
+        return $this->hasMany('App\documentation');
     }
 }

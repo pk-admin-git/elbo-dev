@@ -12,7 +12,13 @@ class DocuObject extends Model
    public function project(){
     
        return $this->belongsTo('App\project');
-    }
+   }
+
+   public function docuFloors(){
+    
+      return $this->hasMany('App\docuObject');
+   }
+
 
     public function documentations(){
     

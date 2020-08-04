@@ -29,3 +29,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::post('/docuObjects', 'DocuObjectController@store')->middleware('cors');
         Route::patch('/docuObjects/{object}', 'DocuObjectController@update')->middleware('cors');
         Route::delete('/docuObjects/{object}', 'DocuObjectController@destroy')->middleware('cors');
+
+        Route::get('/project/{project}/docuObjects/{docuObject}/floors', 'DocuObjectController@index')->middleware('cors');
+        Route::post('/docuFloors', 'DocuObjectController@store')->middleware('cors');
+        Route::patch('/docuObjects/{object}', 'DocuObjectController@update')->middleware('cors');
+        Route::delete('/docuObjects/{object}', 'DocuObjectController@destroy')->middleware('cors');

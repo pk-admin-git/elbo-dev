@@ -8,11 +8,11 @@ class measurment extends Model
 {
     public function project(){
     
-        $this->belongsTo('App\project');
+        return $this->belongsTo('App\project');
     }
 
     public function documenations(){
     
-        $this->hasMany('App\documentation');
+        return $this->hasMany('App\documentation');
     }
 }

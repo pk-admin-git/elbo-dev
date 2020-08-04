@@ -11,6 +11,7 @@ let axiosConfig = {
 const state = {
     ProjectItems: [],
     DocuObjectItems: [],
+    DocuFloorItems: [],
     
 };
 
@@ -24,12 +25,20 @@ const mutations = {
         state.ProjectItems.push(payload);
     },
 
-    /* Dokumentationen */
+    /* Dokumentation Gebäude */
     UPDATE_DOCU_OBJECT_ITEMS(state, payload){
         state.DocuObjectItems = payload;
     },
     UPDATE_NEW_DOCU_OBJECT_ITEM(state, payload){
         state.DocuObjectItems.push(payload);
+    },
+
+    /* Dokumentation Etagen */
+    UPDATE_DOCU_FLOOR_ITEMS(state, payload){
+        state.DocuFloorItems = payload;
+    },
+    UPDATE_NEW_DOCU_FLOOR_ITEM(state, payload){
+        state.DocuFloorItems.push(payload);
     }
 };
 
@@ -49,7 +58,7 @@ const actions = {
             });
     },
 
-    /* Dokumentationen */
+    /* Dokumentation Gebäude */
     getDocuObjectItems({ commit }, id){
         axios.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig)
             .then((response) => {
@@ -60,6 +69,21 @@ const actions = {
         axios.post('http://46.101.114.150/api/docuObjects', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_OBJECT_ITEM', response.data);
+            });
+    },
+
+    /* Dokumentation Etagen */
+
+    getDocuFloorItems({ commit }, projectId, objectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuObjects/' + objectId + '/floors', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_DOCU_FLOOR_ITEMS', response.data)
+            });
+    },
+    addNewDocufloor({ commit }, payload){
+        axios.post('http://46.101.114.150/api/docuObjects', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
             });
     }
 };

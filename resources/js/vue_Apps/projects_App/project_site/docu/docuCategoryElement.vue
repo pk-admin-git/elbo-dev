@@ -10,11 +10,6 @@
 
         <div :id="elementIndex(index)" class="collapse"  data-parent="#accordionCategory">
         <div class="card-body">
-                <div class="accordion" id="accordionObject">
-                    <docuObjectElement v-for="docuObject in docuObjects" 
-                                        :key="docuObject.id"
-                                        :docuObject="docuObject"/>
-                </div>
         </div>
         </div>
     </div>
@@ -28,6 +23,7 @@
         name: 'docuCategoryElement',
         components: {
             docuObjectElement,
+            
         },
         props: [
             'docuCategory',

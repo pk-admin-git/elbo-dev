@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     public function projects(){
     
-            $this->hasMany('App\project');
+        return $this->hasMany('App\project');
     }
 
     /**

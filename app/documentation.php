@@ -8,37 +8,37 @@ class documentation extends Model
 {
     public function project(){
     
-        $this->belongsTo('App\project');
+       return $this->belongsTo('App\project');
     }
 
     public function specification(){
     
-        $this->belongsTo('App\specification');
+        return $this->belongsTo('App\specification');
     }
 
     public function measurment(){
     
-        $this->belongsTo('App\measurment');
+        return $this->belongsTo('App\measurment');
     }
 
     public function docuCategory(){
     
-        $this->belongsTo('App\docuCategory');
+        return $this->belongsTo('App\docuCategory');
     }
 
     public function docuObject(){
     
-        $this->belongsTo('App\docuObject');
+        return $this->belongsTo('App\docuObject');
     }
 
     public function docuFloor(){
     
-        $this->belongsTo('App\docuFloor');
+        return $this->belongsTo('App\docuFloor');
     }
 
     public function docuRoom(){
     
-        $this->belongsTo('App\docuRoom');
+        return $this->belongsTo('App\docuRoom');
     }
 
 }

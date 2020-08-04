@@ -2,12 +2,71 @@
     <div>
         <h1 class="h1 my-4">Dokumentation</h1>
 
-        <div class="accordion" id="accordionCategory">
-            <docuCategoryElement v-for="(docuCategory, index) in 3"
-                                        :key="index"
-                                        :index="index"
-                                        :docuCategory="docuCategory"/>
+        <div class="card">
+            <div class="card-body p-1 row">
+                <h4 class="h4 col-12 p-3">Überblick</h4>
+
+                <div class="card border-0 col-12 col-md-6">
+                    <div class="card-body p-0 row justify-content-between">
+                        <h5 class="h5 col-4">Objekte</h5>
+                        <div class="col-8 d-flex justify-content-end">
+                            <form class="form-inline">
+                            <input type="text" class="form-control"  v-if="newObjectShow"/>
+                            </form> 
+                            <span   style="cursor:pointer"
+                                    class="fas fa-check-circle fa-lg m-2"
+                                    v-if="newObjectShow"
+                                    @click="showNewObjectInput"></span>
+                            <span   style="cursor:pointer"
+                                    class="fas fa-plus-circle fa-lg" 
+                                    @click="showNewObjectInput"
+                                    v-if="!newObjectShow"></span>
+                            
+                        </div>
+                        <ul class="list-group col-12 my-3">
+                            <li v-for="docuObject in docuObjects"
+                                :key="docuObject.id"
+                                :docuObject="docuObject" 
+                                class="list-group-item"> {{docuObject.Object}} </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-0 col-12 col-md-6">
+                    <div class="card-body p-0 row justify-content-between">
+                        <h5 class="h5 col-4">Etagen</h5>
+                        <div class="col-8 d-flex justify-content-end">
+                            <form class="form-inline">
+                            <input type="text" class="form-control"  v-if="newObjectShow"/>
+                            <span   style="cursor:pointer"
+                                    class="fas fa-check-circle fa-lg m-2"
+                                    v-if="newObjectShow"
+                                    @click="showNewObjectInput"></span>
+                            <span   style="cursor:pointer"
+                                    class="fas fa-plus-circle fa-lg" 
+                                    @click="showNewObjectInput"
+                                    v-if="!newObjectShow"></span>
+                            </form> 
+                        </div>
+                        <ul class="list-group col-12 my-3">
+                            <li v-for="docuObject in docuObjects"
+                                :key="docuObject.id"
+                                :docuObject="docuObject" 
+                                class="list-group-item"> {{docuObject.Object}} </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+
+
+
+
+            </div>
         </div>
+    
+        
+        
     </div>
 </template>
 
@@ -15,6 +74,7 @@
 <script>
 
 import docuCategoryElement from './docuCategoryElement.vue'
+import docuObjectElement from './docuObjectElement.vue'
 
     export default {
         name: 'projectDocu',
@@ -23,12 +83,14 @@ import docuCategoryElement from './docuCategoryElement.vue'
         ],
         data() {
             return {
-                
+                newObjectShow: false,
+                object: '',
                 
             }
         },
         components: {
             docuCategoryElement,
+            docuObjectElement
         },
         created() {
             this.$store.dispatch('getDocuObjectItems', [this.id])
@@ -38,6 +100,18 @@ import docuCategoryElement from './docuCategoryElement.vue'
                 return this.$store.getters.DocuObjects;
             }
         },
+        methods: {
+            showNewObjectInput() {
+                this.newObjectShow = !this.newObjectShow
+            },
+            addNewDocuObject(){
+            const NewDocuObject = {
+                Object: this.object,
+                ProjectId: this.id
+            }
+            this.$store.dispatch('addNewDocuObject', NewDocuObject)
+            }
+        }
         
     }
 </script>

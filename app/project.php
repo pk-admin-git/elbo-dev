@@ -11,7 +11,7 @@ class project extends Model
 
     public function users(){
     
-        $this->belongsToMany('App\user');
+        return $this->belongsToMany('App\user');
     }
 
     public function customer(){
@@ -21,17 +21,17 @@ class project extends Model
 
     public function workrecords(){
     
-        $this->hasMany('App\workrecord');
+        return $this->hasMany('App\workrecord');
     }
 
     public function specifications(){
     
-        $this->hasMany('App\specification');
+        return $this->hasMany('App\specification');
     }
 
     public function measurments(){
     
-        $this->hasMany('App\measurment');
+        return $this->hasMany('App\measurment');
     }
 
     public function docuCategories(){
@@ -41,21 +41,21 @@ class project extends Model
 
     public function docuObjects(){
     
-        $this->hasMany('App\docuObject');
+        return $this->hasMany('App\docuObject');
     }
 
     public function docuFloors(){
     
-        $this->hasMany('App\docuFloor');
+        return $this->hasMany('App\docuFloor');
     }
 
     public function docuRooms(){
     
-        $this->hasMany('App\docuRoom');
+        return $this->hasMany('App\docuRoom');
     }
 
     public function documentations(){
     
-        $this->hasMany('App\documentation');
+        return $this->hasMany('App\documentation');
     }
 }
