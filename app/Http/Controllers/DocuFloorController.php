@@ -11,6 +11,6 @@ class DocuFloorController extends Controller
     {
         $docuFloors = DocuFloor::where('DocuObjectId', $object)->get();
 
-        return $docuObjects;     
+        return $docuFloors;     
     }
 }
