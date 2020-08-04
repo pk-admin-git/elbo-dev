@@ -8,7 +8,7 @@ class DocuFloorController extends Controller
 {
     public function index($object)
     {
-        $docuFloors = docuFloor::where('DocuObjectId', $object)->get();
+        $docuFloors = DocuFloor::where('DocuObjectId', $object)->get();
 
         return $docuObjects;     
     }
