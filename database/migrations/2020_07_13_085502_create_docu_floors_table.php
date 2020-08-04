@@ -20,7 +20,7 @@ class CreateDocuFloorsTable extends Migration
             $table->foreign('ProjectId')->references('id')->on('projects');
 
             $table->unsignedBigInteger('DocuObjectId');
-            $table->foreign('DocuObjectId')->references('id')->on('docu_Objects');
+            $table->foreign('DocuObjectId')->references('id')->on('docu_objects');
 
             $table->string('Floor', 50);
             $table->timestamps();
