@@ -13,10 +13,7 @@ class DocuObjectController extends Controller
 
         return $docuObjects;
 
-        /* $docuObjectsFiltered = $docuObjects->where('ProjectId', $project)->get();
         
-        return $docuObjectsFiltered; */
-
         
     }
 
