@@ -8,27 +8,32 @@
 
                 <div class="card border-0 col-12 col-md-6">
                     <div class="card-body p-0 row">
-                        <h5 class="h5 col-4">Objekte</h5>
-                        <div class="col-8 d-flex justify-content-end">
-                            <form class="form-inline">
-                            <input type="text" class="form-control mr-2"  v-if="newObjectShow" v-model="object"/>
-                            </form> 
-                            <span   style="cursor:pointer"
-                                    class="fas fa-check-circle fa-lg m-2"
-                                    v-if="newObjectShow"
-                                    @click="addNewDocuObject"></span>
-                            <span   style="cursor:pointer"
-                                    class="fas fa-times-circle fa-lg m-2"
-                                    v-if="newObjectShow"
-                                    @click="showNewObjectInput"></span>
-
-                            <span   style="cursor:pointer"
-                                    class="fas fa-plus-circle fa-lg" 
+                        
+                        <h5 class="h5 col-5">Gebäude</h5>
+                        <span   style="cursor:pointer"
+                                    class="fas fa-plus-circle fa-lg mt-2 col-7 d-flex justify-content-end" 
                                     @click="showNewObjectInput"
                                     v-if="!newObjectShow"></span>
-                            
+                        
+
+                        <div class="col-lg-7 col-12 p-0">
+                            <div class="row">
+                                <form class="col p-0">
+                                <input type="text" class="form-control mr-2"  v-if="newObjectShow" v-model="object"/>
+                                </form> 
+                                <div class="col-auto pl-0 d-flex justify-content-end">
+                                    <span   style="cursor:pointer"
+                                            class="fas fa-check-circle fa-lg m-2"
+                                            v-if="newObjectShow"
+                                            @click="addNewDocuObject"></span>
+                                    <span   style="cursor:pointer"
+                                            class="fas fa-times-circle fa-lg mt-2 ml-2"
+                                            v-if="newObjectShow"
+                                            @click="showNewObjectInput"></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="list-group list-group-action col-12 my-3">
+                        <div class="list-group list-group-action col-12 my-3 mb-4">
                             <button v-for="docuObject in docuObjects"
                                 :key="docuObject.id"
                                 :docuObject="docuObject"
@@ -42,25 +47,30 @@
                 </div>
 
                 <div class="card border-0 col-12 col-md-6">
-                    <div class="card-body p-0 row justify-content-between">
-                        <h5 class="h5 col-4">Etagen</h5>
-                        <div class="col-8 d-flex justify-content-end align-items-start">
-                            <form class="form-inline">
-                            <input type="text" class="form-control mr-2" v-if="newFloorShow" v-model="floor"/>
-                            </form> 
-                            <span   style="cursor:pointer"
-                                    class="fas fa-check-circle fa-lg m-2"
-                                    v-if="newFloorShow"
-                                    @click="addNewDocuFloor"></span>
-                            <span   style="cursor:pointer"
-                                    class="fas fa-times-circle fa-lg m-2"
-                                    v-if="newFloorShow"
-                                    @click="showNewFloorInput"></span>
-
-                            <span   style="cursor:pointer"
-                                    class="fas fa-plus-circle fa-lg" 
-                                    @click="showNewFloorInput"
-                                    v-if="!newFloorShow"></span>
+                    <div class="card-body p-1 row align-items-start">
+                        <h5 class="h5 col-5">Etagen</h5>
+                        <span   style="cursor:pointer"
+                                class="fas fa-plus-circle fa-lg mt-2 col-7 d-flex justify-content-end" 
+                                @click="showNewFloorInput"
+                                v-if="(activeObject != null) && (newFloorShow !== true)"></span>
+                        
+                        
+                        <div class="col-lg-7 col-12 p-0">
+                            <div class="row">   
+                                <form class="col p-0">
+                                <input type="text" class="form-control mr-2" v-if="newFloorShow" v-model="floor"/>
+                                </form>
+                                <div class="col-auto d-flex justify-content-end pl-0"> 
+                                    <span   style="cursor:pointer"
+                                            class="fas fa-check-circle fa-lg m-2"
+                                            v-if="newFloorShow"
+                                            @click="addNewDocuFloor"></span>
+                                    <span   style="cursor:pointer"
+                                            class="fas fa-times-circle fa-lg mt-2 ml-2"
+                                            v-if="newFloorShow"
+                                            @click="showNewFloorInput"></span>
+                                </div>
+                            </div>   
                         </div>
                         <ul class="list-group col-12 my-3">
                             <li v-for="docuFloor in docuFloors"
@@ -98,10 +108,9 @@ import docuObjectElement from './docuObjectElement.vue'
         data() {
             return {
                 newObjectShow: false,
-                activeObject: '',
+                activeObject: null,
                 newFloorShow: false,
                 object: '',
-                objectId: '1',
                 floor: '',
                 
             }
@@ -130,11 +139,12 @@ import docuObjectElement from './docuObjectElement.vue'
             },
             addNewDocuObject(){
             const NewDocuObject = {
-                Object: this.object,
+                Object: this.activeObject,
                 ProjectId: this.projectId
             }
             this.$store.dispatch('addNewDocuObject', NewDocuObject)
             this.newObjectShow = !this.newObjectShow
+            this.object= ''
             },
             setActiveObject(objectId) {
                 this.activeObject = objectId
@@ -145,10 +155,11 @@ import docuObjectElement from './docuObjectElement.vue'
             const NewDocuFloor = {
                 Floor: this.floor,
                 ProjectId: this.projectId,
-                DocuObjectId: this.objectId,
+                DocuObjectId: this.activeObject,
             }
             this.$store.dispatch('addNewDocuFloor', NewDocuFloor)
             this.newFloorShow = !this.newFloorShow
+            this.floor= ''
             }
         }
         
