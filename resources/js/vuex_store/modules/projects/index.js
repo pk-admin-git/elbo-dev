@@ -12,6 +12,9 @@ const state = {
     ProjectItems: [],
     DocuObjectItems: [],
     DocuFloorItems: [],
+    DocuCategoryItems: [],
+    ActiveObject: null,
+    ActiveFloor: null,
     
 };
 
@@ -32,6 +35,9 @@ const mutations = {
     UPDATE_NEW_DOCU_OBJECT_ITEM(state, payload){
         state.DocuObjectItems.push(payload);
     },
+    UPDATE_ACTIVE_OBJECT(state, payload){
+        state.ActiveObject = payload;
+    },
 
     /* Dokumentation Etagen */
     UPDATE_DOCU_FLOOR_ITEMS(state, payload){
@@ -39,6 +45,17 @@ const mutations = {
     },
     UPDATE_NEW_DOCU_FLOOR_ITEM(state, payload){
         state.DocuFloorItems.push(payload);
+    },
+    UPDATE_ACTIVE_FLOOR(state, payload){
+        state.ActiveFloor = payload;
+    },
+
+    /* Dokumentation Kategorien */
+    UPDATE_DOCU_CATEGORY_ITEMS(state, payload){
+        state.DocuCategoryItems = payload;
+    },
+    UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload){
+        state.DocuCategoryItems.push(payload);
     }
 };
 
@@ -71,6 +88,9 @@ const actions = {
                 commit('UPDATE_NEW_DOCU_OBJECT_ITEM', response.data);
             });
     },
+    setActiveObject({commit}, activeObject){
+        commit('UPDATE_ACTIVE_OBJECT', activeObject)
+    },
 
     /* Dokumentation Etagen */
 
@@ -85,14 +105,38 @@ const actions = {
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
             });
+    },
+    setActiveFloor({commit}, activeFloor){
+        commit('UPDATE_ACTIVE_FLOOR', activeFloor)
+    },
+
+    /* Dokumentation Kategorien */
+
+    getDocuCategoryItems({ commit }, [projectId, objectId, floorId]){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuObjects/' + objectId + '/floors/' + floorId + '/categories', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data)
+            });
+    },
+    addNewDocuCategory({ commit }, payload){
+        axios.post('http://46.101.114.150/api/docuCategories', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
+            });
     }
 };
 
 const getters = {
     ProjectItems: state => state.ProjectItems,
     ProjectItemById: state => id => state.ProjectItems.find(ProjectItem => ProjectItem.id === id ),
+    
     DocuObjects: state => state.DocuObjectItems,
+    ActiveObject: state => state.ActiveObject,
+    
     DocuFloors: state => state.DocuFloorItems,
+    ActiveFloor: state => state.ActiveFloor,
+
+    DocuCategories: state => state.DocuCategoryItems,
 };
 
 const projectsModul = {

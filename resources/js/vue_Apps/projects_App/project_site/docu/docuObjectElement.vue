@@ -1,25 +1,40 @@
 <template>
-    <div class="card my-4">
-        <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-                <button class="btn btn-block text-left" type="button" data-toggle="collapse" :data-target="setElementIndex(docuObject.id)">
-                {{docuObject.Object}}
-                </button>
-            </h2>
-        </div>
+    <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
+        <div class="card-body p-0 row">
+            
+            <h5 class="h5 col-10 pl-0">Gebäude</h5>
+            <span   style="cursor:pointer"
+                        class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end" 
+                        @click="showNewObjectInput"
+                        v-if="!newObjectShow"></span>
+            
 
-        <div :id="elementIndex(docuObject.id)" class="collapse" aria-labelledby="headingOne" data-parent="#accordionObject">
-            <div class="card-body">
-                <div class="row col-12 my-3">
-                    <button type="button" class="btn btn-primary" @click="collapseNewObjectForm">Objekt anlegen</button>
+            <div class="col-12 p-0">
+                <div class="row">
+                    <form class="col p-0">
+                    <input type="text" class="form-control"  v-if="newObjectShow" v-model="object"/>
+                    </form> 
+                    <div class="col-auto pl-0 d-flex justify-content-end">
+                        <span   style="cursor:pointer"
+                                class="fas fa-check-circle fa-lg m-2"
+                                v-if="newObjectShow"
+                                @click="addNewDocuObject"></span>
+                        <span   style="cursor:pointer"
+                                class="fas fa-times-circle fa-lg mt-2 ml-2"
+                                v-if="newObjectShow"
+                                @click="showNewObjectInput"></span>
+                    </div>
                 </div>
-
-                <form class="form-inline" v-if="newObjectFormVisible">
-                    <input type="text" class="form-control mr-2" id="ObjectName" placeholder="Name" v-model="object">
-                    <button type="button" class="btn btn-success mr-2 mt-2 mt-sm-0" @click="addNewDocuObject">Anlegen</button>
-                    <button type="button" class="btn btn-secondary mr-2 mt-2 mt-sm-0" 
-                    @click="collapseNewObjectForm">Schließen</button>
-                </form>
+            </div>
+            <div class="list-group list-group-action col-12 my-3 mb-5">
+                <button v-for="docuObject in docuObjects"
+                    :key="docuObject.id"
+                    :docuObject="docuObject"
+                    @click="setActiveObject(docuObject.id)"
+                    data-toggle="list" 
+                    class="list-group-item list-group-item-action"
+                    type="button"> {{docuObject.Object}} </button>
+                
             </div>
         </div>
     </div>
@@ -30,33 +45,42 @@
     export default {
         name: 'docuObjectElement',
         props: [
-            'docuObject',
-            'id'
+            'projectId'
         ],
         data() {
             return {
-                newObjectFormVisible: false,
+                newObjectShow: false,
                 object: '',
             }
         },
+        computed: {
+            docuObjects() {
+                return this.$store.getters.DocuObjects;
+            },
+            activeObject() {
+                return this.$store.getters.ActiveObject
+            }
+        },
         methods: {
-            elementIndex: function(index) {
-                return "object"+index;
-            },
-            setElementIndex: function(index) {
-                return "#object"+index;
-            },
-            collapseNewObjectForm: function() {
-                this.newObjectFormVisible = !this.newObjectFormVisible;
+            showNewObjectInput() {
+                this.newObjectShow = !this.newObjectShow
             },
             addNewDocuObject(){
             const NewDocuObject = {
-                Object: this.object,
-                ProjectId: this.id
+                Object: this.activeObject,
+                ProjectId: this.projectId
             }
             this.$store.dispatch('addNewDocuObject', NewDocuObject)
+            this.newObjectShow = !this.newObjectShow
+            this.object= ''
+            },
+            setActiveObject(objectId) {
+                this.$store.dispatch('setActiveObject', objectId)
+                this.$store.dispatch('getDocuFloorItems', [this.projectId, this.activeObject])
+            },
             
-        } 
+            
+        
         }
     }
 </script>

@@ -18,6 +18,11 @@ class DocuFloor extends Model
         return $this->belongsTo('App\DocuObject');
     }
 
+    public function docuCategories(){
+    
+        return $this->hasMany('App\DocuCategory');
+     }
+
     public function docuRooms(){
     
         return $this->hasMany('App\DocuRoom');

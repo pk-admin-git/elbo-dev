@@ -19,6 +19,12 @@ class CreateDocuCategoriesTable extends Migration
             $table->unsignedBigInteger('ProjectId');
             $table->foreign('ProjectId')->references('id')->on('projects');
 
+            $table->unsignedBigInteger('DocuObjectId');
+            $table->foreign('DocuObjectId')->references('id')->on('docu_objects');
+
+            $table->unsignedBigInteger('DocuFloorId');
+            $table->foreign('DocuFloorId')->references('id')->on('docu_floors');
+
             $table->string('Category', 50);
             $table->timestamps();
         });
