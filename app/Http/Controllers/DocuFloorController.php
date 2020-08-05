@@ -13,4 +13,17 @@ class DocuFloorController extends Controller
 
         return $docuFloors;     
     }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'Floor' => 'required|string',
+            'ProjectId' => 'required',
+            'ObjectId' => 'required'
+        ]);
+
+        $docuFloor = docuFloor::create($data);
+
+        return response($docuFloor, 201);
+    }
 }
