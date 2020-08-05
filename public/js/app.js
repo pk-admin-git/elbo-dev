@@ -2103,6 +2103,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39074,7 +39084,7 @@ var render = function() {
                             expression: "object"
                           }
                         ],
-                        staticClass: "form-control",
+                        staticClass: "form-control mr-2",
                         attrs: { type: "text" },
                         domProps: { value: _vm.object },
                         on: {
@@ -39094,6 +39104,14 @@ var render = function() {
                       staticClass: "fas fa-check-circle fa-lg m-2",
                       staticStyle: { cursor: "pointer" },
                       on: { click: _vm.addNewDocuObject }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.newObjectShow
+                  ? _c("span", {
+                      staticClass: "fas fa-times-circle fa-lg m-2",
+                      staticStyle: { cursor: "pointer" },
+                      on: { click: _vm.showNewObjectInput }
                     })
                   : _vm._e(),
                 _vm._v(" "),
@@ -39151,7 +39169,7 @@ var render = function() {
                               expression: "floor"
                             }
                           ],
-                          staticClass: "form-control",
+                          staticClass: "form-control mr-2",
                           attrs: { type: "text" },
                           domProps: { value: _vm.floor },
                           on: {
@@ -39171,6 +39189,14 @@ var render = function() {
                         staticClass: "fas fa-check-circle fa-lg m-2",
                         staticStyle: { cursor: "pointer" },
                         on: { click: _vm.addNewDocuFloor }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.newFloorShow
+                    ? _c("span", {
+                        staticClass: "fas fa-times-circle fa-lg m-2",
+                        staticStyle: { cursor: "pointer" },
+                        on: { click: _vm.showNewFloorInput }
                       })
                     : _vm._e(),
                   _vm._v(" "),

@@ -11,12 +11,17 @@
                         <h5 class="h5 col-4">Objekte</h5>
                         <div class="col-8 d-flex justify-content-end">
                             <form class="form-inline">
-                            <input type="text" class="form-control"  v-if="newObjectShow" v-model="object"/>
+                            <input type="text" class="form-control mr-2"  v-if="newObjectShow" v-model="object"/>
                             </form> 
                             <span   style="cursor:pointer"
                                     class="fas fa-check-circle fa-lg m-2"
                                     v-if="newObjectShow"
                                     @click="addNewDocuObject"></span>
+                            <span   style="cursor:pointer"
+                                    class="fas fa-times-circle fa-lg m-2"
+                                    v-if="newObjectShow"
+                                    @click="showNewObjectInput"></span>
+
                             <span   style="cursor:pointer"
                                     class="fas fa-plus-circle fa-lg" 
                                     @click="showNewObjectInput"
@@ -38,12 +43,17 @@
                         <h5 class="h5 col-4">Etagen</h5>
                         <div class="col-8 d-flex justify-content-end align-items-start">
                             <form class="form-inline">
-                            <input type="text" class="form-control" v-if="newFloorShow" v-model="floor"/>
+                            <input type="text" class="form-control mr-2" v-if="newFloorShow" v-model="floor"/>
                             </form> 
                             <span   style="cursor:pointer"
                                     class="fas fa-check-circle fa-lg m-2"
                                     v-if="newFloorShow"
                                     @click="addNewDocuFloor"></span>
+                            <span   style="cursor:pointer"
+                                    class="fas fa-times-circle fa-lg m-2"
+                                    v-if="newFloorShow"
+                                    @click="showNewFloorInput"></span>
+
                             <span   style="cursor:pointer"
                                     class="fas fa-plus-circle fa-lg" 
                                     @click="showNewFloorInput"
@@ -136,3 +146,9 @@ import docuObjectElement from './docuObjectElement.vue'
         
     }
 </script>
+
+<style lang="scss">
+
+
+
+</style>
