@@ -14,7 +14,7 @@ export const projectRoutes = [
         }
     },
     {    
-        path: '/projectApp/project/:id/projectOverview',
+        path: '/projectApp/project/:projectId/projectOverview',
         components: {
             navTab: projectNav,
             content: projectOverview
@@ -22,7 +22,7 @@ export const projectRoutes = [
         props: {navTab: true, content: true}, 
     },
     {    
-        path: '/projectApp/project/:id/projectSpecification',
+        path: '/projectApp/project/:projectId/projectSpecification',
         components: {
             navTab: projectNav,
             content: projectSpecification
@@ -30,7 +30,7 @@ export const projectRoutes = [
         props: {navTab: true, content: true},
     },
     {    
-        path: '/projectApp/project/:id/projectDocu',
+        path: '/projectApp/project/:projectId/projectDocu',
         components: {
             navTab: projectNav,
             content: projectDocu

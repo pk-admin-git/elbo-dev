@@ -80,8 +80,8 @@ const actions = {
                 commit('UPDATE_DOCU_FLOOR_ITEMS', response.data)
             });
     },
-    addNewDocufloor({ commit }, payload){
-        axios.post('http://46.101.114.150/api/docuObjects', payload)
+    addNewDocuFloor({ commit }, payload){
+        axios.post('http://46.101.114.150/api/docuFloors', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
             });
@@ -90,8 +90,9 @@ const actions = {
 
 const getters = {
     ProjectItems: state => state.ProjectItems,
-    DocuObjects: state => state.DocuObjectItems,
     ProjectItemById: state => id => state.ProjectItems.find(ProjectItem => ProjectItem.id === id ),
+    DocuObjects: state => state.DocuObjectItems,
+    DocuFloors: state => state.DocuFloorItems,
 };
 
 const projectsModul = {

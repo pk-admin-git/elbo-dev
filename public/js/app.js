@@ -2107,11 +2107,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'projectDocu',
-  props: ['id'],
+  props: ['projectId'],
   data: function data() {
     return {
       newObjectShow: false,
-      object: ''
+      newFloorShow: false,
+      object: '',
+      objectId: '1',
+      floor: ''
     };
   },
   components: {
@@ -2119,23 +2122,40 @@ __webpack_require__.r(__webpack_exports__);
     docuObjectElement: _docuObjectElement_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
-    this.$store.dispatch('getDocuObjectItems', [this.id]);
+    this.$store.dispatch('getDocuObjectItems', [this.projectId]);
+    this.$store.dispatch('getDocuFloorItems', [this.projectId, this.objectId]);
   },
   computed: {
     docuObjects: function docuObjects() {
       return this.$store.getters.DocuObjects;
+    },
+    docuFloors: function docuFloors() {
+      return this.$store.getters.DocuFloors;
     }
   },
   methods: {
     showNewObjectInput: function showNewObjectInput() {
       this.newObjectShow = !this.newObjectShow;
     },
+    showNewFloorInput: function showNewFloorInput() {
+      this.newFloorShow = !this.newFloorShow;
+    },
     addNewDocuObject: function addNewDocuObject() {
       var NewDocuObject = {
         Object: this.object,
-        ProjectId: this.id
+        ProjectId: this.projectId
       };
       this.$store.dispatch('addNewDocuObject', NewDocuObject);
+      this.newObjectShow = !this.newObjectShow;
+    },
+    addNewDocuFloor: function addNewDocuFloor() {
+      var NewDocuFloor = {
+        Floor: this.floor,
+        ProjectId: this.projectId,
+        DocuObjectId: this.objectId
+      };
+      this.$store.dispatch('addNewDocuFloor', NewDocuFloor);
+      this.newFloorShow = !this.newFloorShow;
     }
   }
 });
@@ -2220,13 +2240,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'project',
-  props: ['id'],
+  props: ['projectId'],
   created: function created() {
     this.$store.dispatch('getProjectItems');
   },
   computed: {
     ProjectItem: function ProjectItem() {
-      return this.$store.getters.ProjectItemById(Number(this.id));
+      return this.$store.getters.ProjectItemById(Number(this.projectId));
     }
   }
 });
@@ -2275,13 +2295,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'projectNav',
-  props: ['id'],
+  props: ['projectId'],
   created: function created() {
     this.$store.dispatch('getProjectItems');
   },
   computed: {
     ProjectItem: function ProjectItem() {
-      return this.$store.getters.ProjectItemById(Number(this.id));
+      return this.$store.getters.ProjectItemById(Number(this.projectId));
     }
   }
 });
@@ -39046,8 +39066,25 @@ var render = function() {
                 _c("form", { staticClass: "form-inline" }, [
                   _vm.newObjectShow
                     ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.object,
+                            expression: "object"
+                          }
+                        ],
                         staticClass: "form-control",
-                        attrs: { type: "text" }
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.object },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.object = $event.target.value
+                          }
+                        }
                       })
                     : _vm._e()
                 ]),
@@ -39056,7 +39093,7 @@ var render = function() {
                   ? _c("span", {
                       staticClass: "fas fa-check-circle fa-lg m-2",
                       staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.showNewObjectInput }
+                      on: { click: _vm.addNewDocuObject }
                     })
                   : _vm._e(),
                 _vm._v(" "),
@@ -39096,45 +39133,69 @@ var render = function() {
             [
               _c("h5", { staticClass: "h5 col-4" }, [_vm._v("Etagen")]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-8 d-flex justify-content-end" }, [
-                _c("form", { staticClass: "form-inline" }, [
-                  _vm.newObjectShow
-                    ? _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text" }
-                      })
-                    : _vm._e(),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col-8 d-flex justify-content-end align-items-start"
+                },
+                [
+                  _c("form", { staticClass: "form-inline" }, [
+                    _vm.newFloorShow
+                      ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.floor,
+                              expression: "floor"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.floor },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.floor = $event.target.value
+                            }
+                          }
+                        })
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
-                  _vm.newObjectShow
+                  _vm.newFloorShow
                     ? _c("span", {
                         staticClass: "fas fa-check-circle fa-lg m-2",
                         staticStyle: { cursor: "pointer" },
-                        on: { click: _vm.showNewObjectInput }
+                        on: { click: _vm.addNewDocuFloor }
                       })
                     : _vm._e(),
                   _vm._v(" "),
-                  !_vm.newObjectShow
+                  !_vm.newFloorShow
                     ? _c("span", {
                         staticClass: "fas fa-plus-circle fa-lg",
                         staticStyle: { cursor: "pointer" },
-                        on: { click: _vm.showNewObjectInput }
+                        on: { click: _vm.showNewFloorInput }
                       })
                     : _vm._e()
-                ])
-              ]),
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "ul",
                 { staticClass: "list-group col-12 my-3" },
-                _vm._l(_vm.docuObjects, function(docuObject) {
+                _vm._l(_vm.docuFloors, function(docuFloor) {
                   return _c(
                     "li",
                     {
-                      key: docuObject.id,
+                      key: docuFloor.id,
                       staticClass: "list-group-item",
-                      attrs: { docuObject: docuObject }
+                      attrs: { docuFloor: docuFloor }
                     },
-                    [_vm._v(" " + _vm._s(docuObject.Object) + " ")]
+                    [_vm._v(" " + _vm._s(docuFloor.Floor) + " ")]
                   )
                 }),
                 0
@@ -57304,7 +57365,7 @@ var projectRoutes = [{
     content: _vue_Apps_projects_App_projectsAll_site_active_projects_activeProjectsList_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 }, {
-  path: '/projectApp/project/:id/projectOverview',
+  path: '/projectApp/project/:projectId/projectOverview',
   components: {
     navTab: _vue_Apps_projects_App_project_site_projectNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     content: _vue_Apps_projects_App_project_site_overview_projectOverview_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -57314,7 +57375,7 @@ var projectRoutes = [{
     content: true
   }
 }, {
-  path: '/projectApp/project/:id/projectSpecification',
+  path: '/projectApp/project/:projectId/projectSpecification',
   components: {
     navTab: _vue_Apps_projects_App_project_site_projectNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     content: _vue_Apps_projects_App_project_site_specification_projectSpecification_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -57324,7 +57385,7 @@ var projectRoutes = [{
     content: true
   }
 }, {
-  path: '/projectApp/project/:id/projectDocu',
+  path: '/projectApp/project/:projectId/projectDocu',
   components: {
     navTab: _vue_Apps_projects_App_project_site_projectNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     content: _vue_Apps_projects_App_project_site_docu_projectDocu_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -57450,9 +57511,9 @@ var actions = {
       commit('UPDATE_DOCU_FLOOR_ITEMS', response.data);
     });
   },
-  addNewDocufloor: function addNewDocufloor(_ref6, payload) {
+  addNewDocuFloor: function addNewDocuFloor(_ref6, payload) {
     var commit = _ref6.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuObjects', payload).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuFloors', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
     });
   }
@@ -57461,15 +57522,18 @@ var getters = {
   ProjectItems: function ProjectItems(state) {
     return state.ProjectItems;
   },
-  DocuObjects: function DocuObjects(state) {
-    return state.DocuObjectItems;
-  },
   ProjectItemById: function ProjectItemById(state) {
     return function (id) {
       return state.ProjectItems.find(function (ProjectItem) {
         return ProjectItem.id === id;
       });
     };
+  },
+  DocuObjects: function DocuObjects(state) {
+    return state.DocuObjectItems;
+  },
+  DocuFloors: function DocuFloors(state) {
+    return state.DocuFloorItems;
   }
 };
 var projectsModul = {

@@ -33,7 +33,7 @@
 export default {
     name: 'projectNav',
     props: [
-        'id',
+        'projectId',
     ],
     
     created() {
@@ -42,7 +42,7 @@ export default {
 
     computed: {
         ProjectItem() {
-            return (this.$store.getters.ProjectItemById(Number(this.id)));
+            return (this.$store.getters.ProjectItemById(Number(this.projectId)));
         }
     },
     
