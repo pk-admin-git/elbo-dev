@@ -3,11 +3,11 @@
         <h1 class="h1 my-4">Dokumentation</h1>
 
         <div class="card">
-            <div class="card-body p-1 row">
+            <div class="card-body p-1 row align-items-start">
                 <h4 class="h4 col-12 p-3">Überblick</h4>
 
                 <div class="card border-0 col-12 col-md-6">
-                    <div class="card-body p-0 row justify-content-between">
+                    <div class="card-body p-0 row">
                         <h5 class="h5 col-4">Objekte</h5>
                         <div class="col-8 d-flex justify-content-end">
                             <form class="form-inline">
@@ -28,13 +28,16 @@
                                     v-if="!newObjectShow"></span>
                             
                         </div>
-                        <ul class="list-group col-12 my-3">
-                            <li v-for="docuObject in docuObjects"
+                        <div class="list-group list-group-action col-12 my-3">
+                            <button v-for="docuObject in docuObjects"
                                 :key="docuObject.id"
-                                :docuObject="docuObject" 
-                                class="list-group-item"> {{docuObject.Object}} </li>
+                                :docuObject="docuObject"
+                                @click="setActiveObject(docuObject.id)"
+                                data-toggle="list" 
+                                class="list-group-item list-group-item-action"
+                                type="button"> {{docuObject.Object}} </button>
                             
-                        </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -95,6 +98,7 @@ import docuObjectElement from './docuObjectElement.vue'
         data() {
             return {
                 newObjectShow: false,
+                activeObject: '',
                 newFloorShow: false,
                 object: '',
                 objectId: '1',
@@ -108,7 +112,6 @@ import docuObjectElement from './docuObjectElement.vue'
         },
         created() {
             this.$store.dispatch('getDocuObjectItems', [this.projectId])
-            this.$store.dispatch('getDocuFloorItems', [this.projectId, this.objectId])
         },
         computed: {
             docuObjects() {
@@ -116,7 +119,7 @@ import docuObjectElement from './docuObjectElement.vue'
             },
             docuFloors() {
                 return this.$store.getters.DocuFloors;
-            }
+            },
         },
         methods: {
             showNewObjectInput() {
@@ -133,6 +136,11 @@ import docuObjectElement from './docuObjectElement.vue'
             this.$store.dispatch('addNewDocuObject', NewDocuObject)
             this.newObjectShow = !this.newObjectShow
             },
+            setActiveObject(objectId) {
+                this.activeObject = objectId
+                this.$store.dispatch('getDocuFloorItems', [this.projectId, objectId])
+            },
+            
             addNewDocuFloor(){
             const NewDocuFloor = {
                 Floor: this.floor,
