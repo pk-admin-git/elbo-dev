@@ -19,7 +19,7 @@ class DocuFloorController extends Controller
         $data = $request->validate([
             'Floor' => 'required|string',
             'ProjectId' => 'required',
-            'ObjectId' => 'required'
+            'DocuObjectId' => 'required'
         ]);
 
         $docuFloor = docuFloor::create($data);
