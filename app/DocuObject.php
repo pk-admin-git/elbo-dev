@@ -16,7 +16,7 @@ class DocuObject extends Model
 
    public function docuFloors(){
     
-      return $this->hasMany('App\docuObject');
+      return $this->hasMany('App\DocuObject');
    }
 
 

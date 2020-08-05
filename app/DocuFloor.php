@@ -15,12 +15,12 @@ class DocuFloor extends Model
 
     public function docuObject(){
     
-        return $this->belongsTo('App\docuObject');
+        return $this->belongsTo('App\DocuObject');
     }
 
     public function docuRooms(){
     
-        return $this->hasMany('App\docuRoom');
+        return $this->hasMany('App\DocuRoom');
     }
 
     public function documentations(){
