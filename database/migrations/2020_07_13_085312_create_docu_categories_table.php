@@ -15,6 +15,7 @@ class CreateDocuCategoriesTable extends Migration
     {
         Schema::create('docu_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('color', 20);
 
             $table->unsignedBigInteger('ProjectId');
             $table->foreign('ProjectId')->references('id')->on('projects');
