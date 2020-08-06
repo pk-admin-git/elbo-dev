@@ -2042,7 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuFloorElement',
-  props: [],
+  props: ['projectId'],
   components: {},
   data: function data() {
     return {
@@ -2157,7 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addNewDocuObject: function addNewDocuObject() {
       var NewDocuObject = {
-        Object: this.activeObject,
+        Object: this.object,
         ProjectId: this.projectId
       };
       this.$store.dispatch('addNewDocuObject', NewDocuObject);
@@ -39330,7 +39330,7 @@ var render = function() {
         _vm._v(" "),
         _c("docuObjectElement", { attrs: { projectId: _vm.projectId } }),
         _vm._v(" "),
-        _c("docuFloorElement"),
+        _c("docuFloorElement", { attrs: { projectId: _vm.projectId } }),
         _vm._v(" "),
         _c("docuCategoryElement")
       ],

@@ -9,7 +9,7 @@
 
             <!-- Etagen -->
 
-            <docuFloorElement/>
+            <docuFloorElement :projectId="projectId"/>
 
             <!-- Kategorien -->
 

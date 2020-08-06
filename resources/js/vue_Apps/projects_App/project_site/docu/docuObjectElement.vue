@@ -67,7 +67,7 @@
             },
             addNewDocuObject(){
             const NewDocuObject = {
-                Object: this.activeObject,
+                Object: this.object,
                 ProjectId: this.projectId
             }
             this.$store.dispatch('addNewDocuObject', NewDocuObject)
