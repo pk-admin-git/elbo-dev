@@ -1,8 +1,8 @@
 <template>
 <div>
-    <div class="card border-0 bg-transparent">
+    <div class="card bg-transparent">
         <div class="card-body row align-items-start p-0">
-            <h3 class="h3 col-12 mb-4">Überblick</h3>
+            <h3 class="h3 col-12 mt-3 mb-4">Überblick</h3>
 
             <!-- Kategorien -->
 
@@ -19,11 +19,8 @@
     </div>
 
     <div class="card border-0 bg-transparent">
-        <div class="card-body row align-items-start p-0">
-            <h3 class="h3 col-12 mb-4">Kabelzuglisten</h3>
-
-            
-        </div>
+            <!-- Kabelzuglisten -->
+            <cableLists/>
     </div>
 
 </div>   
@@ -33,6 +30,7 @@
 import docuCategoryElement from './docuCategoryElement.vue'
 import docuObjectElement from './docuObjectElement.vue'
 import docuFloorElement from './docuFloorElement.vue'
+import cableLists from './cableLists.vue'
 
 export default {
     name: 'docuOverview',
@@ -47,6 +45,7 @@ export default {
             docuCategoryElement,
             docuObjectElement,
             docuFloorElement,
+            cableLists,
         },
         created() {
             this.$store.dispatch('getDocuObjectItems', [this.projectId])

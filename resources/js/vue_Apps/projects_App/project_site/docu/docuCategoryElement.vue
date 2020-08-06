@@ -2,13 +2,13 @@
     <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
         <div class="card-body p-0 row align-items-start">
             
-            <h5 class="h5 col-10 pl-0">Kategorien</h5>
+            <h5 class="h5 col-10 p-0">Kategorien</h5>
             <span   style="cursor:pointer"
-                    class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end" 
+                    class="fas fa-plus-circle fa-lg mt-2 col-2 p-0 d-flex justify-content-end" 
                     @click="showNewCategoryInput"
                     v-if="!newCategoryShow"></span>
 
-            <div class="col-2 d-flex justify-content-end mb-3" v-if="newCategoryShow">
+            <div class="col-2 d-flex justify-content-end mb-3 p-0" v-if="newCategoryShow">
                 <span   style="cursor:pointer"
                         class="fas fa-times-circle fa-lg mt-2 mr-3"
                         @click="showNewCategoryInput"></span>
@@ -17,13 +17,13 @@
                         @click="addNewDocuCategory"></span>
             </div>
             
-            <div class="col-12 pl-0">   
+            <div class="col-12 p-0">   
                 <form class="col p-0">
-                <input type="text" class="form-control mr-2" v-if="newCategoryShow" v-model="category"/>
+                <input type="text" class="form-control" v-if="newCategoryShow" v-model="category"/>
                 </form> 
             </div>
 
-            <div class="col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
+            <div class="col-12 p-0 d-flex justify-content-between mt-3 mb-4"
                  v-if="newCategoryShow">
                         <button  v-for="(categoryColor, index) in categoryColors"
                             :key="index"
@@ -36,7 +36,7 @@
                         </button>
             </div>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5">
+            <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
                 <div v-for="docuCategory in docuCategories"
                     :key="docuCategory.id"
                     :docuCategory="docuCategory" 

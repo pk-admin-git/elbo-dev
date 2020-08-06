@@ -1899,6 +1899,28 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCategoryElement.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCategoryElement.vue?vue&type=script&lang=js& ***!
@@ -2212,6 +2234,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCategoryElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCategoryElement.vue");
 /* harmony import */ var _docuObjectElement_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuObjectElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuObjectElement.vue");
 /* harmony import */ var _docuFloorElement_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./docuFloorElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuFloorElement.vue");
+/* harmony import */ var _cableLists_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cableLists.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue");
 //
 //
 //
@@ -2240,9 +2263,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
+
 
 
 
@@ -2255,7 +2276,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     docuCategoryElement: _docuCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     docuObjectElement: _docuObjectElement_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    docuFloorElement: _docuFloorElement_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    docuFloorElement: _docuFloorElement_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    cableLists: _cableLists_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   created: function created() {
     this.$store.dispatch('getDocuObjectItems', [this.projectId]);
@@ -38998,6 +39020,45 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=template&id=5c9dd0d6&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=template&id=5c9dd0d6& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body row align-items-start pl-0" }, [
+      _c("h3", { staticClass: "h3 col-10 mb-4" }, [_vm._v("Kabelzuglisten")]),
+      _vm._v(" "),
+      _c("span", {
+        staticClass:
+          "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
+        staticStyle: { cursor: "pointer" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCategoryElement.vue?vue&type=template&id=e5d16798&":
 /*!***************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCategoryElement.vue?vue&type=template&id=e5d16798& ***!
@@ -39018,12 +39079,12 @@ var render = function() {
     { staticClass: "card border-0 col-12 col-lg-4 bg-transparent mt-1" },
     [
       _c("div", { staticClass: "card-body p-0 row align-items-start" }, [
-        _c("h5", { staticClass: "h5 col-10 pl-0" }, [_vm._v("Kategorien")]),
+        _c("h5", { staticClass: "h5 col-10 p-0" }, [_vm._v("Kategorien")]),
         _vm._v(" "),
         !_vm.newCategoryShow
           ? _c("span", {
               staticClass:
-                "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
+                "fas fa-plus-circle fa-lg mt-2 col-2 p-0 d-flex justify-content-end",
               staticStyle: { cursor: "pointer" },
               on: { click: _vm.showNewCategoryInput }
             })
@@ -39032,7 +39093,7 @@ var render = function() {
         _vm.newCategoryShow
           ? _c(
               "div",
-              { staticClass: "col-2 d-flex justify-content-end mb-3" },
+              { staticClass: "col-2 d-flex justify-content-end mb-3 p-0" },
               [
                 _c("span", {
                   staticClass: "fas fa-times-circle fa-lg mt-2 mr-3",
@@ -39049,7 +39110,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 pl-0" }, [
+        _c("div", { staticClass: "col-12 p-0" }, [
           _c("form", { staticClass: "col p-0" }, [
             _vm.newCategoryShow
               ? _c("input", {
@@ -39061,7 +39122,7 @@ var render = function() {
                       expression: "category"
                     }
                   ],
-                  staticClass: "form-control mr-2",
+                  staticClass: "form-control",
                   attrs: { type: "text" },
                   domProps: { value: _vm.category },
                   on: {
@@ -39082,7 +39143,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
+                  "col-12 p-0 d-flex justify-content-between mt-3 mb-4"
               },
               _vm._l(_vm.categoryColors, function(categoryColor, index) {
                 return _c("button", {
@@ -39107,7 +39168,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
+          { staticClass: "list-group list-group-action col-12 my-3 mb-5 p-0" },
           _vm._l(_vm.docuCategories, function(docuCategory) {
             return _c(
               "div",
@@ -39375,12 +39436,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "card border-0 bg-transparent" }, [
+    _c("div", { staticClass: "card bg-transparent" }, [
       _c(
         "div",
         { staticClass: "card-body row align-items-start p-0" },
         [
-          _c("h3", { staticClass: "h3 col-12 mb-4" }, [_vm._v("Überblick")]),
+          _c("h3", { staticClass: "h3 col-12 mt-3 mb-4" }, [
+            _vm._v("Überblick")
+          ]),
           _vm._v(" "),
           _c("docuCategoryElement", { attrs: { projectId: _vm.projectId } }),
           _vm._v(" "),
@@ -39392,21 +39455,15 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _c(
+      "div",
+      { staticClass: "card border-0 bg-transparent" },
+      [_c("cableLists")],
+      1
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card border-0 bg-transparent" }, [
-      _c("div", { staticClass: "card-body row align-items-start p-0" }, [
-        _c("h3", { staticClass: "h3 col-12 mb-4" }, [_vm._v("Kabelzuglisten")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -56769,6 +56826,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cableLists_vue_vue_type_template_id_5c9dd0d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cableLists.vue?vue&type=template&id=5c9dd0d6& */ "./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=template&id=5c9dd0d6&");
+/* harmony import */ var _cableLists_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cableLists.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _cableLists_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _cableLists_vue_vue_type_template_id_5c9dd0d6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _cableLists_vue_vue_type_template_id_5c9dd0d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cableLists_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./cableLists.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cableLists_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=template&id=5c9dd0d6&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=template&id=5c9dd0d6& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cableLists_vue_vue_type_template_id_5c9dd0d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./cableLists.vue?vue&type=template&id=5c9dd0d6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/cableLists.vue?vue&type=template&id=5c9dd0d6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cableLists_vue_vue_type_template_id_5c9dd0d6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cableLists_vue_vue_type_template_id_5c9dd0d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
