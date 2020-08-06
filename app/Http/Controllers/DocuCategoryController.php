@@ -18,6 +18,7 @@ class DocuCategoryController extends Controller
     {
         $data = $request->validate([
             'Category' => 'required|string',
+            'color' => 'required',
             'ProjectId' => 'required',
             'DocuObjectId' => 'required',
             'DocuFloorId' => 'required'
