@@ -7,9 +7,9 @@ use App\DocuCategory;
 
 class DocuCategoryController extends Controller
 {
-    public function index($project, $docuObject, $docuFloor)
+    public function index($project)
     {
-        $docuCategories = DocuCategory::where('DocuFloorId', $docuFloor)->get();
+        $docuCategories = DocuCategory::where('ProjectId', $project)->get();
 
         return $docuCategories;     
     }
@@ -20,8 +20,6 @@ class DocuCategoryController extends Controller
             'Category' => 'required|string',
             'color' => 'required',
             'ProjectId' => 'required',
-            'DocuObjectId' => 'required',
-            'DocuFloorId' => 'required'
         ]);
 
         $docuCategory = docuCategory::create($data);

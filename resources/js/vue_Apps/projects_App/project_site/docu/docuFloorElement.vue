@@ -7,25 +7,23 @@
                     class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end" 
                     @click="showNewFloorInput"
                     v-if="(activeObject != null) && (newFloorShow !== true)"></span>
-            
-            
-            <div class="col-12 p-0">
-                <div class="row">   
-                    <form class="col p-0">
-                    <input type="text" class="form-control mr-2" v-if="newFloorShow" v-model="floor"/>
-                    </form>
-                    <div class="col-auto d-flex justify-content-end pl-0"> 
-                        <span   style="cursor:pointer"
-                                class="fas fa-check-circle fa-lg m-2"
-                                v-if="newFloorShow"
-                                @click="addNewDocuFloor"></span>
-                        <span   style="cursor:pointer"
-                                class="fas fa-times-circle fa-lg mt-2 ml-2"
-                                v-if="newFloorShow"
-                                @click="showNewFloorInput"></span>
-                    </div>
-                </div>   
+
+            <div class="col-2 d-flex justify-content-end mb-3 mt-2" v-if="newFloorShow"> 
+                <span   style="cursor:pointer"
+                        class="fas fa-times-circle fa-lg mr-3"
+                        @click="showNewFloorInput"></span>
+                <span   style="cursor:pointer"
+                        class="fas fa-check-circle fa-lg"
+                        @click="addNewDocuFloor"></span>
             </div>
+            
+            
+            <div class="col-12 pl-0">    
+                <form class="col p-0">
+                <input type="text" class="form-control mr-2" v-if="newFloorShow" v-model="floor"/>
+                </form>    
+            </div>
+
             <div class="list-group list-group-action col-12 my-3 mb-5">
                 <div v-for="docuFloor in docuFloors"
                     :key="docuFloor.id"
@@ -58,11 +56,12 @@ export default {
     },
     computed: {
         docuFloors() {
-                return this.$store.getters.DocuFloors;
+                return this.$store.getters.DocuFloors
             },
         activeObject() {
                 return this.$store.getters.ActiveObject
-            }
+            },
+
     },
     methods: {
             showNewFloorInput() {
@@ -80,7 +79,7 @@ export default {
             },
             setActiveFloor(floorId) {
                 this.$store.dispatch('setActiveFloor', floorId)
-                /* this.$store.dispatch('getDocuCategoryItems', [this.projectId, this.activeObject, this.activeFloor]) */
+                this.$store.dispatch('getDocuCategoryItems', [this.projectId, this.activeObject, floorId])
             },
     }, 
 }

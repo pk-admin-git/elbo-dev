@@ -13,16 +13,6 @@ class DocuCategory extends Model
         return $this->belongsTo('App\project');
     }
 
-    public function DocuObject(){
-    
-        return $this->belongsTo('App\DocuObject');
-    }
-
-    public function DocuFloor(){
-    
-        return $this->belongsTo('App\DocuFloor');
-    }
-
     public function documentations(){
     
         return $this->hasMany('App\documentation');

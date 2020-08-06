@@ -1947,6 +1947,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCategoryElement',
   components: {},
@@ -1954,37 +1966,54 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       newCategoryShow: false,
-      category: ''
+      category: '',
+      newCategoryColor: '',
+      colors: [{
+        color: 'primary'
+      }, {
+        color: 'secondary'
+      }, {
+        color: 'success'
+      }, {
+        color: 'danger'
+      }, {
+        color: 'warning'
+      }, {
+        color: 'info'
+      }]
     };
   },
   computed: {
     docuCategories: function docuCategories() {
-      return this.$store.getters.docuCategories;
+      return this.$store.getters.DocuCategories;
     },
-    docuFloors: function docuFloors() {
-      return this.$store.getters.DocuFloors;
-    },
-    activeObject: function activeObject() {
-      return this.$store.getters.ActiveObject;
-    },
-    activeFloor: function activeFloor() {
-      return this.$store.getters.ActiveFloor;
+    categoryColors: function categoryColors() {
+      return this.colors;
     }
   },
   methods: {
     showNewCategoryInput: function showNewCategoryInput() {
       this.newCategoryShow = !this.newCategoryShow;
     },
+    setActiveColor: function setActiveColor(color) {
+      this.newCategoryColor = color;
+    },
     addNewDocuCategory: function addNewDocuCategory() {
       var NewDocuCategory = {
         Category: this.category,
-        ProjectId: this.projectId,
-        DocuObjectId: this.activeObject,
-        DocuFloorId: this.activeFloor
+        color: this.newCategoryColor,
+        ProjectId: this.projectId
       };
       this.$store.dispatch('addNewDocuCategory', NewDocuCategory);
       this.newCategoryShow = !this.newCategoryShow;
       this.category = '';
+      this.newCategoryColor = '';
+    },
+    bgColorListGroup: function bgColorListGroup(color) {
+      return 'list-group-item-' + color;
+    },
+    bgColorNewCategory: function bgColorNewCategory(color) {
+      return 'btn-' + color;
     }
   }
 });
@@ -2000,8 +2029,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -2075,7 +2102,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     setActiveFloor: function setActiveFloor(floorId) {
       this.$store.dispatch('setActiveFloor', floorId);
-      /* this.$store.dispatch('getDocuCategoryItems', [this.projectId, this.activeObject, this.activeFloor]) */
+      this.$store.dispatch('getDocuCategoryItems', [this.projectId, this.activeObject, floorId]);
     }
   }
 });
@@ -2091,8 +2118,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -2165,8 +2190,10 @@ __webpack_require__.r(__webpack_exports__);
       this.object = '';
     },
     setActiveObject: function setActiveObject(objectId) {
+      var floorId = null;
       this.$store.dispatch('setActiveObject', objectId);
       this.$store.dispatch('getDocuFloorItems', [this.projectId, this.activeObject]);
+      this.$store.dispatch('setActiveFloor', floorId);
     }
   }
 });
@@ -38984,7 +39011,7 @@ var render = function() {
       _c("div", { staticClass: "card-body p-0 row align-items-start" }, [
         _c("h5", { staticClass: "h5 col-10 pl-0" }, [_vm._v("Kategorien")]),
         _vm._v(" "),
-        _vm.activeFloor != null && _vm.newCategoryShow !== true
+        !_vm.newCategoryShow
           ? _c("span", {
               staticClass:
                 "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
@@ -38993,57 +39020,81 @@ var render = function() {
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 p-0" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("form", { staticClass: "col p-0" }, [
-              _vm.newCategoryShow
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category,
-                        expression: "category"
-                      }
-                    ],
-                    staticClass: "form-control mr-2",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.category },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.category = $event.target.value
-                      }
-                    }
-                  })
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c(
+        _vm.newCategoryShow
+          ? _c(
               "div",
-              { staticClass: "col-auto d-flex justify-content-end pl-0" },
+              { staticClass: "col-2 d-flex justify-content-end mb-3" },
               [
-                _vm.newCategoryShow
-                  ? _c("span", {
-                      staticClass: "fas fa-check-circle fa-lg m-2",
-                      staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.addNewDocuCategory }
-                    })
-                  : _vm._e(),
+                _c("span", {
+                  staticClass: "fas fa-times-circle fa-lg mt-2 mr-3",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.showNewCategoryInput }
+                }),
                 _vm._v(" "),
-                _vm.newCategoryShow
-                  ? _c("span", {
-                      staticClass: "fas fa-times-circle fa-lg mt-2 ml-2",
-                      staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.showNewCategoryInput }
-                    })
-                  : _vm._e()
+                _c("span", {
+                  staticClass: "fas fa-check-circle fa-lg mt-2",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.addNewDocuCategory }
+                })
               ]
             )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 pl-0" }, [
+          _c("form", { staticClass: "col p-0" }, [
+            _vm.newCategoryShow
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.category,
+                      expression: "category"
+                    }
+                  ],
+                  staticClass: "form-control mr-2",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.category },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.category = $event.target.value
+                    }
+                  }
+                })
+              : _vm._e()
           ])
         ]),
+        _vm._v(" "),
+        _vm.newCategoryShow
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
+              },
+              _vm._l(_vm.categoryColors, function(categoryColor, index) {
+                return _c("button", {
+                  key: index,
+                  staticClass: "btn",
+                  class: _vm.bgColorNewCategory(categoryColor.color),
+                  staticStyle: { height: "35px", width: "35px" },
+                  attrs: {
+                    categoryColor: categoryColor,
+                    "data-toogle": "button"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.setActiveColor(categoryColor.color)
+                    }
+                  }
+                })
+              }),
+              0
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "div",
@@ -39054,6 +39105,7 @@ var render = function() {
               {
                 key: docuCategory.id,
                 staticClass: "list-group-item list-group-item-action",
+                class: _vm.bgColorListGroup(docuCategory.color),
                 attrs: { docuCategory: docuCategory }
               },
               [_vm._v(" " + _vm._s(docuCategory.Category) + " ")]
@@ -39103,55 +39155,51 @@ var render = function() {
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 p-0" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("form", { staticClass: "col p-0" }, [
-              _vm.newFloorShow
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.floor,
-                        expression: "floor"
-                      }
-                    ],
-                    staticClass: "form-control mr-2",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.floor },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.floor = $event.target.value
-                      }
-                    }
-                  })
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c(
+        _vm.newFloorShow
+          ? _c(
               "div",
-              { staticClass: "col-auto d-flex justify-content-end pl-0" },
+              { staticClass: "col-2 d-flex justify-content-end mb-3 mt-2" },
               [
-                _vm.newFloorShow
-                  ? _c("span", {
-                      staticClass: "fas fa-check-circle fa-lg m-2",
-                      staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.addNewDocuFloor }
-                    })
-                  : _vm._e(),
+                _c("span", {
+                  staticClass: "fas fa-times-circle fa-lg mr-3",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.showNewFloorInput }
+                }),
                 _vm._v(" "),
-                _vm.newFloorShow
-                  ? _c("span", {
-                      staticClass: "fas fa-times-circle fa-lg mt-2 ml-2",
-                      staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.showNewFloorInput }
-                    })
-                  : _vm._e()
+                _c("span", {
+                  staticClass: "fas fa-check-circle fa-lg",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.addNewDocuFloor }
+                })
               ]
             )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 pl-0" }, [
+          _c("form", { staticClass: "col p-0" }, [
+            _vm.newFloorShow
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.floor,
+                      expression: "floor"
+                    }
+                  ],
+                  staticClass: "form-control mr-2",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.floor },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.floor = $event.target.value
+                    }
+                  }
+                })
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -39218,55 +39266,51 @@ var render = function() {
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 p-0" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("form", { staticClass: "col p-0" }, [
-              _vm.newObjectShow
-                ? _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.object,
-                        expression: "object"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.object },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.object = $event.target.value
-                      }
-                    }
-                  })
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c(
+        _vm.newObjectShow
+          ? _c(
               "div",
-              { staticClass: "col-auto pl-0 d-flex justify-content-end" },
+              { staticClass: "mt-2 col-2 d-flex justify-content-end mb-3" },
               [
-                _vm.newObjectShow
-                  ? _c("span", {
-                      staticClass: "fas fa-check-circle fa-lg m-2",
-                      staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.addNewDocuObject }
-                    })
-                  : _vm._e(),
+                _c("span", {
+                  staticClass: "fas fa-times-circle fa-lg mr-3",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.showNewObjectInput }
+                }),
                 _vm._v(" "),
-                _vm.newObjectShow
-                  ? _c("span", {
-                      staticClass: "fas fa-times-circle fa-lg mt-2 ml-2",
-                      staticStyle: { cursor: "pointer" },
-                      on: { click: _vm.showNewObjectInput }
-                    })
-                  : _vm._e()
+                _c("span", {
+                  staticClass: "fas fa-check-circle fa-lg",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.addNewDocuObject }
+                })
               ]
             )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 pl-0" }, [
+          _c("form", { staticClass: "col p-0" }, [
+            _vm.newObjectShow
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.object,
+                      expression: "object"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.object },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.object = $event.target.value
+                    }
+                  }
+                })
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -39328,11 +39372,11 @@ var render = function() {
       [
         _c("h3", { staticClass: "h3 col-12 mb-4" }, [_vm._v("Überblick")]),
         _vm._v(" "),
+        _c("docuCategoryElement", { attrs: { projectId: _vm.projectId } }),
+        _vm._v(" "),
         _c("docuObjectElement", { attrs: { projectId: _vm.projectId } }),
         _vm._v(" "),
-        _c("docuFloorElement", { attrs: { projectId: _vm.projectId } }),
-        _vm._v(" "),
-        _c("docuCategoryElement")
+        _c("docuFloorElement", { attrs: { projectId: _vm.projectId } })
       ],
       1
     )
@@ -57862,20 +57906,14 @@ var actions = {
   },
 
   /* Dokumentation Kategorien */
-  getDocuCategoryItems: function getDocuCategoryItems(_ref11, _ref12) {
+  getDocuCategoryItems: function getDocuCategoryItems(_ref11, projectId) {
     var commit = _ref11.commit;
-
-    var _ref13 = _slicedToArray(_ref12, 3),
-        projectId = _ref13[0],
-        objectId = _ref13[1],
-        floorId = _ref13[2];
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuObjects/' + objectId + '/floors/' + floorId + '/categories', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data);
     });
   },
-  addNewDocuCategory: function addNewDocuCategory(_ref14, payload) {
-    var commit = _ref14.commit;
+  addNewDocuCategory: function addNewDocuCategory(_ref12, payload) {
+    var commit = _ref12.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuCategories', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
     });

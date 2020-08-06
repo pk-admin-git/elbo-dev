@@ -8,24 +8,22 @@
                         @click="showNewObjectInput"
                         v-if="!newObjectShow"></span>
             
-
-            <div class="col-12 p-0">
-                <div class="row">
-                    <form class="col p-0">
-                    <input type="text" class="form-control"  v-if="newObjectShow" v-model="object"/>
-                    </form> 
-                    <div class="col-auto pl-0 d-flex justify-content-end">
-                        <span   style="cursor:pointer"
-                                class="fas fa-check-circle fa-lg m-2"
-                                v-if="newObjectShow"
-                                @click="addNewDocuObject"></span>
-                        <span   style="cursor:pointer"
-                                class="fas fa-times-circle fa-lg mt-2 ml-2"
-                                v-if="newObjectShow"
-                                @click="showNewObjectInput"></span>
-                    </div>
-                </div>
+            <div class="mt-2 col-2 d-flex justify-content-end mb-3" v-if="newObjectShow">
+                <span   style="cursor:pointer"
+                        class="fas fa-times-circle fa-lg mr-3"
+                        @click="showNewObjectInput"></span>
+                <span   style="cursor:pointer"
+                        class="fas fa-check-circle fa-lg"
+                        @click="addNewDocuObject"></span>
             </div>
+            
+
+            <div class="col-12 pl-0">
+                <form class="col p-0">
+                <input type="text" class="form-control"  v-if="newObjectShow" v-model="object"/>
+                </form>
+            </div>
+
             <div class="list-group list-group-action col-12 my-3 mb-5">
                 <button v-for="docuObject in docuObjects"
                     :key="docuObject.id"
@@ -75,8 +73,10 @@
             this.object= ''
             },
             setActiveObject(objectId) {
+                let floorId = null
                 this.$store.dispatch('setActiveObject', objectId)
                 this.$store.dispatch('getDocuFloorItems', [this.projectId, this.activeObject])
+                this.$store.dispatch('setActiveFloor', floorId)
             },
             
             

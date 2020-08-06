@@ -112,8 +112,8 @@ const actions = {
 
     /* Dokumentation Kategorien */
 
-    getDocuCategoryItems({ commit }, [projectId, objectId, floorId]){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuObjects/' + objectId + '/floors/' + floorId + '/categories', axiosConfig)
+    getDocuCategoryItems({ commit }, projectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data)
             });

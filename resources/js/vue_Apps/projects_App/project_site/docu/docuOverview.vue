@@ -3,6 +3,10 @@
         <div class="card-body row align-items-start p-0">
             <h3 class="h3 col-12 mb-4">Überblick</h3>
 
+            <!-- Kategorien -->
+
+            <docuCategoryElement :projectId="projectId"/>
+            
             <!-- Gebäude -->
 
             <docuObjectElement :projectId="projectId"/>
@@ -10,10 +14,6 @@
             <!-- Etagen -->
 
             <docuFloorElement :projectId="projectId"/>
-
-            <!-- Kategorien -->
-
-            <docuCategoryElement/>
 
 
 
