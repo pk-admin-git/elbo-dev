@@ -79,7 +79,6 @@ export default {
             },
             setActiveFloor(floorId) {
                 this.$store.dispatch('setActiveFloor', floorId)
-                this.$store.dispatch('getDocuCategoryItems', [this.projectId, this.activeObject, floorId])
             },
     }, 
 }

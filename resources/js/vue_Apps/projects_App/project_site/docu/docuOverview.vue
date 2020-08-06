@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="card border-0 bg-transparent">
         <div class="card-body row align-items-start p-0">
             <h3 class="h3 col-12 mb-4">Überblick</h3>
@@ -14,11 +15,18 @@
             <!-- Etagen -->
 
             <docuFloorElement :projectId="projectId"/>
-
-
-
         </div>
     </div>
+
+    <div class="card border-0 bg-transparent">
+        <div class="card-body row align-items-start p-0">
+            <h3 class="h3 col-12 mb-4">Kabelzuglisten</h3>
+
+            
+        </div>
+    </div>
+
+</div>   
 </template>
 
 <script>
@@ -42,6 +50,9 @@ export default {
         },
         created() {
             this.$store.dispatch('getDocuObjectItems', [this.projectId])
+            
+            this.$store.dispatch('getDocuCategoryItems', this.projectId)
+            
         },
         computed: {
             activeObject() {

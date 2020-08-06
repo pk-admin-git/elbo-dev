@@ -1983,6 +1983,7 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  created: {},
   computed: {
     docuCategories: function docuCategories() {
       return this.$store.getters.DocuCategories;
@@ -2102,7 +2103,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     setActiveFloor: function setActiveFloor(floorId) {
       this.$store.dispatch('setActiveFloor', floorId);
-      this.$store.dispatch('getDocuCategoryItems', [this.projectId, this.activeObject, floorId]);
     }
   }
 });
@@ -2235,6 +2235,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2251,6 +2259,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$store.dispatch('getDocuObjectItems', [this.projectId]);
+    this.$store.dispatch('getDocuCategoryItems', this.projectId);
   },
   computed: {
     activeObject: function activeObject() {
@@ -39365,24 +39374,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card border-0 bg-transparent" }, [
-    _c(
-      "div",
-      { staticClass: "card-body row align-items-start p-0" },
-      [
-        _c("h3", { staticClass: "h3 col-12 mb-4" }, [_vm._v("Überblick")]),
-        _vm._v(" "),
-        _c("docuCategoryElement", { attrs: { projectId: _vm.projectId } }),
-        _vm._v(" "),
-        _c("docuObjectElement", { attrs: { projectId: _vm.projectId } }),
-        _vm._v(" "),
-        _c("docuFloorElement", { attrs: { projectId: _vm.projectId } })
-      ],
-      1
-    )
+  return _c("div", [
+    _c("div", { staticClass: "card border-0 bg-transparent" }, [
+      _c(
+        "div",
+        { staticClass: "card-body row align-items-start p-0" },
+        [
+          _c("h3", { staticClass: "h3 col-12 mb-4" }, [_vm._v("Überblick")]),
+          _vm._v(" "),
+          _c("docuCategoryElement", { attrs: { projectId: _vm.projectId } }),
+          _vm._v(" "),
+          _c("docuObjectElement", { attrs: { projectId: _vm.projectId } }),
+          _vm._v(" "),
+          _c("docuFloorElement", { attrs: { projectId: _vm.projectId } })
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card border-0 bg-transparent" }, [
+      _c("div", { staticClass: "card-body row align-items-start p-0" }, [
+        _c("h3", { staticClass: "h3 col-12 mb-4" }, [_vm._v("Kabelzuglisten")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
