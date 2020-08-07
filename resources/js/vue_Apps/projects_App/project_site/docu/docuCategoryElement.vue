@@ -39,7 +39,8 @@
             <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
                 <div v-for="docuCategory in docuCategories"
                     :key="docuCategory.id"
-                    :docuCategory="docuCategory" 
+                    :docuCategory="docuCategory"
+                    data-toggle="list" 
                     class="list-group-item list-group-item-action"
                     :class="bgColorListGroup(docuCategory.color)"> {{docuCategory.Category}} </div>   
             </div>

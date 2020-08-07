@@ -24,7 +24,7 @@
                 </form>
             </div>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5">
+            <div class="list-group col-12 my-3 mb-5">
                 <button v-for="docuObject in docuObjects"
                     :key="docuObject.id"
                     :docuObject="docuObject"
@@ -75,7 +75,6 @@
             setActiveObject(objectId) {
                 let floorId = null
                 this.$store.dispatch('setActiveObject', objectId)
-                this.$store.dispatch('getDocuFloorItems', this.projectId,)
                 this.$store.dispatch('setActiveFloor', floorId)
             },
             

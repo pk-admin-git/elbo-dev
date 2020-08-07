@@ -8,7 +8,6 @@
                 <button v-for="cableList in cableLists"
                     :key="cableList.id"
                     :cableList="cableList"
-                    data-toggle="list" 
                     class="list-group-item list-group-item-action p-0"
                     :class="getColor(cableList.CategoryId)"
                     type="button">

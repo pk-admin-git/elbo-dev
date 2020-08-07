@@ -160,6 +160,7 @@ const getters = {
     ActiveObject: state => state.ActiveObject,
     
     DocuFloors: state => state.DocuFloorItems,
+    DocuFloorsFiltered: state => objectId => state.DocuFloorItems.filter(floors => floors.DocuObjectId === objectId),
     ActiveFloor: state => state.ActiveFloor,
 
     DocuCategories: state => state.DocuCategoryItems,

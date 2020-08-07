@@ -1934,7 +1934,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableLists',
   props: ['projectId'],
@@ -1985,6 +1984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2156,9 +2156,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   computed: {
-    docuFloors: function docuFloors() {
-      return this.$store.getters.DocuFloors;
-    },
     activeObject: function activeObject() {
       return this.$store.getters.ActiveObject;
     }
@@ -2166,6 +2163,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showNewFloorInput: function showNewFloorInput() {
       this.newFloorShow = !this.newFloorShow;
+    },
+    docuFloors: function docuFloors(objectId) {
+      return this.$store.getters.DocuFloorsFiltered(objectId);
     },
     addNewDocuFloor: function addNewDocuFloor() {
       var NewDocuFloor = {
@@ -2268,7 +2268,6 @@ __webpack_require__.r(__webpack_exports__);
     setActiveObject: function setActiveObject(objectId) {
       var floorId = null;
       this.$store.dispatch('setActiveObject', objectId);
-      this.$store.dispatch('getDocuFloorItems', this.projectId);
       this.$store.dispatch('setActiveFloor', floorId);
     }
   }
@@ -39113,11 +39112,7 @@ var render = function() {
             key: cableList.id,
             staticClass: "list-group-item list-group-item-action p-0",
             class: _vm.getColor(cableList.CategoryId),
-            attrs: {
-              cableList: cableList,
-              "data-toggle": "list",
-              type: "button"
-            }
+            attrs: { cableList: cableList, type: "button" }
           },
           [
             _c("div", { staticClass: "row" }, [
@@ -39273,7 +39268,7 @@ var render = function() {
                 key: docuCategory.id,
                 staticClass: "list-group-item list-group-item-action",
                 class: _vm.bgColorListGroup(docuCategory.color),
-                attrs: { docuCategory: docuCategory }
+                attrs: { docuCategory: docuCategory, "data-toggle": "list" }
               },
               [_vm._v(" " + _vm._s(docuCategory.Category) + " ")]
             )
@@ -39370,27 +39365,29 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
-          _vm._l(_vm.docuFloors, function(docuFloor) {
-            return _c(
+        _vm.activeObject
+          ? _c(
               "div",
-              {
-                key: docuFloor.id,
-                staticClass: "list-group-item list-group-item-action",
-                attrs: { docuFloor: docuFloor, "data-toggle": "list" },
-                on: {
-                  click: function($event) {
-                    return _vm.setActiveFloor(docuFloor.id)
-                  }
-                }
-              },
-              [_vm._v(" " + _vm._s(docuFloor.Floor) + " ")]
+              { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
+              _vm._l(_vm.docuFloors(_vm.activeObject), function(docuFloor) {
+                return _c(
+                  "div",
+                  {
+                    key: docuFloor.id,
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { docuFloor: docuFloor, "data-toggle": "list" },
+                    on: {
+                      click: function($event) {
+                        return _vm.setActiveFloor(docuFloor.id)
+                      }
+                    }
+                  },
+                  [_vm._v(" " + _vm._s(docuFloor.Floor) + " ")]
+                )
+              }),
+              0
             )
-          }),
-          0
-        )
+          : _vm._e()
       ])
     ]
   )
@@ -39483,7 +39480,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
+          { staticClass: "list-group col-12 my-3 mb-5" },
           _vm._l(_vm.docuObjects, function(docuObject) {
             return _c(
               "button",
@@ -58192,6 +58189,13 @@ var getters = {
   },
   DocuFloors: function DocuFloors(state) {
     return state.DocuFloorItems;
+  },
+  DocuFloorsFiltered: function DocuFloorsFiltered(state) {
+    return function (objectId) {
+      return state.DocuFloorItems.filter(function (floors) {
+        return floors.DocuObjectId === objectId;
+      });
+    };
   },
   ActiveFloor: function ActiveFloor(state) {
     return state.ActiveFloor;

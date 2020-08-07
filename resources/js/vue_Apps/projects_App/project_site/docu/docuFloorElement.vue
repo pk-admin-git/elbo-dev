@@ -24,8 +24,8 @@
                 </form>    
             </div>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5">
-                <div v-for="docuFloor in docuFloors"
+            <div class="list-group list-group-action col-12 my-3 mb-5" v-if="activeObject">
+                <div v-for="docuFloor in docuFloors(activeObject)"
                     :key="docuFloor.id"
                     :docuFloor="docuFloor"
                     @click="setActiveFloor(docuFloor.id)"
@@ -55,9 +55,6 @@ export default {
         
     },
     computed: {
-        docuFloors() {
-                return this.$store.getters.DocuFloors
-            },
         activeObject() {
                 return this.$store.getters.ActiveObject
             },
@@ -66,6 +63,9 @@ export default {
     methods: {
             showNewFloorInput() {
                 this.newFloorShow = !this.newFloorShow
+            },
+            docuFloors(objectId){
+                return this.$store.getters.DocuFloorsFiltered(objectId)
             },
             addNewDocuFloor(){
             const NewDocuFloor = {
