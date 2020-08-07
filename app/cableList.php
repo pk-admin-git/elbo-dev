@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class cableList extends Model
+class cablelist extends Model
 {
     protected $guarded = [];
 

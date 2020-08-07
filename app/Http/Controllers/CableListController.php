@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\cableList;
+use App\cablelist;
 use Illuminate\Http\Request;
 
 class CableListController extends Controller
@@ -14,7 +14,7 @@ class CableListController extends Controller
      */
     public function index($project)
     {
-        $cableLists = cableList::where('ProjectId', $project)->get();
+        $cableLists = cablelist::where('ProjectId', $project)->get();
 
         return $cableLists;
     }
@@ -36,7 +36,7 @@ class CableListController extends Controller
             'ConnectionEnd' => 'integer'
         ]);
 
-        $cableList = cableList::create($data);
+        $cableList = cablelist::create($data);
 
         return response($cableList, 201);
     }
