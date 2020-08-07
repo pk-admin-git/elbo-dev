@@ -13,8 +13,11 @@ const state = {
     DocuObjectItems: [],
     DocuFloorItems: [],
     DocuCategoryItems: [],
+    CableListItems: [],
+
     ActiveObject: null,
     ActiveFloor: null,
+    ActiveCategory: null,
     
 };
 
@@ -56,6 +59,14 @@ const mutations = {
     },
     UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload){
         state.DocuCategoryItems.push(payload);
+    },
+
+    /* Kabelzuglisten */
+    UPDATE_CABLE_LIST_ITEMS(state, payload){
+        state.CableListItems = payload;
+    },
+    UPDATE_NEW_CABLE_LIST_ITEM(state, payload){
+        state.CableListItems.push(payload);
     }
 };
 
@@ -123,7 +134,22 @@ const actions = {
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
             });
-    }
+    },
+
+    /* Kabelzuglisten */
+
+    getCableListItems({ commit }, projectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_CABLE_LIST_ITEMS', response.data)
+            });
+    },
+    addNewCableList({ commit }, payload){
+        axios.post('http://46.101.114.150/api/cableLists', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
+            });
+    },
 };
 
 const getters = {
@@ -137,6 +163,9 @@ const getters = {
     ActiveFloor: state => state.ActiveFloor,
 
     DocuCategories: state => state.DocuCategoryItems,
+    ActiveCategory: state => state.ActiveCategory,
+
+    CableLists: state => state.CableListItems,
 };
 
 const projectsModul = {

@@ -21,7 +21,7 @@ class DocuObject extends Model
 
    public function docuCategories(){
     
-      return $this->hasMany('App\DocuCategory');
+      return $this->belongsTo('App\DocuCategory');
    }
 
    public function docuRooms(){

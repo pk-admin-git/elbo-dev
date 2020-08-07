@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\cablelist;
+use App\cableList;
 use Illuminate\Http\Request;
 
 class CableListController extends Controller
@@ -12,19 +12,11 @@ class CableListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($project)
     {
-        //
-    }
+        $cableLists = cableList::where('ProjectId', $project)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $cableLists;
     }
 
     /**
@@ -35,30 +27,20 @@ class CableListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string',
+            'ProjectId' => 'required',
+            'DocuObjectId' => 'required',
+            'DocuFloorId' => 'required',
+            'ConnectionStart' => 'integer',
+            'ConnectionEnd' => 'integer'
+        ]);
+
+        $cableList = cableList::create($data);
+
+        return response($cableList, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\cablelist  $cablelist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(cablelist $cablelist)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\cablelist  $cablelist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(cablelist $cablelist)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

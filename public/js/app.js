@@ -57957,8 +57957,10 @@ var state = {
   DocuObjectItems: [],
   DocuFloorItems: [],
   DocuCategoryItems: [],
+  CableListItems: [],
   ActiveObject: null,
-  ActiveFloor: null
+  ActiveFloor: null,
+  ActiveCategory: null
 };
 var mutations = {
   /* Projekte */
@@ -57997,6 +57999,14 @@ var mutations = {
   },
   UPDATE_NEW_DOCU_CATEGORY_ITEM: function UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload) {
     state.DocuCategoryItems.push(payload);
+  },
+
+  /* Kabelzuglisten */
+  UPDATE_CABLE_LIST_ITEMS: function UPDATE_CABLE_LIST_ITEMS(state, payload) {
+    state.CableListItems = payload;
+  },
+  UPDATE_NEW_CABLE_LIST_ITEM: function UPDATE_NEW_CABLE_LIST_ITEM(state, payload) {
+    state.CableListItems.push(payload);
   }
 };
 var actions = {
@@ -58067,6 +58077,20 @@ var actions = {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuCategories', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
     });
+  },
+
+  /* Kabelzuglisten */
+  getCableListItems: function getCableListItems(_ref13, projectId) {
+    var commit = _ref13.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig).then(function (response) {
+      commit('UPDATE_CABLE_LIST_ITEMS', response.data);
+    });
+  },
+  addNewCableList: function addNewCableList(_ref14, payload) {
+    var commit = _ref14.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableLists', payload).then(function (response) {
+      commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
+    });
   }
 };
 var getters = {
@@ -58094,6 +58118,12 @@ var getters = {
   },
   DocuCategories: function DocuCategories(state) {
     return state.DocuCategoryItems;
+  },
+  ActiveCategory: function ActiveCategory(state) {
+    return state.ActiveCategory;
+  },
+  CableLists: function CableLists(state) {
+    return state.CableListItems;
   }
 };
 var projectsModul = {

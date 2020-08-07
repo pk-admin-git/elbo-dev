@@ -39,3 +39,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::post('/docuCategories', 'DocuCategoryController@store')->middleware('cors');
         Route::patch('/docuCategories/{category}', 'DocucategoryController@update')->middleware('cors');
         Route::delete('/docuCategories/{category}', 'DocuCategoryController@destroy')->middleware('cors');
+
+        Route::get('/project/{project}/cableLists', 'CableListController@index')->middleware('cors');
+        Route::post('/cableLists', 'CableListController@store')->middleware('cors');
+        Route::patch('/cableLists/{cableList}', 'CableListController@update')->middleware('cors');
+        Route::delete('/cableLists/{cableList}', 'CableListController@destroy')->middleware('cors');
