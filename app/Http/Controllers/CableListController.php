@@ -30,8 +30,9 @@ class CableListController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'ProjectId' => 'required',
-            'DocuObjectId' => 'required',
-            'DocuFloorId' => 'required',
+            'ObjectId' => 'required',
+            'FloorId' => 'required',
+            'CategoryId' => 'required',
             'ConnectionStart' => 'integer',
             'ConnectionEnd' => 'integer'
         ]);
