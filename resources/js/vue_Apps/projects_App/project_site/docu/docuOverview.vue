@@ -19,8 +19,9 @@
     </div>
 
     <div class="card border-0 bg-transparent">
+            
             <!-- Kabelzuglisten -->
-            <cableLists/>
+            <cableLists :projectId="projectId"/>
     </div>
 
 </div>   
@@ -48,9 +49,13 @@ export default {
             cableLists,
         },
         created() {
-            this.$store.dispatch('getDocuObjectItems', [this.projectId])
+            this.$store.dispatch('getDocuObjectItems', this.projectId)
+
+            this.$store.dispatch('getDocuFloorItems', this.projectId)
             
             this.$store.dispatch('getDocuCategoryItems', this.projectId)
+
+            this.$store.dispatch('getCableListItems', this.projectId)
             
         },
         computed: {

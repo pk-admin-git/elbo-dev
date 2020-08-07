@@ -7,9 +7,9 @@ use App\DocuFloor;
 
 class DocuFloorController extends Controller
 {
-    public function index($project, $docuObject)
+    public function index($project)
     {
-        $docuFloors = DocuFloor::where('DocuObjectId', $docuObject)->get();
+        $docuFloors = DocuFloor::where('ProjectId', $project)->get();
 
         return $docuFloors;     
     }

@@ -105,8 +105,8 @@ const actions = {
 
     /* Dokumentation Etagen */
 
-    getDocuFloorItems({ commit }, [projectId, objectId]){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuObjects/' + objectId + '/floors', axiosConfig)
+    getDocuFloorItems({ commit }, projectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_FLOOR_ITEMS', response.data)
             });
@@ -166,6 +166,7 @@ const getters = {
     ActiveCategory: state => state.ActiveCategory,
 
     CableLists: state => state.CableListItems,
+    
 };
 
 const projectsModul = {

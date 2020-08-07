@@ -30,7 +30,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::patch('/docuObjects/{object}', 'DocuObjectController@update')->middleware('cors');
         Route::delete('/docuObjects/{object}', 'DocuObjectController@destroy')->middleware('cors');
 
-        Route::get('/project/{project}/docuObjects/{docuObject}/floors', 'DocuFloorController@index')->middleware('cors');
+        Route::get('/project/{project}/floors', 'DocuFloorController@index')->middleware('cors');
         Route::post('/docuFloors', 'DocuFloorController@store')->middleware('cors');
         Route::patch('/docuObjects/{floor}', 'DocuFloorController@update')->middleware('cors');
         Route::delete('/docuObjects/{floor}', 'DocuFloorController@destroy')->middleware('cors');

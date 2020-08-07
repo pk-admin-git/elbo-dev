@@ -1917,7 +1917,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'cableLists',
+  props: ['projectId'],
+  data: function data() {
+    return {};
+  },
+  computed: {
+    cableLists: function cableLists() {
+      return this.$store.getters.CableLists;
+    }
+  },
+  methods: {
+    getColor: function getColor(categoryId) {
+      var category = this.$store.getters.DocuCategories.find(function (category) {
+        return category.id === categoryId;
+      });
+      return 'list-group-item-' + category.color;
+    },
+    getCategory: function getCategory(categoryId) {
+      var category = this.$store.getters.DocuCategories.find(function (category) {
+        return category.id === categoryId;
+      });
+      return category.Category;
+    },
+    getObject: function getObject(objectId) {
+      var object = this.$store.getters.DocuObjects.find(function (object) {
+        return object.id === objectId;
+      });
+      return object.Object;
+    },
+    getFloor: function getFloor(floorId) {
+      var floor = this.$store.getters.DocuFloors.find(function (floor) {
+        return floor.id === floorId;
+      });
+      return floor.Floor;
+    }
+  }
+});
 
 /***/ }),
 
@@ -2005,7 +2060,6 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  created: {},
   computed: {
     docuCategories: function docuCategories() {
       return this.$store.getters.DocuCategories;
@@ -2214,7 +2268,7 @@ __webpack_require__.r(__webpack_exports__);
     setActiveObject: function setActiveObject(objectId) {
       var floorId = null;
       this.$store.dispatch('setActiveObject', objectId);
-      this.$store.dispatch('getDocuFloorItems', [this.projectId, this.activeObject]);
+      this.$store.dispatch('getDocuFloorItems', this.projectId);
       this.$store.dispatch('setActiveFloor', floorId);
     }
   }
@@ -2263,6 +2317,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2280,8 +2335,10 @@ __webpack_require__.r(__webpack_exports__);
     cableLists: _cableLists_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   created: function created() {
-    this.$store.dispatch('getDocuObjectItems', [this.projectId]);
+    this.$store.dispatch('getDocuObjectItems', this.projectId);
+    this.$store.dispatch('getDocuFloorItems', this.projectId);
     this.$store.dispatch('getDocuCategoryItems', this.projectId);
+    this.$store.dispatch('getCableListItems', this.projectId);
   },
   computed: {
     activeObject: function activeObject() {
@@ -39035,24 +39092,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card-body row align-items-start mt-3" }, [
+    _c("h3", { staticClass: "h3 col-10 mb-4 pl-0" }, [
+      _vm._v("Kabelzuglisten")
+    ]),
+    _vm._v(" "),
+    _c("span", {
+      staticClass:
+        "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
+      staticStyle: { cursor: "pointer" }
+    }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
+      _vm._l(_vm.cableLists, function(cableList) {
+        return _c(
+          "button",
+          {
+            key: cableList.id,
+            staticClass: "list-group-item list-group-item-action p-0",
+            class: _vm.getColor(cableList.CategoryId),
+            attrs: {
+              cableList: cableList,
+              "data-toggle": "list",
+              type: "button"
+            }
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col-12 font-weight-bold p-2 border-md-right border-dark"
+                },
+                [_vm._v(_vm._s(cableList.name))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-4 border-right border-dark p-2" }, [
+                _vm._v(" " + _vm._s(_vm.getCategory(cableList.CategoryId)))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-4 border-right border-dark p-2" }, [
+                _vm._v(_vm._s(_vm.getObject(cableList.ObjectId)))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-4 p-2" }, [
+                _vm._v(_vm._s(_vm.getFloor(cableList.FloorId)))
+              ])
+            ])
+          ]
+        )
+      }),
+      0
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body row align-items-start pl-0" }, [
-      _c("h3", { staticClass: "h3 col-10 mb-4" }, [_vm._v("Kabelzuglisten")]),
-      _vm._v(" "),
-      _c("span", {
-        staticClass:
-          "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
-        staticStyle: { cursor: "pointer" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39458,7 +39555,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "card border-0 bg-transparent" },
-      [_c("cableLists")],
+      [_c("cableLists", { attrs: { projectId: _vm.projectId } })],
       1
     )
   ])
@@ -57930,18 +58027,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 /* axios.defaults.baseURL = 'http://46.101.114.150/api' */
 
@@ -58043,51 +58128,46 @@ var actions = {
   },
 
   /* Dokumentation Etagen */
-  getDocuFloorItems: function getDocuFloorItems(_ref6, _ref7) {
+  getDocuFloorItems: function getDocuFloorItems(_ref6, projectId) {
     var commit = _ref6.commit;
-
-    var _ref8 = _slicedToArray(_ref7, 2),
-        projectId = _ref8[0],
-        objectId = _ref8[1];
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuObjects/' + objectId + '/floors', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_FLOOR_ITEMS', response.data);
     });
   },
-  addNewDocuFloor: function addNewDocuFloor(_ref9, payload) {
-    var commit = _ref9.commit;
+  addNewDocuFloor: function addNewDocuFloor(_ref7, payload) {
+    var commit = _ref7.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuFloors', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
     });
   },
-  setActiveFloor: function setActiveFloor(_ref10, activeFloor) {
-    var commit = _ref10.commit;
+  setActiveFloor: function setActiveFloor(_ref8, activeFloor) {
+    var commit = _ref8.commit;
     commit('UPDATE_ACTIVE_FLOOR', activeFloor);
   },
 
   /* Dokumentation Kategorien */
-  getDocuCategoryItems: function getDocuCategoryItems(_ref11, projectId) {
-    var commit = _ref11.commit;
+  getDocuCategoryItems: function getDocuCategoryItems(_ref9, projectId) {
+    var commit = _ref9.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data);
     });
   },
-  addNewDocuCategory: function addNewDocuCategory(_ref12, payload) {
-    var commit = _ref12.commit;
+  addNewDocuCategory: function addNewDocuCategory(_ref10, payload) {
+    var commit = _ref10.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuCategories', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
     });
   },
 
   /* Kabelzuglisten */
-  getCableListItems: function getCableListItems(_ref13, projectId) {
-    var commit = _ref13.commit;
+  getCableListItems: function getCableListItems(_ref11, projectId) {
+    var commit = _ref11.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig).then(function (response) {
       commit('UPDATE_CABLE_LIST_ITEMS', response.data);
     });
   },
-  addNewCableList: function addNewCableList(_ref14, payload) {
-    var commit = _ref14.commit;
+  addNewCableList: function addNewCableList(_ref12, payload) {
+    var commit = _ref12.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableLists', payload).then(function (response) {
       commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
     });

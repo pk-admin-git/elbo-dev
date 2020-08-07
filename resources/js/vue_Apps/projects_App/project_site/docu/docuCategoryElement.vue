@@ -75,9 +75,6 @@
                 
             }
         },
-        created: {
-
-        },
         computed: {
             docuCategories() {
                 return this.$store.getters.DocuCategories;

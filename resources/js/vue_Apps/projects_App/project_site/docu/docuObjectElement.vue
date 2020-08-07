@@ -75,7 +75,7 @@
             setActiveObject(objectId) {
                 let floorId = null
                 this.$store.dispatch('setActiveObject', objectId)
-                this.$store.dispatch('getDocuFloorItems', [this.projectId, this.activeObject])
+                this.$store.dispatch('getDocuFloorItems', this.projectId,)
                 this.$store.dispatch('setActiveFloor', floorId)
             },
             
