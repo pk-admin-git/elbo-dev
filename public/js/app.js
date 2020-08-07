@@ -1934,15 +1934,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableLists',
   props: ['projectId'],
   data: function data() {
-    return {};
+    return {
+      newCableListShow: false,
+      cableList: '',
+      selectedObject: '',
+      selectedFloor: ''
+    };
   },
   computed: {
     cableLists: function cableLists() {
       return this.$store.getters.CableLists;
+    },
+    docuObjects: function docuObjects() {
+      return this.$store.getters.DocuObjects;
+    },
+    selectActiveObject: function selectActiveObject() {
+      this.selectedObject = this.$store.getters.ActiveObject;
+    },
+    docuFloors: function docuFloors() {
+      return this.$store.getters.DocuFloors;
+    },
+    selectActiveFloor: function selectActiveFloor() {
+      this.selectedFloor = this.$store.getters.ActiveFloor;
     }
   },
   methods: {
@@ -1969,6 +2010,9 @@ __webpack_require__.r(__webpack_exports__);
         return floor.id === floorId;
       });
       return floor.Floor;
+    },
+    showNewCableList: function showNewCableList() {
+      this.newCableListShow = !this.newCableListShow;
     }
   }
 });
@@ -39096,15 +39140,136 @@ var render = function() {
       _vm._v("Kabelzuglisten")
     ]),
     _vm._v(" "),
-    _c("span", {
-      staticClass:
-        "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
-      staticStyle: { cursor: "pointer" }
-    }),
+    !_vm.newCableListShow
+      ? _c("span", {
+          staticClass:
+            "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
+          staticStyle: { cursor: "pointer" },
+          on: { click: _vm.showNewCableList }
+        })
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.newCableListShow
+      ? _c("div", { staticClass: "col-2 d-flex justify-content-end mt-2" }, [
+          _c("span", {
+            staticClass: "fas fa-times-circle fa-lg mr-3",
+            staticStyle: { cursor: "pointer" },
+            on: { click: _vm.showNewCableList }
+          }),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "fas fa-check-circle fa-lg",
+            staticStyle: { cursor: "pointer" },
+            on: { click: _vm.showNewCableList }
+          })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 p-0 row" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.cableList,
+            expression: "cableList"
+          }
+        ],
+        staticClass: "form-control col-12 col-lg-3 mr-3",
+        attrs: { type: "text" },
+        domProps: { value: _vm.cableList },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.cableList = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.selectedObject,
+              expression: "selectedObject"
+            }
+          ],
+          staticClass: "custom-select col-12 col-lg-3 mr-3",
+          attrs: { id: "inputObject" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.selectedObject = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.docuObjects, function(docuObject) {
+          return _c(
+            "option",
+            { key: docuObject.id, domProps: { value: docuObject.id } },
+            [_vm._v(_vm._s(docuObject.Object))]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.selectedFloor,
+              expression: "selectedFloor"
+            }
+          ],
+          staticClass: "custom-select col-12 col-lg-3 mr-3",
+          attrs: { id: "inputFloor" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.selectedFloor = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        _vm._l(_vm.docuFloors, function(docuFloor) {
+          return _c(
+            "option",
+            { key: docuFloor.id, domProps: { value: docuFloor.id } },
+            [_vm._v(_vm._s(docuFloor.Floor))]
+          )
+        }),
+        0
+      )
+    ]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
+      { staticClass: "list-group list-group-action col-12 my-3 mb-5 p-0" },
       _vm._l(_vm.cableLists, function(cableList) {
         return _c(
           "button",
