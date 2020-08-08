@@ -25,13 +25,13 @@
             </div>
 
             <div class="list-group col-12 my-3 mb-5">
-                <button v-for="docuObject in docuObjects"
+                <div v-for="docuObject in docuObjects"
                     :key="docuObject.id"
                     :docuObject="docuObject"
                     @click="setActiveObject(docuObject.id)"
                     :class="docuObject.id === activeObject ? 'active' : ''"
                     class="list-group-item list-group-item-action"
-                    type="button"> {{docuObject.Object}} </button>
+                    type="button"> {{docuObject.Object}} </div>
                 
             </div>
         </div>
@@ -49,6 +49,7 @@
             return {
                 newObjectShow: false,
                 object: '',
+                objectActiveToggle: false
             }
         },
         computed: {
@@ -73,9 +74,18 @@
             this.object= ''
             },
             setActiveObject(objectId) {
-                let floorId = ''
-                this.$store.dispatch('setActiveObject', objectId)
-                this.$store.dispatch('setActiveFloor', floorId)
+            
+                this.activeObject === objectId ? this.objectActiveToggle = true : this.objectActiveToggle=false
+                
+                if (this.objectActiveToggle === false){
+                    this.$store.dispatch('setActiveObject', objectId)
+                    this.$store.dispatch('setActiveFloor', '')
+                    
+                }
+                else {
+                    this.$store.dispatch('setActiveObject', '')
+                    this.$store.dispatch('setActiveFloor', '')
+                }
             },
             
             

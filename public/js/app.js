@@ -2097,6 +2097,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       newCategoryShow: false,
       category: '',
+      categoryActiveToggle: false,
       newCategoryColor: '',
       colors: [{
         color: 'primary'
@@ -2117,6 +2118,9 @@ __webpack_require__.r(__webpack_exports__);
     docuCategories: function docuCategories() {
       return this.$store.getters.DocuCategories;
     },
+    activeCategory: function activeCategory() {
+      return this.$store.getters.ActiveCategory;
+    },
     categoryColors: function categoryColors() {
       return this.colors;
     }
@@ -2129,7 +2133,14 @@ __webpack_require__.r(__webpack_exports__);
       this.newCategoryColor = color;
     },
     setActiveCategory: function setActiveCategory(categoryId) {
-      this.$store.dispatch('setActiveCategory', categoryId);
+      /* this.activeCategory === categoryId ? this.categoryActiveToggle = true : this.categoryActiveToggle = false */
+      this.categoryActiveToggle = !this.categoryActiveToggle;
+
+      if (this.categoryActiveToggle = true) {
+        this.$store.dispatch('setActiveCategory', categoryId);
+      } else {
+        this.$store.dispatch('setActiveCategory', '');
+      }
     },
     addNewDocuCategory: function addNewDocuCategory() {
       var NewDocuCategory = {
@@ -2207,7 +2218,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       newFloorShow: false,
-      floor: ''
+      floor: '',
+      activeFloorToggle: false
     };
   },
   created: function created() {},
@@ -2237,7 +2249,13 @@ __webpack_require__.r(__webpack_exports__);
       this.floor = '';
     },
     setActiveFloor: function setActiveFloor(floorId) {
-      this.$store.dispatch('setActiveFloor', floorId);
+      this.activeFloor === floorId ? this.activeFloorToggle = true : this.activeFloorToggle = false;
+
+      if (this.activeFloorToggle === false) {
+        this.$store.dispatch('setActiveFloor', floorId);
+      } else {
+        this.$store.dispatch('setActiveFloor', '');
+      }
     }
   }
 });
@@ -2300,7 +2318,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       newObjectShow: false,
-      object: ''
+      object: '',
+      objectActiveToggle: false
     };
   },
   computed: {
@@ -2325,9 +2344,15 @@ __webpack_require__.r(__webpack_exports__);
       this.object = '';
     },
     setActiveObject: function setActiveObject(objectId) {
-      var floorId = '';
-      this.$store.dispatch('setActiveObject', objectId);
-      this.$store.dispatch('setActiveFloor', floorId);
+      this.activeObject === objectId ? this.objectActiveToggle = true : this.objectActiveToggle = false;
+
+      if (this.objectActiveToggle === false) {
+        this.$store.dispatch('setActiveObject', objectId);
+        this.$store.dispatch('setActiveFloor', '');
+      } else {
+        this.$store.dispatch('setActiveObject', '');
+        this.$store.dispatch('setActiveFloor', '');
+      }
     }
   }
 });
@@ -39442,15 +39467,18 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "list-group list-group-action col-12 my-3 mb-5 p-0" },
+          { staticClass: "list-group col-12 my-3 mb-5 p-0" },
           _vm._l(_vm.docuCategories, function(docuCategory) {
             return _c(
-              "div",
+              "a",
               {
                 key: docuCategory.id,
                 staticClass: "list-group-item list-group-item-action",
-                class: _vm.bgColorListGroup(docuCategory.color),
-                attrs: { docuCategory: docuCategory, "data-toggle": "list" },
+                class: [
+                  _vm.bgColorListGroup(docuCategory.color),
+                  docuCategory.id === _vm.activeCategory ? "active" : ""
+                ],
+                attrs: { docuCategory: docuCategory, href: "#" },
                 on: {
                   click: function($event) {
                     return _vm.setActiveCategory(docuCategory.id)
@@ -39563,7 +39591,7 @@ var render = function() {
                     key: docuFloor.id,
                     staticClass: "list-group-item list-group-item-action",
                     class: docuFloor.id === _vm.activeFloor ? "active" : "",
-                    attrs: { docuFloor: docuFloor },
+                    attrs: { docuFloor: docuFloor, type: "button" },
                     on: {
                       click: function($event) {
                         return _vm.setActiveFloor(docuFloor.id)
@@ -39671,7 +39699,7 @@ var render = function() {
           { staticClass: "list-group col-12 my-3 mb-5" },
           _vm._l(_vm.docuObjects, function(docuObject) {
             return _c(
-              "button",
+              "div",
               {
                 key: docuObject.id,
                 staticClass: "list-group-item list-group-item-action",
@@ -57060,6 +57088,23 @@ var projects = new Vue({
 /* let shiftplan = new Vue({
     render: h => h(shiftplanApp),
 }).$mount('#shiftplanApp'); */
+
+Vue.directive('click-outside', {
+  bind: function bind(el, binding, vnode) {
+    el.clickOutsideEvent = function (event) {
+      // here I check that click was outside the el and his children
+      if (!(el == event.target || el.contains(event.target))) {
+        // and if it did, call method provided in attribute value
+        vnode.context[binding.expression](event);
+      }
+    };
+
+    document.body.addEventListener('click', el.clickOutsideEvent);
+  },
+  unbind: function unbind(el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent);
+  }
+});
 
 /***/ }),
 

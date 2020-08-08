@@ -36,14 +36,14 @@
                         </button>
             </div>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
-                <div v-for="docuCategory in docuCategories"
+            <div class="list-group col-12 my-3 mb-5 p-0">
+                <a v-for="docuCategory in docuCategories"
                     :key="docuCategory.id"
                     :docuCategory="docuCategory"
-                    data-toggle="list" 
                     class="list-group-item list-group-item-action"
-                    :class="bgColorListGroup(docuCategory.color)"
-                    @click="setActiveCategory(docuCategory.id)"> {{docuCategory.Category}}</div>   
+                    href="#"
+                    :class="[bgColorListGroup(docuCategory.color), docuCategory.id === activeCategory ? 'active' : '']"
+                    @click="setActiveCategory(docuCategory.id)"> {{docuCategory.Category}}</a>   
             </div>
         
         </div>
@@ -65,6 +65,7 @@
             return {
                 newCategoryShow: false,
                 category: '',
+                categoryActiveToggle: false,
                 newCategoryColor: '',
                 colors: [
                     {color: 'primary'},
@@ -79,7 +80,10 @@
         },
         computed: {
             docuCategories() {
-                return this.$store.getters.DocuCategories;
+                return this.$store.getters.DocuCategories
+            },
+            activeCategory() {
+                return this.$store.getters.ActiveCategory
             },
             categoryColors() {
                 return this.colors
@@ -93,7 +97,15 @@
                 this.newCategoryColor = color
             },
             setActiveCategory(categoryId) {
-                this.$store.dispatch('setActiveCategory', categoryId)
+                
+                /* this.activeCategory === categoryId ? this.categoryActiveToggle = true : this.categoryActiveToggle = false */
+                this.categoryActiveToggle = !this.categoryActiveToggle
+                if(this.categoryActiveToggle = true) {
+                    this.$store.dispatch('setActiveCategory', categoryId)
+                }
+                else {
+                    this.$store.dispatch('setActiveCategory', '')
+                }
             },
             addNewDocuCategory(){
             const NewDocuCategory = {
@@ -115,3 +127,7 @@
         }
     }
 </script>
+
+<style lang="scss">
+    
+</style>

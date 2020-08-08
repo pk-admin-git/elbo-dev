@@ -30,7 +30,7 @@
                     :docuFloor="docuFloor"
                     @click="setActiveFloor(docuFloor.id)"
                     :class="docuFloor.id === activeFloor ? 'active' : ''" 
-                    class="list-group-item list-group-item-action"> {{docuFloor.Floor}} </div>   
+                    class="list-group-item list-group-item-action" type="button"> {{docuFloor.Floor}} </div>   
             </div>
         </div>
     </div> 
@@ -49,6 +49,7 @@ export default {
         return {
             newFloorShow: false,
             floor: '',
+            activeFloorToggle: false,
         }
     },
     created() {
@@ -81,7 +82,14 @@ export default {
             this.floor= ''
             },
             setActiveFloor(floorId) {
-                this.$store.dispatch('setActiveFloor', floorId)
+                
+                this.activeFloor === floorId ? this.activeFloorToggle = true : this.activeFloorToggle = false
+                if (this.activeFloorToggle === false) {
+                    this.$store.dispatch('setActiveFloor', floorId)
+                }
+                else {
+                    this.$store.dispatch('setActiveFloor', '')
+                }
             },
     }, 
 }
