@@ -39469,7 +39469,7 @@ var render = function() {
           { staticClass: "list-group col-12 my-3 mb-5 p-0" },
           _vm._l(_vm.docuCategories, function(docuCategory) {
             return _c(
-              "a",
+              "div",
               {
                 key: docuCategory.id,
                 staticClass: "list-group-item list-group-item-action",
@@ -39477,7 +39477,7 @@ var render = function() {
                   _vm.bgColorListGroup(docuCategory.color),
                   docuCategory.id === _vm.activeCategory ? "active" : ""
                 ],
-                attrs: { docuCategory: docuCategory, href: "#" },
+                attrs: { docuCategory: docuCategory },
                 on: {
                   click: function($event) {
                     return _vm.setActiveCategory(docuCategory.id)

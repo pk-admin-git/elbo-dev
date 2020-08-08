@@ -37,13 +37,13 @@
             </div>
 
             <div class="list-group col-12 my-3 mb-5 p-0">
-                <a v-for="docuCategory in docuCategories"
+                <div v-for="docuCategory in docuCategories"
                     :key="docuCategory.id"
                     :docuCategory="docuCategory"
+                    @click="setActiveCategory(docuCategory.id)"
                     class="list-group-item list-group-item-action"
-                    href="#"
                     :class="[bgColorListGroup(docuCategory.color), docuCategory.id === activeCategory ? 'active' : '']"
-                    @click="setActiveCategory(docuCategory.id)"> {{docuCategory.Category}}</a>   
+                    > {{docuCategory.Category}}</div>   
             </div>
         
         </div>
@@ -99,7 +99,8 @@
             setActiveCategory(categoryId) {
                 
                 /* this.activeCategory === categoryId ? this.categoryActiveToggle = true : this.categoryActiveToggle = false */
-                this.categoryActiveToggle = !this.categoryActiveToggle
+                this.categoryActiveToggle = !this.categoryActiveToggle;
+                
                 if(this.categoryActiveToggle = true) {
                     this.$store.dispatch('setActiveCategory', categoryId)
                 }
