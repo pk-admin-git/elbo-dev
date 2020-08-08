@@ -42,7 +42,8 @@
                     :docuCategory="docuCategory"
                     data-toggle="list" 
                     class="list-group-item list-group-item-action"
-                    :class="bgColorListGroup(docuCategory.color)"> {{docuCategory.Category}} </div>   
+                    :class="bgColorListGroup(docuCategory.color)"
+                    @click="setActiveCategory(docuCategory.id)"> {{docuCategory.Category}}</div>   
             </div>
         
         </div>
@@ -90,6 +91,9 @@
             },
             setActiveColor(color){
                 this.newCategoryColor = color
+            },
+            setActiveCategory(categoryId) {
+                this.$store.dispatch('setActiveCategory', categoryId)
             },
             addNewDocuCategory(){
             const NewDocuCategory = {

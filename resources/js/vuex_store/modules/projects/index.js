@@ -15,9 +15,9 @@ const state = {
     DocuCategoryItems: [],
     CableListItems: [],
 
-    ActiveObject: null,
-    ActiveFloor: null,
-    ActiveCategory: null,
+    ActiveObject: '',
+    ActiveFloor: '',
+    ActiveCategory: '',
     
 };
 
@@ -59,6 +59,9 @@ const mutations = {
     },
     UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload){
         state.DocuCategoryItems.push(payload);
+    },
+    UPDATE_ACTIVE_CATEGORY(state, payload){
+        state.ActiveCategory = payload;
     },
 
     /* Kabelzuglisten */
@@ -134,6 +137,9 @@ const actions = {
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
             });
+    },
+    setActiveCategory({commit}, activeCategory){
+        commit('UPDATE_ACTIVE_CATEGORY', activeCategory)
     },
 
     /* Kabelzuglisten */

@@ -29,7 +29,7 @@
                     :key="docuObject.id"
                     :docuObject="docuObject"
                     @click="setActiveObject(docuObject.id)"
-                    data-toggle="list" 
+                    :class="docuObject.id === activeObject ? 'active' : ''"
                     class="list-group-item list-group-item-action"
                     type="button"> {{docuObject.Object}} </button>
                 
@@ -73,7 +73,7 @@
             this.object= ''
             },
             setActiveObject(objectId) {
-                let floorId = null
+                let floorId = ''
                 this.$store.dispatch('setActiveObject', objectId)
                 this.$store.dispatch('setActiveFloor', floorId)
             },

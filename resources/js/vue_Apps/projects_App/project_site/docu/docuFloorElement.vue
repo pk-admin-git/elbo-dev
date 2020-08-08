@@ -6,7 +6,7 @@
             <span   style="cursor:pointer"
                     class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end" 
                     @click="showNewFloorInput"
-                    v-if="(activeObject != null) && (newFloorShow !== true)"></span>
+                    v-if="(activeObject != '') && (newFloorShow !== true)"></span>
 
             <div class="col-2 d-flex justify-content-end mb-3 mt-2" v-if="newFloorShow"> 
                 <span   style="cursor:pointer"
@@ -29,7 +29,7 @@
                     :key="docuFloor.id"
                     :docuFloor="docuFloor"
                     @click="setActiveFloor(docuFloor.id)"
-                    data-toggle="list" 
+                    :class="docuFloor.id === activeFloor ? 'active' : ''" 
                     class="list-group-item list-group-item-action"> {{docuFloor.Floor}} </div>   
             </div>
         </div>
@@ -56,8 +56,11 @@ export default {
     },
     computed: {
         activeObject() {
-                return this.$store.getters.ActiveObject
-            },
+            return this.$store.getters.ActiveObject
+        },
+        activeFloor() {
+            return this.$store.getters.ActiveFloor
+        }
 
     },
     methods: {

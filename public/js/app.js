@@ -1964,9 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       newCableListShow: false,
-      cableList: '',
-      selectedObject: '',
-      selectedFloor: ''
+      cableList: ''
     };
   },
   computed: {
@@ -1976,14 +1974,21 @@ __webpack_require__.r(__webpack_exports__);
     docuObjects: function docuObjects() {
       return this.$store.getters.DocuObjects;
     },
-    selectActiveObject: function selectActiveObject() {
-      this.selectedObject = this.$store.getters.ActiveObject;
+    activeObject: {
+      get: function get() {
+        return this.$store.getters.ActiveObject;
+      },
+      set: function set(value) {
+        this.$store.dispatch('setActiveObject', value);
+      }
     },
-    docuFloors: function docuFloors() {
-      return this.$store.getters.DocuFloors;
-    },
-    selectActiveFloor: function selectActiveFloor() {
-      this.selectedFloor = this.$store.getters.ActiveFloor;
+    activeFloor: {
+      get: function get() {
+        return this.$store.getters.ActiveFloor;
+      },
+      set: function set(value) {
+        this.$store.dispatch('setActiveFloor', value);
+      }
     }
   },
   methods: {
@@ -2013,6 +2018,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showNewCableList: function showNewCableList() {
       this.newCableListShow = !this.newCableListShow;
+    },
+    docuFloors: function docuFloors(objectId) {
+      return this.$store.getters.DocuFloorsFiltered(objectId);
     }
   }
 });
@@ -2028,6 +2036,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2119,6 +2128,9 @@ __webpack_require__.r(__webpack_exports__);
     setActiveColor: function setActiveColor(color) {
       this.newCategoryColor = color;
     },
+    setActiveCategory: function setActiveCategory(categoryId) {
+      this.$store.dispatch('setActiveCategory', categoryId);
+    },
     addNewDocuCategory: function addNewDocuCategory() {
       var NewDocuCategory = {
         Category: this.category,
@@ -2202,6 +2214,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     activeObject: function activeObject() {
       return this.$store.getters.ActiveObject;
+    },
+    activeFloor: function activeFloor() {
+      return this.$store.getters.ActiveFloor;
     }
   },
   methods: {
@@ -2310,7 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
       this.object = '';
     },
     setActiveObject: function setActiveObject(objectId) {
-      var floorId = null;
+      var floorId = '';
       this.$store.dispatch('setActiveObject', objectId);
       this.$store.dispatch('setActiveFloor', floorId);
     }
@@ -39175,7 +39190,7 @@ var render = function() {
             expression: "cableList"
           }
         ],
-        staticClass: "form-control col-12 col-lg-3 mr-3",
+        staticClass: "form-control col-12 col-lg-3 mr-1",
         attrs: { type: "text" },
         domProps: { value: _vm.cableList },
         on: {
@@ -39194,12 +39209,13 @@ var render = function() {
           directives: [
             {
               name: "model",
-              rawName: "v-model",
-              value: _vm.selectedObject,
-              expression: "selectedObject"
+              rawName: "v-model.lazy",
+              value: _vm.activeObject,
+              expression: "activeObject",
+              modifiers: { lazy: true }
             }
           ],
-          staticClass: "custom-select col-12 col-lg-3 mr-3",
+          staticClass: "custom-select col-12 col-lg-3 mr-1",
           attrs: { id: "inputObject" },
           on: {
             change: function($event) {
@@ -39211,7 +39227,7 @@ var render = function() {
                   var val = "_value" in o ? o._value : o.value
                   return val
                 })
-              _vm.selectedObject = $event.target.multiple
+              _vm.activeObject = $event.target.multiple
                 ? $$selectedVal
                 : $$selectedVal[0]
             }
@@ -39233,12 +39249,13 @@ var render = function() {
           directives: [
             {
               name: "model",
-              rawName: "v-model",
-              value: _vm.selectedFloor,
-              expression: "selectedFloor"
+              rawName: "v-model.lazy",
+              value: _vm.activeFloor,
+              expression: "activeFloor",
+              modifiers: { lazy: true }
             }
           ],
-          staticClass: "custom-select col-12 col-lg-3 mr-3",
+          staticClass: "custom-select col-12 col-lg-3 mr-1",
           attrs: { id: "inputFloor" },
           on: {
             change: function($event) {
@@ -39250,13 +39267,13 @@ var render = function() {
                   var val = "_value" in o ? o._value : o.value
                   return val
                 })
-              _vm.selectedFloor = $event.target.multiple
+              _vm.activeFloor = $event.target.multiple
                 ? $$selectedVal
                 : $$selectedVal[0]
             }
           }
         },
-        _vm._l(_vm.docuFloors, function(docuFloor) {
+        _vm._l(_vm.docuFloors(_vm.activeObject), function(docuFloor) {
           return _c(
             "option",
             { key: docuFloor.id, domProps: { value: docuFloor.id } },
@@ -39433,9 +39450,14 @@ var render = function() {
                 key: docuCategory.id,
                 staticClass: "list-group-item list-group-item-action",
                 class: _vm.bgColorListGroup(docuCategory.color),
-                attrs: { docuCategory: docuCategory, "data-toggle": "list" }
+                attrs: { docuCategory: docuCategory, "data-toggle": "list" },
+                on: {
+                  click: function($event) {
+                    return _vm.setActiveCategory(docuCategory.id)
+                  }
+                }
               },
-              [_vm._v(" " + _vm._s(docuCategory.Category) + " ")]
+              [_vm._v(" " + _vm._s(docuCategory.Category))]
             )
           }),
           0
@@ -39473,7 +39495,7 @@ var render = function() {
       _c("div", { staticClass: "card-body row p-0 align-items-start" }, [
         _c("h5", { staticClass: "h5 col-10 pl-0" }, [_vm._v("Etagen")]),
         _vm._v(" "),
-        _vm.activeObject != null && _vm.newFloorShow !== true
+        _vm.activeObject != "" && _vm.newFloorShow !== true
           ? _c("span", {
               staticClass:
                 "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
@@ -39540,7 +39562,8 @@ var render = function() {
                   {
                     key: docuFloor.id,
                     staticClass: "list-group-item list-group-item-action",
-                    attrs: { docuFloor: docuFloor, "data-toggle": "list" },
+                    class: docuFloor.id === _vm.activeFloor ? "active" : "",
+                    attrs: { docuFloor: docuFloor },
                     on: {
                       click: function($event) {
                         return _vm.setActiveFloor(docuFloor.id)
@@ -39652,11 +39675,8 @@ var render = function() {
               {
                 key: docuObject.id,
                 staticClass: "list-group-item list-group-item-action",
-                attrs: {
-                  docuObject: docuObject,
-                  "data-toggle": "list",
-                  type: "button"
-                },
+                class: docuObject.id === _vm.activeObject ? "active" : "",
+                attrs: { docuObject: docuObject, type: "button" },
                 on: {
                   click: function($event) {
                     return _vm.setActiveObject(docuObject.id)
@@ -58205,9 +58225,9 @@ var state = {
   DocuFloorItems: [],
   DocuCategoryItems: [],
   CableListItems: [],
-  ActiveObject: null,
-  ActiveFloor: null,
-  ActiveCategory: null
+  ActiveObject: '',
+  ActiveFloor: '',
+  ActiveCategory: ''
 };
 var mutations = {
   /* Projekte */
@@ -58246,6 +58266,9 @@ var mutations = {
   },
   UPDATE_NEW_DOCU_CATEGORY_ITEM: function UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload) {
     state.DocuCategoryItems.push(payload);
+  },
+  UPDATE_ACTIVE_CATEGORY: function UPDATE_ACTIVE_CATEGORY(state, payload) {
+    state.ActiveCategory = payload;
   },
 
   /* Kabelzuglisten */
@@ -58320,16 +58343,20 @@ var actions = {
       commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
     });
   },
+  setActiveCategory: function setActiveCategory(_ref11, activeCategory) {
+    var commit = _ref11.commit;
+    commit('UPDATE_ACTIVE_CATEGORY', activeCategory);
+  },
 
   /* Kabelzuglisten */
-  getCableListItems: function getCableListItems(_ref11, projectId) {
-    var commit = _ref11.commit;
+  getCableListItems: function getCableListItems(_ref12, projectId) {
+    var commit = _ref12.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig).then(function (response) {
       commit('UPDATE_CABLE_LIST_ITEMS', response.data);
     });
   },
-  addNewCableList: function addNewCableList(_ref12, payload) {
-    var commit = _ref12.commit;
+  addNewCableList: function addNewCableList(_ref13, payload) {
+    var commit = _ref13.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableLists', payload).then(function (response) {
       commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
     });

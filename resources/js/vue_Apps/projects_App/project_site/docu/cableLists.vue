@@ -15,14 +15,14 @@
                         @click="showNewCableList"></span>
             </div>
             <div class="col-12 p-0 row">
-                    <input type="text" class="form-control col-12 col-lg-3 mr-3" v-model="cableList"/>
-                    <select id="inputObject" class="custom-select col-12 col-lg-3 mr-3" v-model="selectedObject">
+                    <input type="text" class="form-control col-12 col-lg-3 mr-1" v-model="cableList"/>
+                    <select id="inputObject" class="custom-select col-12 col-lg-3 mr-1" v-model.lazy="activeObject">
                         <option v-for="docuObject in docuObjects"
                                 :key="docuObject.id"
                                 :value="docuObject.id">{{docuObject.Object}}</option>
                     </select>
-                    <select id="inputFloor" class="custom-select col-12 col-lg-3 mr-3" v-model="selectedFloor">
-                        <option v-for="docuFloor in docuFloors"
+                    <select id="inputFloor" class="custom-select col-12 col-lg-3 mr-1" v-model.lazy="activeFloor">
+                        <option v-for="docuFloor in docuFloors(activeObject)"
                                 :key="docuFloor.id"
                                 :value="docuFloor.id">{{docuFloor.Floor}}</option>
                     </select>   
@@ -58,8 +58,6 @@ export default {
         return {
             newCableListShow: false,
             cableList: '',
-            selectedObject: '',
-            selectedFloor: '',
         }
     },
     computed: {
@@ -67,17 +65,17 @@ export default {
             return this.$store.getters.CableLists
         },
         docuObjects() {
-            return this.$store.getters.DocuObjects;
-            },
-        selectActiveObject() {
-            this.selectedObject = this.$store.getters.ActiveObject
+            return this.$store.getters.DocuObjects
         },
-        docuFloors() {
-            return this.$store.getters.DocuFloors;
-            },
-        selectActiveFloor(){
-            this.selectedFloor = this.$store.getters.ActiveFloor
-        }
+        
+        activeObject: {
+            get() {return this.$store.getters.ActiveObject},
+            set(value) {this.$store.dispatch('setActiveObject', value)}
+        },
+        activeFloor: {
+            get() {return this.$store.getters.ActiveFloor},
+            set(value) {this.$store.dispatch('setActiveFloor', value)}   
+        },
     },
     methods: {
         getColor(categoryId) {
@@ -99,6 +97,11 @@ export default {
         showNewCableList() {
             this.newCableListShow = !this.newCableListShow
         },
+        docuFloors(objectId){
+            return this.$store.getters.DocuFloorsFiltered(objectId)
+        },
+        
+        
         
     }
 }
