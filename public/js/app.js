@@ -2311,7 +2311,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuObjectElement',
   props: ['projectId'],
@@ -39591,7 +39590,7 @@ var render = function() {
                     key: docuFloor.id,
                     staticClass: "list-group-item list-group-item-action",
                     class: docuFloor.id === _vm.activeFloor ? "active" : "",
-                    attrs: { docuFloor: docuFloor, type: "button" },
+                    attrs: { docuFloor: docuFloor },
                     on: {
                       click: function($event) {
                         return _vm.setActiveFloor(docuFloor.id)
@@ -39704,7 +39703,7 @@ var render = function() {
                 key: docuObject.id,
                 staticClass: "list-group-item list-group-item-action",
                 class: docuObject.id === _vm.activeObject ? "active" : "",
-                attrs: { docuObject: docuObject, type: "button" },
+                attrs: { docuObject: docuObject },
                 on: {
                   click: function($event) {
                     return _vm.setActiveObject(docuObject.id)

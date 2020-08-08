@@ -30,8 +30,7 @@
                     :docuObject="docuObject"
                     @click="setActiveObject(docuObject.id)"
                     :class="docuObject.id === activeObject ? 'active' : ''"
-                    class="list-group-item list-group-item-action"
-                    type="button"> {{docuObject.Object}} </div>
+                    class="list-group-item list-group-item-action"> {{docuObject.Object}} </div>
                 
             </div>
         </div>
