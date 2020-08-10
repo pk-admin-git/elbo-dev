@@ -39484,12 +39484,12 @@ var render = function() {
     { staticClass: "card border-0 col-12 col-lg-4 bg-transparent mt-1" },
     [
       _c("div", { staticClass: "card-body p-0 row align-items-start" }, [
-        _c("h5", { staticClass: "h5 col-10 p-0" }, [_vm._v("Kategorien")]),
+        _c("h5", { staticClass: "h5 col-10 pl-0" }, [_vm._v("Kategorien")]),
         _vm._v(" "),
         !_vm.newCategoryShow
           ? _c("span", {
               staticClass:
-                "fas fa-plus-circle fa-lg mt-2 col-2 p-0 d-flex justify-content-end",
+                "fas fa-plus-circle fa-lg mt-2 col-2  d-flex justify-content-end",
               staticStyle: { cursor: "pointer" },
               on: { click: _vm.showNewCategoryInput }
             })
@@ -39498,7 +39498,7 @@ var render = function() {
         _vm.newCategoryShow
           ? _c(
               "div",
-              { staticClass: "col-2 d-flex justify-content-end mb-3 p-0" },
+              { staticClass: "col-2 d-flex justify-content-end mb-3" },
               [
                 _c("span", {
                   staticClass: "fas fa-times-circle fa-lg mt-2 mr-3",
@@ -39515,7 +39515,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 p-0" }, [
+        _c("div", { staticClass: "col-12 pl-0" }, [
           _c("form", { staticClass: "col p-0" }, [
             _vm.newCategoryShow
               ? _c("input", {
@@ -39548,7 +39548,7 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "col-12 p-0 d-flex justify-content-between mt-3 mb-4"
+                  "col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
               },
               _vm._l(_vm.categoryColors, function(categoryColor, index) {
                 return _c("button", {
