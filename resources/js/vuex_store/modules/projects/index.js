@@ -10,14 +10,16 @@ let axiosConfig = {
 
 const state = {
     ProjectItems: [],
+    DocuCategoryItems: [],
     DocuObjectItems: [],
     DocuFloorItems: [],
-    DocuCategoryItems: [],
     CableListItems: [],
 
+    CategorySelected: false,
+    ActiveCategory: '',
     ActiveObject: '',
     ActiveFloor: '',
-    ActiveCategory: '',
+    
     
 };
 
@@ -29,6 +31,20 @@ const mutations = {
     },
     UPDATE_NEW_PROJECT_ITEM(state, payload){
         state.ProjectItems.push(payload);
+    },
+    
+    /* Dokumentation Kategorien */
+    UPDATE_DOCU_CATEGORY_ITEMS(state, payload){
+        state.DocuCategoryItems = payload;
+    },
+    UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload){
+        state.DocuCategoryItems.push(payload);
+    },
+    UPDATE_ACTIVE_CATEGORY(state, payload){
+        state.ActiveCategory = payload;
+    },
+    UPDATE_CATEGORY_SELECTED(state, payload){
+        state.CategorySelected = payload;
     },
 
     /* Dokumentation Gebäude */
@@ -53,17 +69,6 @@ const mutations = {
         state.ActiveFloor = payload;
     },
 
-    /* Dokumentation Kategorien */
-    UPDATE_DOCU_CATEGORY_ITEMS(state, payload){
-        state.DocuCategoryItems = payload;
-    },
-    UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload){
-        state.DocuCategoryItems.push(payload);
-    },
-    UPDATE_ACTIVE_CATEGORY(state, payload){
-        state.ActiveCategory = payload;
-    },
-
     /* Kabelzuglisten */
     UPDATE_CABLE_LIST_ITEMS(state, payload){
         state.CableListItems = payload;
@@ -74,6 +79,29 @@ const mutations = {
 };
 
 const actions = {
+
+
+    /* Dokumentation Kategorien */
+
+    getDocuCategoryItems({ commit }, projectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data)
+            });
+    },
+    addNewDocuCategory({ commit }, payload){
+        axios.post('http://46.101.114.150/api/docuCategories', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
+            });
+    },
+    setActiveCategory({commit}, activeCategory){
+        commit('UPDATE_ACTIVE_CATEGORY', activeCategory)
+    },
+    setCategorySelected({commit}, categoryId){
+        commit('UPDATE_CATEGORY_SELECTED', categoryId)
+    },
+
 
     /* Projekte */
     getProjectItems({ commit }){
@@ -124,24 +152,6 @@ const actions = {
         commit('UPDATE_ACTIVE_FLOOR', activeFloor)
     },
 
-    /* Dokumentation Kategorien */
-
-    getDocuCategoryItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig)
-            .then((response) => {
-                commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data)
-            });
-    },
-    addNewDocuCategory({ commit }, payload){
-        axios.post('http://46.101.114.150/api/docuCategories', payload)
-            .then((response) => {
-                commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
-            });
-    },
-    setActiveCategory({commit}, activeCategory){
-        commit('UPDATE_ACTIVE_CATEGORY', activeCategory)
-    },
-
     /* Kabelzuglisten */
 
     getCableListItems({ commit }, projectId){
@@ -159,6 +169,11 @@ const actions = {
 };
 
 const getters = {
+
+    DocuCategories: state => state.DocuCategoryItems,
+    ActiveCategory: state => state.ActiveCategory,
+    CategorySelected: state => state.CategorySelected,
+
     ProjectItems: state => state.ProjectItems,
     ProjectItemById: state => id => state.ProjectItems.find(ProjectItem => ProjectItem.id === id ),
     
@@ -168,9 +183,6 @@ const getters = {
     DocuFloors: state => state.DocuFloorItems,
     DocuFloorsFiltered: state => objectId => state.DocuFloorItems.filter(floors => floors.DocuObjectId === objectId),
     ActiveFloor: state => state.ActiveFloor,
-
-    DocuCategories: state => state.DocuCategoryItems,
-    ActiveCategory: state => state.ActiveCategory,
 
     CableLists: state => state.CableListItems,
     

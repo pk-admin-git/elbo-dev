@@ -59,9 +59,7 @@ export default {
             
         },
         computed: {
-            activeObject() {
-                return this.$store.getters.ActiveObject
-            }
+            
         },
         methods: {
             

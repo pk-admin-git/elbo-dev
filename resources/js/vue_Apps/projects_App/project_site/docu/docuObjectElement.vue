@@ -29,6 +29,7 @@
                     :key="docuObject.id"
                     :docuObject="docuObject"
                     @click="setActiveObject(docuObject.id)"
+                    style="cursor:pointer"
                     :class="docuObject.id === activeObject ? 'active' : ''"
                     class="list-group-item list-group-item-action"> {{docuObject.Object}} </div>
                 
@@ -74,7 +75,8 @@
             },
             setActiveObject(objectId) {
             
-                this.activeObject === objectId ? this.objectActiveToggle = true : this.objectActiveToggle=false
+                
+                this.activeObject === objectId ? this.objectActiveToggle = true : this.objectActiveToggle = false
                 
                 if (this.objectActiveToggle === false){
                     this.$store.dispatch('setActiveObject', objectId)

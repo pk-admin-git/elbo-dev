@@ -36,12 +36,13 @@
                         </button>
             </div>
 
-            <div class="list-group col-12 my-3 mb-5 p-0">
+            <div class="list-group col-12 my-3 mb-5">
                 <div v-for="docuCategory in docuCategories"
                     :key="docuCategory.id"
                     :docuCategory="docuCategory"
                     @click="setActiveCategory(docuCategory.id)"
                     class="list-group-item list-group-item-action"
+                    style="cursor:pointer"
                     :class="[bgColorListGroup(docuCategory.color), docuCategory.id === activeCategory ? 'active' : '']"
                     > {{docuCategory.Category}}</div>   
             </div>
@@ -65,7 +66,6 @@
             return {
                 newCategoryShow: false,
                 category: '',
-                categoryActiveToggle: false,
                 newCategoryColor: '',
                 colors: [
                     {color: 'primary'},
@@ -98,14 +98,16 @@
             },
             setActiveCategory(categoryId) {
                 
-                /* this.activeCategory === categoryId ? this.categoryActiveToggle = true : this.categoryActiveToggle = false */
-                this.categoryActiveToggle = !this.categoryActiveToggle;
+                let payload = this.$store.getters.CategorySelected
+                this.activeCategory === categoryId ? payload = true : payload = false
                 
-                if(this.categoryActiveToggle = true) {
+                if (payload === false) {
                     this.$store.dispatch('setActiveCategory', categoryId)
+                    this.$store.dispatch('setCategorySelected', payload)
                 }
                 else {
                     this.$store.dispatch('setActiveCategory', '')
+                    this.$store.dispatch('setCategorySelected', payload)
                 }
             },
             addNewDocuCategory(){

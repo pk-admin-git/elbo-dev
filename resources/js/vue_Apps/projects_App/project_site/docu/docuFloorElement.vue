@@ -29,6 +29,7 @@
                     :key="docuFloor.id"
                     :docuFloor="docuFloor"
                     @click="setActiveFloor(docuFloor.id)"
+                    style="cursor:pointer"
                     :class="docuFloor.id === activeFloor ? 'active' : ''" 
                     class="list-group-item list-group-item-action"> {{docuFloor.Floor}} </div>   
             </div>

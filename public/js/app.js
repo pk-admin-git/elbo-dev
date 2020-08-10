@@ -1958,6 +1958,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableLists',
   props: ['projectId'],
@@ -1974,6 +1993,9 @@ __webpack_require__.r(__webpack_exports__);
     docuObjects: function docuObjects() {
       return this.$store.getters.DocuObjects;
     },
+    docuCategories: function docuCategories() {
+      return this.$store.getters.DocuCategories;
+    },
     activeObject: {
       get: function get() {
         return this.$store.getters.ActiveObject;
@@ -1988,6 +2010,14 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(value) {
         this.$store.dispatch('setActiveFloor', value);
+      }
+    },
+    activeCategory: {
+      get: function get() {
+        return this.$store.getters.ActiveCategory;
+      },
+      set: function set(value) {
+        this.$store.dispatch('setActiveCategory', value);
       }
     }
   },
@@ -2021,6 +2051,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     docuFloors: function docuFloors(objectId) {
       return this.$store.getters.DocuFloorsFiltered(objectId);
+    },
+    addNewCableList: function addNewCableList() {
+      var NewCableList = {
+        name: this.cableList,
+        ProjectId: this.projectId,
+        CategoryId: this.activeCategory,
+        ObjectId: this.activeObject,
+        FloorId: this.activeFloor
+      };
+      this.$store.dispatch('addNewCableList', NewCableList);
+      this.newCableListShow = !this.newCableListShow;
+      this.cableList = '';
     }
   }
 });
@@ -2089,6 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCategoryElement',
   components: {},
@@ -2097,7 +2140,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       newCategoryShow: false,
       category: '',
-      categoryActiveToggle: false,
       newCategoryColor: '',
       colors: [{
         color: 'primary'
@@ -2133,13 +2175,15 @@ __webpack_require__.r(__webpack_exports__);
       this.newCategoryColor = color;
     },
     setActiveCategory: function setActiveCategory(categoryId) {
-      /* this.activeCategory === categoryId ? this.categoryActiveToggle = true : this.categoryActiveToggle = false */
-      this.categoryActiveToggle = !this.categoryActiveToggle;
+      var payload = this.$store.getters.CategorySelected;
+      this.activeCategory === categoryId ? payload = true : payload = false;
 
-      if (this.categoryActiveToggle = true) {
+      if (payload === false) {
         this.$store.dispatch('setActiveCategory', categoryId);
+        this.$store.dispatch('setCategorySelected', payload);
       } else {
         this.$store.dispatch('setActiveCategory', '');
+        this.$store.dispatch('setCategorySelected', payload);
       }
     },
     addNewDocuCategory: function addNewDocuCategory() {
@@ -2173,6 +2217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2271,6 +2316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2422,11 +2468,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('getDocuCategoryItems', this.projectId);
     this.$store.dispatch('getCableListItems', this.projectId);
   },
-  computed: {
-    activeObject: function activeObject() {
-      return this.$store.getters.ActiveObject;
-    }
-  },
+  computed: {},
   methods: {}
 });
 
@@ -39174,139 +39216,204 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card-body row align-items-start mt-3" }, [
-    _c("h3", { staticClass: "h3 col-10 mb-4 pl-0" }, [
-      _vm._v("Kabelzuglisten")
-    ]),
-    _vm._v(" "),
-    !_vm.newCableListShow
-      ? _c("span", {
-          staticClass:
-            "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
-          staticStyle: { cursor: "pointer" },
-          on: { click: _vm.showNewCableList }
-        })
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.newCableListShow
-      ? _c("div", { staticClass: "col-2 d-flex justify-content-end mt-2" }, [
-          _c("span", {
-            staticClass: "fas fa-times-circle fa-lg mr-3",
-            staticStyle: { cursor: "pointer" },
-            on: { click: _vm.showNewCableList }
-          }),
-          _vm._v(" "),
-          _c("span", {
-            staticClass: "fas fa-check-circle fa-lg",
+  return _c("div", { staticClass: "card-body align-items-start mt-3" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("h3", { staticClass: "h3 col-10 mb-4 pl-0" }, [
+        _vm._v("Kabelzuglisten")
+      ]),
+      _vm._v(" "),
+      !_vm.newCableListShow
+        ? _c("span", {
+            staticClass:
+              "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
             staticStyle: { cursor: "pointer" },
             on: { click: _vm.showNewCableList }
           })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.newCableListShow
+        ? _c("div", { staticClass: "col-2 d-flex justify-content-end mt-2" }, [
+            _c("span", {
+              staticClass: "fas fa-times-circle fa-lg mr-3",
+              staticStyle: { cursor: "pointer" },
+              on: { click: _vm.showNewCableList }
+            }),
+            _vm._v(" "),
+            _c("span", {
+              staticClass: "fas fa-check-circle fa-lg",
+              staticStyle: { cursor: "pointer" },
+              on: { click: _vm.addNewCableList }
+            })
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _vm.newCableListShow
+      ? _c("div", { staticClass: "row mb-5" }, [
+          _c("div", { staticClass: "col-lg-3 col-12" }, [
+            _c("label", { attrs: { for: "inputTitle" } }, [_vm._v("Titel")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cableList,
+                  expression: "cableList"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "inputTitle", type: "text" },
+              domProps: { value: _vm.cableList },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.cableList = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-12" }, [
+            _c("label", { attrs: { for: "inputObject" } }, [_vm._v("Gebäude")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.lazy",
+                    value: _vm.activeObject,
+                    expression: "activeObject",
+                    modifiers: { lazy: true }
+                  }
+                ],
+                staticClass: "custom-select",
+                attrs: { id: "inputObject" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.activeObject = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.docuObjects, function(docuObject) {
+                return _c(
+                  "option",
+                  { key: docuObject.id, domProps: { value: docuObject.id } },
+                  [_vm._v(_vm._s(docuObject.Object))]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-12" }, [
+            _c("label", { attrs: { for: "inputFloor" } }, [_vm._v("Etage")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.lazy",
+                    value: _vm.activeFloor,
+                    expression: "activeFloor",
+                    modifiers: { lazy: true }
+                  }
+                ],
+                staticClass: "custom-select",
+                attrs: { id: "inputFloor" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.activeFloor = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.docuFloors(_vm.activeObject), function(docuFloor) {
+                return _c(
+                  "option",
+                  { key: docuFloor.id, domProps: { value: docuFloor.id } },
+                  [_vm._v(_vm._s(docuFloor.Floor))]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-12" }, [
+            _c("label", { attrs: { for: "inputCategory" } }, [
+              _vm._v("Kategorie")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.lazy",
+                    value: _vm.activeCategory,
+                    expression: "activeCategory",
+                    modifiers: { lazy: true }
+                  }
+                ],
+                staticClass: "custom-select",
+                attrs: { id: "inputCategory" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.activeCategory = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.docuCategories, function(docuCategory) {
+                return _c(
+                  "option",
+                  {
+                    key: docuCategory.id,
+                    domProps: { value: docuCategory.id }
+                  },
+                  [_vm._v(_vm._s(docuCategory.Category))]
+                )
+              }),
+              0
+            )
+          ])
         ])
       : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12 p-0 row" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.cableList,
-            expression: "cableList"
-          }
-        ],
-        staticClass: "form-control col-12 col-lg-3 mr-1",
-        attrs: { type: "text" },
-        domProps: { value: _vm.cableList },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.cableList = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.lazy",
-              value: _vm.activeObject,
-              expression: "activeObject",
-              modifiers: { lazy: true }
-            }
-          ],
-          staticClass: "custom-select col-12 col-lg-3 mr-1",
-          attrs: { id: "inputObject" },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.activeObject = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        _vm._l(_vm.docuObjects, function(docuObject) {
-          return _c(
-            "option",
-            { key: docuObject.id, domProps: { value: docuObject.id } },
-            [_vm._v(_vm._s(docuObject.Object))]
-          )
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.lazy",
-              value: _vm.activeFloor,
-              expression: "activeFloor",
-              modifiers: { lazy: true }
-            }
-          ],
-          staticClass: "custom-select col-12 col-lg-3 mr-1",
-          attrs: { id: "inputFloor" },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.activeFloor = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            }
-          }
-        },
-        _vm._l(_vm.docuFloors(_vm.activeObject), function(docuFloor) {
-          return _c(
-            "option",
-            { key: docuFloor.id, domProps: { value: docuFloor.id } },
-            [_vm._v(_vm._s(docuFloor.Floor))]
-          )
-        }),
-        0
-      )
-    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -39316,7 +39423,7 @@ var render = function() {
           "button",
           {
             key: cableList.id,
-            staticClass: "list-group-item list-group-item-action p-0",
+            staticClass: "list-group-item list-group-item-action p-0 mb-3",
             class: _vm.getColor(cableList.CategoryId),
             attrs: { cableList: cableList, type: "button" }
           },
@@ -39466,7 +39573,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "list-group col-12 my-3 mb-5 p-0" },
+          { staticClass: "list-group col-12 my-3 mb-5" },
           _vm._l(_vm.docuCategories, function(docuCategory) {
             return _c(
               "div",
@@ -39477,6 +39584,7 @@ var render = function() {
                   _vm.bgColorListGroup(docuCategory.color),
                   docuCategory.id === _vm.activeCategory ? "active" : ""
                 ],
+                staticStyle: { cursor: "pointer" },
                 attrs: { docuCategory: docuCategory },
                 on: {
                   click: function($event) {
@@ -39590,6 +39698,7 @@ var render = function() {
                     key: docuFloor.id,
                     staticClass: "list-group-item list-group-item-action",
                     class: docuFloor.id === _vm.activeFloor ? "active" : "",
+                    staticStyle: { cursor: "pointer" },
                     attrs: { docuFloor: docuFloor },
                     on: {
                       click: function($event) {
@@ -39703,6 +39812,7 @@ var render = function() {
                 key: docuObject.id,
                 staticClass: "list-group-item list-group-item-action",
                 class: docuObject.id === _vm.activeObject ? "active" : "",
+                staticStyle: { cursor: "pointer" },
                 attrs: { docuObject: docuObject },
                 on: {
                   click: function($event) {
@@ -58265,13 +58375,14 @@ var axiosConfig = {
 };
 var state = {
   ProjectItems: [],
+  DocuCategoryItems: [],
   DocuObjectItems: [],
   DocuFloorItems: [],
-  DocuCategoryItems: [],
   CableListItems: [],
+  CategorySelected: false,
+  ActiveCategory: '',
   ActiveObject: '',
-  ActiveFloor: '',
-  ActiveCategory: ''
+  ActiveFloor: ''
 };
 var mutations = {
   /* Projekte */
@@ -58280,6 +58391,20 @@ var mutations = {
   },
   UPDATE_NEW_PROJECT_ITEM: function UPDATE_NEW_PROJECT_ITEM(state, payload) {
     state.ProjectItems.push(payload);
+  },
+
+  /* Dokumentation Kategorien */
+  UPDATE_DOCU_CATEGORY_ITEMS: function UPDATE_DOCU_CATEGORY_ITEMS(state, payload) {
+    state.DocuCategoryItems = payload;
+  },
+  UPDATE_NEW_DOCU_CATEGORY_ITEM: function UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload) {
+    state.DocuCategoryItems.push(payload);
+  },
+  UPDATE_ACTIVE_CATEGORY: function UPDATE_ACTIVE_CATEGORY(state, payload) {
+    state.ActiveCategory = payload;
+  },
+  UPDATE_CATEGORY_SELECTED: function UPDATE_CATEGORY_SELECTED(state, payload) {
+    state.CategorySelected = payload;
   },
 
   /* Dokumentation Gebäude */
@@ -58304,17 +58429,6 @@ var mutations = {
     state.ActiveFloor = payload;
   },
 
-  /* Dokumentation Kategorien */
-  UPDATE_DOCU_CATEGORY_ITEMS: function UPDATE_DOCU_CATEGORY_ITEMS(state, payload) {
-    state.DocuCategoryItems = payload;
-  },
-  UPDATE_NEW_DOCU_CATEGORY_ITEM: function UPDATE_NEW_DOCU_CATEGORY_ITEM(state, payload) {
-    state.DocuCategoryItems.push(payload);
-  },
-  UPDATE_ACTIVE_CATEGORY: function UPDATE_ACTIVE_CATEGORY(state, payload) {
-    state.ActiveCategory = payload;
-  },
-
   /* Kabelzuglisten */
   UPDATE_CABLE_LIST_ITEMS: function UPDATE_CABLE_LIST_ITEMS(state, payload) {
     state.CableListItems = payload;
@@ -58324,89 +58438,102 @@ var mutations = {
   }
 };
 var actions = {
-  /* Projekte */
-  getProjectItems: function getProjectItems(_ref) {
+  /* Dokumentation Kategorien */
+  getDocuCategoryItems: function getDocuCategoryItems(_ref, projectId) {
     var commit = _ref.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig).then(function (response) {
+      commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data);
+    });
+  },
+  addNewDocuCategory: function addNewDocuCategory(_ref2, payload) {
+    var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuCategories', payload).then(function (response) {
+      commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
+    });
+  },
+  setActiveCategory: function setActiveCategory(_ref3, activeCategory) {
+    var commit = _ref3.commit;
+    commit('UPDATE_ACTIVE_CATEGORY', activeCategory);
+  },
+  setCategorySelected: function setCategorySelected(_ref4, categoryId) {
+    var commit = _ref4.commit;
+    commit('UPDATE_CATEGORY_SELECTED', categoryId);
+  },
+
+  /* Projekte */
+  getProjectItems: function getProjectItems(_ref5) {
+    var commit = _ref5.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/projects', axiosConfig).then(function (response) {
       commit('UPDATE_PROJECT_ITEMS', response.data);
     });
   },
-  addNewProject: function addNewProject(_ref2, payload) {
-    var commit = _ref2.commit;
+  addNewProject: function addNewProject(_ref6, payload) {
+    var commit = _ref6.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/projects', payload).then(function (response) {
       commit('UPDATE_NEW_PROJECT_ITEM', response.data);
     });
   },
 
   /* Dokumentation Gebäude */
-  getDocuObjectItems: function getDocuObjectItems(_ref3, id) {
-    var commit = _ref3.commit;
+  getDocuObjectItems: function getDocuObjectItems(_ref7, id) {
+    var commit = _ref7.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_OBJECT_ITEMS', response.data);
     });
   },
-  addNewDocuObject: function addNewDocuObject(_ref4, payload) {
-    var commit = _ref4.commit;
+  addNewDocuObject: function addNewDocuObject(_ref8, payload) {
+    var commit = _ref8.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuObjects', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_OBJECT_ITEM', response.data);
     });
   },
-  setActiveObject: function setActiveObject(_ref5, activeObject) {
-    var commit = _ref5.commit;
+  setActiveObject: function setActiveObject(_ref9, activeObject) {
+    var commit = _ref9.commit;
     commit('UPDATE_ACTIVE_OBJECT', activeObject);
   },
 
   /* Dokumentation Etagen */
-  getDocuFloorItems: function getDocuFloorItems(_ref6, projectId) {
-    var commit = _ref6.commit;
+  getDocuFloorItems: function getDocuFloorItems(_ref10, projectId) {
+    var commit = _ref10.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_FLOOR_ITEMS', response.data);
     });
   },
-  addNewDocuFloor: function addNewDocuFloor(_ref7, payload) {
-    var commit = _ref7.commit;
+  addNewDocuFloor: function addNewDocuFloor(_ref11, payload) {
+    var commit = _ref11.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuFloors', payload).then(function (response) {
       commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
     });
   },
-  setActiveFloor: function setActiveFloor(_ref8, activeFloor) {
-    var commit = _ref8.commit;
+  setActiveFloor: function setActiveFloor(_ref12, activeFloor) {
+    var commit = _ref12.commit;
     commit('UPDATE_ACTIVE_FLOOR', activeFloor);
   },
 
-  /* Dokumentation Kategorien */
-  getDocuCategoryItems: function getDocuCategoryItems(_ref9, projectId) {
-    var commit = _ref9.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig).then(function (response) {
-      commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data);
-    });
-  },
-  addNewDocuCategory: function addNewDocuCategory(_ref10, payload) {
-    var commit = _ref10.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuCategories', payload).then(function (response) {
-      commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
-    });
-  },
-  setActiveCategory: function setActiveCategory(_ref11, activeCategory) {
-    var commit = _ref11.commit;
-    commit('UPDATE_ACTIVE_CATEGORY', activeCategory);
-  },
-
   /* Kabelzuglisten */
-  getCableListItems: function getCableListItems(_ref12, projectId) {
-    var commit = _ref12.commit;
+  getCableListItems: function getCableListItems(_ref13, projectId) {
+    var commit = _ref13.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig).then(function (response) {
       commit('UPDATE_CABLE_LIST_ITEMS', response.data);
     });
   },
-  addNewCableList: function addNewCableList(_ref13, payload) {
-    var commit = _ref13.commit;
+  addNewCableList: function addNewCableList(_ref14, payload) {
+    var commit = _ref14.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableLists', payload).then(function (response) {
       commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
     });
   }
 };
 var getters = {
+  DocuCategories: function DocuCategories(state) {
+    return state.DocuCategoryItems;
+  },
+  ActiveCategory: function ActiveCategory(state) {
+    return state.ActiveCategory;
+  },
+  CategorySelected: function CategorySelected(state) {
+    return state.CategorySelected;
+  },
   ProjectItems: function ProjectItems(state) {
     return state.ProjectItems;
   },
@@ -58435,12 +58562,6 @@ var getters = {
   },
   ActiveFloor: function ActiveFloor(state) {
     return state.ActiveFloor;
-  },
-  DocuCategories: function DocuCategories(state) {
-    return state.DocuCategoryItems;
-  },
-  ActiveCategory: function ActiveCategory(state) {
-    return state.ActiveCategory;
   },
   CableLists: function CableLists(state) {
     return state.CableListItems;

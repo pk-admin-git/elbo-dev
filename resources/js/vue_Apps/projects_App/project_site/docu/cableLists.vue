@@ -1,5 +1,6 @@
 <template>
-     <div class="card-body row align-items-start mt-3">
+     <div class="card-body align-items-start mt-3">
+         <div class="row">
             <h3 class="h3 col-10 mb-4 pl-0">Kabelzuglisten</h3>
             <span   style="cursor:pointer"
                     class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end"
@@ -12,27 +13,45 @@
                         @click="showNewCableList"></span>
                 <span   style="cursor:pointer"
                         class="fas fa-check-circle fa-lg"
-                        @click="showNewCableList"></span>
+                        @click="addNewCableList"></span>
             </div>
-            <div class="col-12 p-0 row">
-                    <input type="text" class="form-control col-12 col-lg-3 mr-1" v-model="cableList"/>
-                    <select id="inputObject" class="custom-select col-12 col-lg-3 mr-1" v-model.lazy="activeObject">
-                        <option v-for="docuObject in docuObjects"
-                                :key="docuObject.id"
-                                :value="docuObject.id">{{docuObject.Object}}</option>
-                    </select>
-                    <select id="inputFloor" class="custom-select col-12 col-lg-3 mr-1" v-model.lazy="activeFloor">
-                        <option v-for="docuFloor in docuFloors(activeObject)"
-                                :key="docuFloor.id"
-                                :value="docuFloor.id">{{docuFloor.Floor}}</option>
-                    </select>   
+        </div>
+        <div class="row mb-5" v-if="newCableListShow">
+            <div class="col-lg-3 col-12">
+                <label for="inputTitle">Titel</label>
+                <input id="inputTitle" type="text" class="form-control" v-model="cableList"/>
+             </div>
+            <div class="col-lg-3 col-12">
+                <label for="inputObject">Gebäude</label>
+                <select id="inputObject" class="custom-select" v-model.lazy="activeObject">
+                    <option v-for="docuObject in docuObjects"
+                            :key="docuObject.id"
+                            :value="docuObject.id">{{docuObject.Object}}</option>
+                </select>
+             </div>
+            <div class="col-lg-3 col-12">
+                <label for="inputFloor">Etage</label>
+                <select id="inputFloor" class="custom-select" v-model.lazy="activeFloor">
+                    <option v-for="docuFloor in docuFloors(activeObject)"
+                            :key="docuFloor.id"
+                            :value="docuFloor.id">{{docuFloor.Floor}}</option>
+                </select> 
+             </div>
+            <div class="col-lg-3 col-12">
+                <label for="inputCategory">Kategorie</label>
+                <select id="inputCategory" class="custom-select" v-model.lazy="activeCategory">
+                    <option v-for="docuCategory in docuCategories"
+                            :key="docuCategory.id"
+                            :value="docuCategory.id">{{docuCategory.Category}}</option>
+                </select>
             </div>
+        </div>
 
             <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
                 <button v-for="cableList in cableLists"
                     :key="cableList.id"
                     :cableList="cableList"
-                    class="list-group-item list-group-item-action p-0"
+                    class="list-group-item list-group-item-action p-0 mb-3"
                     :class="getColor(cableList.CategoryId)"
                     type="button">
                     <div class="row">    
@@ -67,6 +86,9 @@ export default {
         docuObjects() {
             return this.$store.getters.DocuObjects
         },
+        docuCategories() {
+            return this.$store.getters.DocuCategories
+        },
         
         activeObject: {
             get() {return this.$store.getters.ActiveObject},
@@ -75,6 +97,10 @@ export default {
         activeFloor: {
             get() {return this.$store.getters.ActiveFloor},
             set(value) {this.$store.dispatch('setActiveFloor', value)}   
+        },
+        activeCategory: {
+            get() {return this.$store.getters.ActiveCategory},
+            set(value) {this.$store.dispatch('setActiveCategory', value)}   
         },
     },
     methods: {
@@ -100,9 +126,19 @@ export default {
         docuFloors(objectId){
             return this.$store.getters.DocuFloorsFiltered(objectId)
         },
-        
-        
-        
+        addNewCableList() {
+            const NewCableList = {
+                name: this.cableList,
+                ProjectId: this.projectId,
+                CategoryId: this.activeCategory,
+                ObjectId: this.activeObject,
+                FloorId: this.activeFloor
+            }
+            this.$store.dispatch('addNewCableList', NewCableList)
+            this.newCableListShow = !this.newCableListShow
+            this.cableList= ''
+            
+        }
     }
 }
 </script>
