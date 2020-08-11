@@ -2132,7 +2132,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCategoryElement',
   components: {},
@@ -2202,10 +2201,7 @@ __webpack_require__.r(__webpack_exports__);
       return 'list-group-item-' + color;
     },
     bgColorNewCategory: function bgColorNewCategory(color) {
-      return 'btn-' + color;
-    },
-    borderColorActive: function borderColorActive(color) {
-      this.newCategoryColor === color ? 'border border-' + color : '';
+      return 'bg-' + color;
     }
   }
 });
@@ -39555,20 +39551,17 @@ var render = function() {
                   "col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
               },
               _vm._l(_vm.categoryColors, function(categoryColor, index) {
-                return _c("button", {
+                return _c("span", {
                   key: index,
                   staticClass: "btn",
                   class: [
                     _vm.bgColorNewCategory(categoryColor.color),
                     categoryColor.color === _vm.newCategoryColor
-                      ? "border border-" + _vm.newCategoryColor
+                      ? "border border-dark"
                       : ""
                   ],
                   staticStyle: { height: "35px", width: "35px" },
-                  attrs: {
-                    categoryColor: categoryColor,
-                    "data-toogle": "button"
-                  },
+                  attrs: { categoryColor: categoryColor },
                   on: {
                     click: function($event) {
                       return _vm.setActiveColor(categoryColor.color)

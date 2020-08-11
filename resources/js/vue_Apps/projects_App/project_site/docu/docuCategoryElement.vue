@@ -25,16 +25,15 @@
 
             <div class="col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
                  v-if="newCategoryShow">
-                        <button  v-for="(categoryColor, index) in categoryColors"
+                        <span  v-for="(categoryColor, index) in categoryColors"
                             :key="index"
-                            :categoryColor="categoryColor"        
-                            class="btn"
+                            :categoryColor="categoryColor"
+                            class="btn"        
                             style="height: 35px; width: 35px"
                             :class="[bgColorNewCategory(categoryColor.color), 
-                                    categoryColor.color === newCategoryColor ? 'border border-'+newCategoryColor : '']"
-                            data-toogle="button"
+                                    categoryColor.color === newCategoryColor ? 'border border-dark' : '']"
                             @click="setActiveColor(categoryColor.color)">   
-                        </button>
+                        </span>
             </div>
 
             <div class="list-group col-12 my-3 mb-5">
@@ -75,7 +74,7 @@
                     {color: 'danger'},
                     {color: 'warning'},
                     {color: 'info'},
-                ]    
+                ],
                 
             }
         },
@@ -89,6 +88,7 @@
             categoryColors() {
                 return this.colors
             },
+            
         },
         methods: {
             showNewCategoryInput() {
@@ -126,15 +126,14 @@
                 return 'list-group-item-' + color
             },
             bgColorNewCategory(color) {
-                return 'btn-' + color
+                return 'bg-' + color
             },
-            borderColorActive(color) {
-                this.newCategoryColor === color ? 'border border-' + color : ''
-            }
         }
     }
 </script>
 
 <style lang="scss">
+
+
     
 </style>
