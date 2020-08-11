@@ -39551,13 +39551,13 @@ var render = function() {
                   "col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
               },
               _vm._l(_vm.categoryColors, function(categoryColor, index) {
-                return _c("span", {
+                return _c("button", {
                   key: index,
                   staticClass: "btn",
                   class: [
                     _vm.bgColorNewCategory(categoryColor.color),
                     categoryColor.color === _vm.newCategoryColor
-                      ? "border border-dark"
+                      ? "border border-dark active"
                       : ""
                   ],
                   staticStyle: { height: "35px", width: "35px" },

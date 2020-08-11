@@ -25,15 +25,15 @@
 
             <div class="col-12 pl-0 d-flex justify-content-between mt-3 mb-4"
                  v-if="newCategoryShow">
-                        <span  v-for="(categoryColor, index) in categoryColors"
+                        <button  v-for="(categoryColor, index) in categoryColors"
                             :key="index"
                             :categoryColor="categoryColor"
                             class="btn"        
                             style="height: 35px; width: 35px"
                             :class="[bgColorNewCategory(categoryColor.color), 
-                                    categoryColor.color === newCategoryColor ? 'border border-dark' : '']"
+                                    categoryColor.color === newCategoryColor ? 'border border-dark active' : '']"
                             @click="setActiveColor(categoryColor.color)">   
-                        </span>
+                        </button>
             </div>
 
             <div class="list-group col-12 my-3 mb-5">
