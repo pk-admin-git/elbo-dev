@@ -2132,6 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCategoryElement',
   components: {},
@@ -2173,7 +2174,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     setActiveColor: function setActiveColor(color) {
       this.newCategoryColor = color;
-      return 'border border-' + color;
     },
     setActiveCategory: function setActiveCategory(categoryId) {
       var payload = this.$store.getters.CategorySelected;
@@ -2203,6 +2203,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     bgColorNewCategory: function bgColorNewCategory(color) {
       return 'btn-' + color;
+    },
+    borderColorActive: function borderColorActive(color) {
+      this.newCategoryColor === color ? 'border border-' + color : '';
     }
   }
 });
@@ -39555,7 +39558,12 @@ var render = function() {
                 return _c("button", {
                   key: index,
                   staticClass: "btn",
-                  class: _vm.bgColorNewCategory(categoryColor.color),
+                  class: [
+                    _vm.bgColorNewCategory(categoryColor.color),
+                    categoryColor.color === _vm.newCategoryColor
+                      ? "border border-" + _vm.newCategoryColor
+                      : ""
+                  ],
                   staticStyle: { height: "35px", width: "35px" },
                   attrs: {
                     categoryColor: categoryColor,

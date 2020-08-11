@@ -30,7 +30,8 @@
                             :categoryColor="categoryColor"        
                             class="btn"
                             style="height: 35px; width: 35px"
-                            :class="bgColorNewCategory(categoryColor.color)"
+                            :class="[bgColorNewCategory(categoryColor.color), 
+                                    categoryColor.color === newCategoryColor ? 'border border-'+newCategoryColor : '']"
                             data-toogle="button"
                             @click="setActiveColor(categoryColor.color)">   
                         </button>
@@ -95,7 +96,6 @@
             },
             setActiveColor(color){
                 this.newCategoryColor = color
-                return 'border border-' + color
             },
             setActiveCategory(categoryId) {
                 
@@ -127,6 +127,9 @@
             },
             bgColorNewCategory(color) {
                 return 'btn-' + color
+            },
+            borderColorActive(color) {
+                this.newCategoryColor === color ? 'border border-' + color : ''
             }
         }
     }
