@@ -55,7 +55,7 @@
 <script>
     
     export default {
-        name: 'docuCategoryElement',
+        name: 'overviewCategoryElement',
         components: {
             
         },

@@ -54,12 +54,14 @@
                     class="list-group-item list-group-item-action p-0 mb-3"
                     :class="getColor(cableList.CategoryId)"
                     type="button">
-                    <div class="row">    
+                    <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/' + cableList.id" 
+                        style="text-decoration:none; color:inherit;"
+                        class="row">
                         <div class="col-12 font-weight-bold p-2 border-md-right border-dark">{{cableList.name}}</div>
                         <div class="col-4 border-right border-dark p-2"> {{getCategory(cableList.CategoryId)}}</div>
                         <div class="col-4 border-right border-dark p-2">{{getObject(cableList.ObjectId)}}</div>
                         <div class="col-4 p-2">{{getFloor(cableList.FloorId)}}</div>
-                    </div>
+                    </router-link>
                 </button>
                 
             </div>
@@ -69,7 +71,7 @@
 
 <script>
 export default {
-    name: 'cableLists',
+    name: 'overviewCableListElement',
     props: [
         'projectId',
     ],

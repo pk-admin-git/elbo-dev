@@ -10,7 +10,7 @@
                 class="nav-link" data-toggle="tab">LV</router-link>
             </li>
             <li class="nav-item">
-                <router-link :to="'/projectApp/project/'+ ProjectItem.id +'/projectDocu'"
+                <router-link :to="'/projectApp/project/'+ ProjectItem.id +'/projectDocu/DocuOverview'"
                 class="nav-link" data-toggle="tab">Docu</router-link> 
             </li>
             <li class="nav-item">

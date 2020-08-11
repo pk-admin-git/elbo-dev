@@ -1,37 +1,38 @@
 <template>
 <div>
-    <div class="card bg-transparent">
+    <h1 class="h1 mt-4">Dokumentation</h1>
+    <div class="card bg-transparent mt-5">
         <div class="card-body row align-items-start p-0">
             <h3 class="h3 col-12 mt-3 mb-4">Überblick</h3>
 
             <!-- Kategorien -->
 
-            <docuCategoryElement :projectId="projectId"/>
+            <overviewCategoryElement :projectId="projectId"/>
             
             <!-- Gebäude -->
 
-            <docuObjectElement :projectId="projectId"/>
+            <overviewObjectElement :projectId="projectId"/>
 
             <!-- Etagen -->
 
-            <docuFloorElement :projectId="projectId"/>
+            <overviewFloorElement :projectId="projectId"/>
         </div>
     </div>
 
     <div class="card border-0 bg-transparent">
             
             <!-- Kabelzuglisten -->
-            <cableLists :projectId="projectId"/>
+            <overviewCableListElement :projectId="projectId"/>
     </div>
 
 </div>   
 </template>
 
 <script>
-import docuCategoryElement from './docuCategoryElement.vue'
-import docuObjectElement from './docuObjectElement.vue'
-import docuFloorElement from './docuFloorElement.vue'
-import cableLists from './cableLists.vue'
+import overviewCategoryElement from './overviewCategoryElement.vue'
+import overviewObjectElement from './overviewObjectElement.vue'
+import overviewFloorElement from './overviewFloorElement.vue'
+import overviewCableListElement from './overviewCableListElement.vue'
 
 export default {
     name: 'docuOverview',
@@ -43,10 +44,10 @@ export default {
             }
         },
         components: {
-            docuCategoryElement,
-            docuObjectElement,
-            docuFloorElement,
-            cableLists,
+            overviewCategoryElement,
+            overviewObjectElement,
+            overviewFloorElement,
+            overviewCableListElement,
         },
         created() {
             this.$store.dispatch('getDocuObjectItems', this.projectId)

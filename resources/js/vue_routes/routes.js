@@ -3,7 +3,8 @@ import activeProjectsList from '../vue_Apps/projects_App/projectsAll-site/active
 import projectNav from '../vue_Apps/projects_App/project_site/projectNav.vue'
 import projectOverview from '../vue_Apps/projects_App/project_site/overview/projectOverview.vue'
 import projectSpecification from '../vue_Apps/projects_App/project_site/specification/projectSpecification.vue'
-import projectDocu from '../vue_Apps/projects_App/project_site/docu/projectDocu.vue'
+import DocuOverview from '../vue_Apps/projects_App/project_site/docu/docuOverview.vue'
+import DocuCableList from '../vue_Apps/projects_App/project_site/docu/docuCableList.vue'
 
 export const projectRoutes = [
     {
@@ -30,10 +31,18 @@ export const projectRoutes = [
         props: {navTab: true, content: true},
     },
     {    
-        path: '/projectApp/project/:projectId/projectDocu',
+        path: '/projectApp/project/:projectId/projectDocu/DocuOverview',
         components: {
             navTab: projectNav,
-            content: projectDocu
+            content: DocuOverview
+        },
+        props: {navTab: true, content: true},
+    },
+    {    
+        path: '/projectApp/project/:projectId/projectDocu/:cableListId',
+        components: {
+            navTab: projectNav,
+            content: DocuCableList
         },
         props: {navTab: true, content: true},
     }
