@@ -95,6 +95,7 @@
             },
             setActiveColor(color){
                 this.newCategoryColor = color
+                return 'border-' + color
             },
             setActiveCategory(categoryId) {
                 

@@ -2173,6 +2173,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     setActiveColor: function setActiveColor(color) {
       this.newCategoryColor = color;
+      return 'border-' + color;
     },
     setActiveCategory: function setActiveCategory(categoryId) {
       var payload = this.$store.getters.CategorySelected;
