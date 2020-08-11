@@ -22,4 +22,9 @@ class cablelist extends Model
     
         return $this->belongsTo('App\DocuCategory');
      }
+
+    public function documentations(){
+
+        return $this->hasMany('App\documentation');
+    }
 }

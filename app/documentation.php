@@ -41,4 +41,9 @@ class documentation extends Model
         return $this->belongsTo('App\docuRoom');
     }
 
+    public function cableList(){
+    
+        return $this->belongsTo('App\cablelist');
+    }
+
 }

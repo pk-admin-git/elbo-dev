@@ -40,6 +40,9 @@ class CreateDocumentationsTable extends Migration
             $table->unsignedBigInteger('RoomId');
             $table->foreign('RoomId')->references('id')->on('docu_rooms');
 
+            $table->unsignedBigInteger('CableListId');
+            $table->foreign('CableListId')->references('id')->on('cablelists');
+
             $table->float('amount', 8, 2);
 
             $table->timestamps();
