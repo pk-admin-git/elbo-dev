@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class specification extends Model
 {
+
+    protected $guarded = [];
+
     public function project(){
     
         $this->belongsTo('App\project');
