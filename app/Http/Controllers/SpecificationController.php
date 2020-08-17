@@ -14,7 +14,7 @@ class SpecificationController extends Controller
      */
     public function index($project)
     {
-        $specifications = cablelist::where('ProjectId', $project)->get();
+        $specifications = specifications::where('ProjectId', $project)->get();
 
         return $specifications;
     }
