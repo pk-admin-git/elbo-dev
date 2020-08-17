@@ -14,7 +14,7 @@ class SpecificationController extends Controller
      */
     public function index($project)
     {
-        $specifications = specifications::where('ProjectId', $project)->get();
+        $specifications = specification::where('ProjectId', $project)->get();
 
         return $specifications;
     }
@@ -38,7 +38,7 @@ class SpecificationController extends Controller
             'TotalPrice' => 'integer'
         ]);
 
-        $specifications = specifications::create($data);
+        $specifications = specification::create($data);
 
         return response($specifications, 201);
     }
