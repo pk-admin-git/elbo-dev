@@ -19,7 +19,8 @@ class CreateSpecificationsTable extends Migration
             $table->unsignedBigInteger('ProjectID');
             $table->foreign('ProjectID')->references('id')->on('projects');
             
-            $table->integer('Position');
+            $table->string('PositionText');
+            $table->integer('PositionNumber');
             $table->string('ShortText', 50);
             $table->text('LongText');
             $table->integer('Quantity');
