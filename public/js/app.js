@@ -2896,12 +2896,34 @@ __webpack_require__.r(__webpack_exports__);
   name: 'specificationFormElement',
   data: function data() {
     return {
-      newPositionForm: true
+      newPositionForm: false,
+      specFormPosition: '',
+      specFormShortText: '',
+      specFormLongText: '',
+      specFormQuantity: 0,
+      specFormUnit: '',
+      specFormUnitPrice: 0,
+      specFormHourPrice: 0
     };
   },
   methods: {
     showNewPositionForm: function showNewPositionForm() {
       this.newPositionForm = !this.newPositionForm;
+    },
+    addNewPosition: function addNewPosition() {
+      var NewPosition = {
+        PositionText: this.specFormPosition,
+        ShortText: this.specFormShortText,
+        LongText: this.specFormLongText,
+        Quantity: this.specFormQuantity,
+        Unit: this.specFormUnit,
+        UnitPrice: this.specFormUnitPrice,
+        HourPrice: this.specFormHourPrice
+      };
+      this.$store.dispatch('addNew...', NewPosition);
+      this.newCategoryShow = !this.newCategoryShow;
+      this.category = '';
+      this.newCategoryColor = '';
     }
   }
 });
