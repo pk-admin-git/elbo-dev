@@ -14,6 +14,7 @@ const state = {
     DocuObjectItems: [],
     DocuFloorItems: [],
     CableListItems: [],
+    SpecItems: [],
 
     CategorySelected: false,
     ActiveCategory: '',
@@ -31,6 +32,15 @@ const mutations = {
     },
     UPDATE_NEW_PROJECT_ITEM(state, payload){
         state.ProjectItems.push(payload);
+    },
+
+    /* Leistungsverzeichnis */
+
+    UPDATE_SPEC_ITEMS(state, payload) {
+        state.SpecItems = payload
+    },
+    NEW_SPEC_ITEM(state, payload) {
+        state.SpecItems.push(payload);
     },
     
     /* Dokumentation Kategorien */
@@ -102,6 +112,21 @@ const actions = {
         commit('UPDATE_CATEGORY_SELECTED', categoryId)
     },
 
+    /* Leistungsverzeichnis */
+
+    getSpecItems({ commit }, projectId) {
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/specification', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_SPEC_ITEMS', response.data)
+            });
+    },
+    addNewSpecItem({ commit}, payload) {
+        axios.post('http://46.101.114.150/api/specifications', axiosConfig)
+        .then((response) => {
+            commit('NEW_SPEC_ITEM', response.data)
+        });
+    }, 
+
 
     /* Projekte */
     getProjectItems({ commit }){
@@ -170,13 +195,19 @@ const actions = {
 
 const getters = {
 
+    /* Aktive Elemente */
     DocuCategories: state => state.DocuCategoryItems,
     ActiveCategory: state => state.ActiveCategory,
     CategorySelected: state => state.CategorySelected,
 
+    /* Projekte */
     ProjectItems: state => state.ProjectItems,
     ProjectItemById: state => id => state.ProjectItems.find(ProjectItem => ProjectItem.id === id ),
     
+    /* LV */
+    SpecItems: state => state.SpecItems,
+
+    /* Dokumentation */
     DocuObjects: state => state.DocuObjectItems,
     ActiveObject: state => state.ActiveObject,
     
