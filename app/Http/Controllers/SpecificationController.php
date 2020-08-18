@@ -28,7 +28,8 @@ class SpecificationController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'Position' => 'required',
+            'PositionText' => 'required',
+            'PositionNumber' => 'required|integer',
             'ProjectId' => 'required',
             'ShortText' => 'required|string',
             'LongText' => 'required|string',
