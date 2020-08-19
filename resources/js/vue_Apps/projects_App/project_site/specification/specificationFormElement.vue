@@ -140,12 +140,14 @@ export default {
                 TotalPrice: this.specFormQuantity * this.specFormUnitPrice,
                 HourPrice: this.specFormHourPrice,
             }
-            console.log(NewPosition)
-            console.log(this.$store.getters.SpecItemsLength)
-            /* this.$store.dispatch('addNew...', NewPosition)
-            this.newCategoryShow = !this.newCategoryShow
-            this.category= ''
-            this.newCategoryColor= '' */
+            this.$store.dispatch('addNewSpecItem', NewPosition)
+            this.specFormPosition = ''
+            this.specFormShortText = ''
+            this.specFormLongText = ''
+            this.specFormQuantity = null
+            this.specFormUnit = ''
+            this.specFormUnitPrice = null
+            this.specFormHourPrice = null
             },
     },
 

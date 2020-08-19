@@ -121,7 +121,7 @@ const actions = {
             });
     },
     addNewSpecItem({ commit}, payload) {
-        axios.post('http://46.101.114.150/api/specifications', axiosConfig)
+        axios.post('http://46.101.114.150/api/specifications', payload)
         .then((response) => {
             commit('NEW_SPEC_ITEM', response.data)
         });

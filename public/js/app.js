@@ -2950,12 +2950,14 @@ __webpack_require__.r(__webpack_exports__);
         TotalPrice: this.specFormQuantity * this.specFormUnitPrice,
         HourPrice: this.specFormHourPrice
       };
-      console.log(NewPosition);
-      console.log(this.$store.getters.SpecItemsLength);
-      /* this.$store.dispatch('addNew...', NewPosition)
-      this.newCategoryShow = !this.newCategoryShow
-      this.category= ''
-      this.newCategoryColor= '' */
+      this.$store.dispatch('addNewSpecItem', NewPosition);
+      this.specFormPosition = '';
+      this.specFormShortText = '';
+      this.specFormLongText = '';
+      this.specFormQuantity = null;
+      this.specFormUnit = '';
+      this.specFormUnitPrice = null;
+      this.specFormHourPrice = null;
     }
   }
 });
@@ -59207,7 +59209,7 @@ var actions = {
   },
   addNewSpecItem: function addNewSpecItem(_ref6, payload) {
     var commit = _ref6.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/specifications', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/specifications', payload).then(function (response) {
       commit('NEW_SPEC_ITEM', response.data);
     });
   },

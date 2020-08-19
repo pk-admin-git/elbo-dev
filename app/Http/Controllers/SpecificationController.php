@@ -36,7 +36,8 @@ class SpecificationController extends Controller
             'Quantity' => 'integer',
             'Unit' => 'string',
             'UnitPrice' => 'integer',
-            'TotalPrice' => 'integer'
+            'TotalPrice' => 'integer',
+            'HourPrice' => 'integer',
         ]);
 
         $specifications = specification::create($data);
