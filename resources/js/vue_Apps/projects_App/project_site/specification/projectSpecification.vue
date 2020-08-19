@@ -3,7 +3,7 @@
         <h1 class="h1 my-4">Leistungsverzeichnis</h1>
        
 
-        <specificationFormElement/>
+        <specificationFormElement :SpecItems="SpecItems" :projectId="projectId"/>
 
         <specificationElement v-for="SpecItem in SpecItems" 
                                 :key="SpecItem.id"

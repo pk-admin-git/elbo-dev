@@ -33,7 +33,7 @@
                     <div class="col-6 p-0">                    
                         <h6 class="card-title p-2 m-0">Menge</h6>
                         <div class="pb-3 pr-3">
-                            <input type="text" class="form-control" v-model="specFormQuantity">   
+                            <input type="text" class="form-control" v-model="convertSpecFormQuantity">   
                         </div>
                     </div>
                     <div class="col-6 p-0">
@@ -48,13 +48,13 @@
                     <div class="col-6 p-0">                    
                         <h6 class="card-title p-2 m-0">EP</h6>
                         <div class="pb-3 pr-3">
-                            <input type="text" class="form-control" v-model="specFormUnitPrice">   
+                            <input type="text" class="form-control" v-model="convertSpecFormUnitPrice">   
                         </div>
                     </div>
                     <div class="col-6 p-0">
                         <h6 class="card-title p-2 m-0">Stundensatz</h6>
                         <div class="pb-3 ">
-                            <input type="text" class="form-control" v-model="specFormHourPrice">   
+                            <input type="text" class="form-control" v-model="convertSpecFormHourPrice">   
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                             @click="showNewPositionForm"></span>
                     <span   style="cursor:pointer"
                             class="fas fa-check-circle fa-lg"
-                            @click="showNewPositionForm"></span>
+                            @click="addNewPosition"></span>
                 </div>
             </div>
 
@@ -78,18 +78,50 @@
 
 export default {
     name: 'specificationFormElement',
+    props: [
+        'SpecItems',
+        'projectId'
+    ],
     data() {
         return {
             newPositionForm: false,
             specFormPosition:'',
             specFormShortText: '',
             specFormLongText: '',
-            specFormQuantity: 0,
+            specFormQuantity: null,
             specFormUnit: '',
-            specFormUnitPrice: 0,
-            specFormHourPrice: 0,
+            specFormUnitPrice: null,
+            specFormHourPrice: null,
+            
 
         }
+    },
+    computed: {
+        convertSpecFormQuantity: {
+            get: function() {
+                return this.specFormQuantity
+            },
+            set: function(newValue) {
+                this.specFormQuantity = parseFloat(newValue.replace(/,/, "." ))
+            }
+        },
+        convertSpecFormUnitPrice: {
+            get: function() {
+                return this.specFormUnitPrice
+            },
+            set: function(newValue) {
+                this.specFormUnitPrice = parseFloat(newValue.replace(/,/, "." ))
+            }
+        },
+        convertSpecFormHourPrice: {
+            get: function() {
+                return this.specFormHourPrice
+            },
+            set: function(newValue) {
+                this.specFormHourPrice = parseFloat(newValue.replace(/,/, "." ))
+            }
+        }
+        
     },
     methods: {
         showNewPositionForm() {
@@ -97,18 +129,23 @@ export default {
         },
         addNewPosition(){
             const NewPosition = {
+                ProjectId: this.projectId,
                 PositionText: this.specFormPosition,
+                PositionNumber: this.$store.getters.SpecItemsLength + 1,
                 ShortText: this.specFormShortText,
                 LongText: this.specFormLongText,
                 Quantity: this.specFormQuantity,
                 Unit: this.specFormUnit,
                 UnitPrice: this.specFormUnitPrice,
+                TotalPrice: this.specFormQuantity * this.specFormUnitPrice,
                 HourPrice: this.specFormHourPrice,
             }
-            this.$store.dispatch('addNew...', NewPosition)
+            console.log(NewPosition)
+            console.log(this.$store.getters.SpecItemsLength)
+            /* this.$store.dispatch('addNew...', NewPosition)
             this.newCategoryShow = !this.newCategoryShow
             this.category= ''
-            this.newCategoryColor= ''
+            this.newCategoryColor= '' */
             },
     },
 

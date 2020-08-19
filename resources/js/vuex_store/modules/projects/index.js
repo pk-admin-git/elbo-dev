@@ -206,6 +206,7 @@ const getters = {
     
     /* LV */
     SpecItems: state => state.SpecItems,
+    SpecItemsLength: state => state.SpecItems.length,
 
     /* Dokumentation */
     DocuObjects: state => state.DocuObjectItems,

@@ -27,6 +27,7 @@ class CreateSpecificationsTable extends Migration
             $table->string('Unit', 10);
             $table->bigInteger('UnitPrice');
             $table->bigInteger('TotalPrice');
+            $table->integer('HourPrice');
             $table->timestamps();
         });
     }

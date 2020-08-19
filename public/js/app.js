@@ -2894,17 +2894,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'specificationFormElement',
+  props: ['SpecItems', 'projectId'],
   data: function data() {
     return {
       newPositionForm: false,
       specFormPosition: '',
       specFormShortText: '',
       specFormLongText: '',
-      specFormQuantity: 0,
+      specFormQuantity: null,
       specFormUnit: '',
-      specFormUnitPrice: 0,
-      specFormHourPrice: 0
+      specFormUnitPrice: null,
+      specFormHourPrice: null
     };
+  },
+  computed: {
+    convertSpecFormQuantity: {
+      get: function get() {
+        return this.specFormQuantity;
+      },
+      set: function set(newValue) {
+        this.specFormQuantity = parseFloat(newValue.replace(/,/, "."));
+      }
+    },
+    convertSpecFormUnitPrice: {
+      get: function get() {
+        return this.specFormUnitPrice;
+      },
+      set: function set(newValue) {
+        this.specFormUnitPrice = parseFloat(newValue.replace(/,/, "."));
+      }
+    },
+    convertSpecFormHourPrice: {
+      get: function get() {
+        return this.specFormHourPrice;
+      },
+      set: function set(newValue) {
+        this.specFormHourPrice = parseFloat(newValue.replace(/,/, "."));
+      }
+    }
   },
   methods: {
     showNewPositionForm: function showNewPositionForm() {
@@ -2912,18 +2939,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     addNewPosition: function addNewPosition() {
       var NewPosition = {
+        ProjectId: this.projectId,
         PositionText: this.specFormPosition,
+        PositionNumber: this.$store.getters.SpecItemsLength + 1,
         ShortText: this.specFormShortText,
         LongText: this.specFormLongText,
         Quantity: this.specFormQuantity,
         Unit: this.specFormUnit,
         UnitPrice: this.specFormUnitPrice,
+        TotalPrice: this.specFormQuantity * this.specFormUnitPrice,
         HourPrice: this.specFormHourPrice
       };
-      this.$store.dispatch('addNew...', NewPosition);
-      this.newCategoryShow = !this.newCategoryShow;
-      this.category = '';
-      this.newCategoryColor = '';
+      console.log(NewPosition);
+      console.log(this.$store.getters.SpecItemsLength);
+      /* this.$store.dispatch('addNew...', NewPosition)
+      this.newCategoryShow = !this.newCategoryShow
+      this.category= ''
+      this.newCategoryColor= '' */
     }
   }
 });
@@ -40512,7 +40544,9 @@ var render = function() {
     [
       _c("h1", { staticClass: "h1 my-4" }, [_vm._v("Leistungsverzeichnis")]),
       _vm._v(" "),
-      _c("specificationFormElement"),
+      _c("specificationFormElement", {
+        attrs: { SpecItems: _vm.SpecItems, projectId: _vm.projectId }
+      }),
       _vm._v(" "),
       _vm._l(_vm.SpecItems, function(SpecItem) {
         return _c("specificationElement", {
@@ -40783,19 +40817,19 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.specFormQuantity,
-                          expression: "specFormQuantity"
+                          value: _vm.convertSpecFormQuantity,
+                          expression: "convertSpecFormQuantity"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: { value: _vm.specFormQuantity },
+                      domProps: { value: _vm.convertSpecFormQuantity },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.specFormQuantity = $event.target.value
+                          _vm.convertSpecFormQuantity = $event.target.value
                         }
                       }
                     })
@@ -40845,19 +40879,19 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.specFormUnitPrice,
-                          expression: "specFormUnitPrice"
+                          value: _vm.convertSpecFormUnitPrice,
+                          expression: "convertSpecFormUnitPrice"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: { value: _vm.specFormUnitPrice },
+                      domProps: { value: _vm.convertSpecFormUnitPrice },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.specFormUnitPrice = $event.target.value
+                          _vm.convertSpecFormUnitPrice = $event.target.value
                         }
                       }
                     })
@@ -40875,19 +40909,19 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.specFormHourPrice,
-                          expression: "specFormHourPrice"
+                          value: _vm.convertSpecFormHourPrice,
+                          expression: "convertSpecFormHourPrice"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "text" },
-                      domProps: { value: _vm.specFormHourPrice },
+                      domProps: { value: _vm.convertSpecFormHourPrice },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.specFormHourPrice = $event.target.value
+                          _vm.convertSpecFormHourPrice = $event.target.value
                         }
                       }
                     })
@@ -40909,7 +40943,7 @@ var render = function() {
                       _c("span", {
                         staticClass: "fas fa-check-circle fa-lg",
                         staticStyle: { cursor: "pointer" },
-                        on: { click: _vm.showNewPositionForm }
+                        on: { click: _vm.addNewPosition }
                       })
                     ]
                   )
@@ -59269,6 +59303,9 @@ var getters = {
   /* LV */
   SpecItems: function SpecItems(state) {
     return state.SpecItems;
+  },
+  SpecItemsLength: function SpecItemsLength(state) {
+    return state.SpecItems.length;
   },
 
   /* Dokumentation */
