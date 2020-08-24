@@ -12,11 +12,11 @@ class CableListElementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($cableListId)
+    public function index($cableList)
     {
-        $cableListElements = cableListElement::where('CableListId', $cableListId)->get();
+        $cableListElements = cableListElement::where('CableListId', $cableList)->get();
 
-        return $cableLists;
+        return $cableListElements;
     }
 
     
