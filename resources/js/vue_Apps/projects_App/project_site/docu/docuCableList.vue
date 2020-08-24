@@ -13,41 +13,45 @@
                 <div class="card-header"><h5 class="h5 mb-0">Start</h5></div>
                 <div class="card-body"></div>
             </div>
-
-            <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0">
-                <div class="card-header"><h5 class="h5 mb-0">HFM: Meldegruppennummer</h5></div>
-                <div class="card-body">
-                    <div class="alert alert-secondary row" role="alert">
-                        <div class="col-12 d-flex justify-content-between">
-                            <span>Raum:</span><span>Nummer</span>
-                        </div>
-                        <div class="col-12 d-flex justify-content-between">
-                            <span>Position:</span><span>Nummer</span>
-                        </div>
-                        <div class="col-12 d-flex justify-content-between">
-                            <span>Menge</span><span>Zahl m</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0 fas fa-plus-circle fa-2x text-center"
-                style="cursor:pointer">
-                 
-            </div>
-
-
         </div>
+
+            <cableListElement v-for="CableListElement in CableListElements"
+                                :key="CableListElement.id"
+                                :CableListElement="CableListElement"/>
+
+            
+
+            <cableListForm :cableListId="cableListId"/>
+
+
+        
 
 
     </div>
 </template>
 
 <script>
+import cableListElement from './docuCableListElement.vue'
+import cableListForm from './docuCableListForm.vue'
+
 export default {
     name: 'docuCableList',
     props: [
         'projectId', 'cableListId'
-    ]
+    ],
+    components: {
+        cableListElement,
+        cableListForm,
+    },
+    created() {
+            this.$store.dispatch('getCableListElements', this.projectId, this.cableListId)
+    },
+    computed: {
+        CableListElements() {
+            return this.$store.getters.CableListElements
+        }
+    },
+    
+    
 }
 </script>

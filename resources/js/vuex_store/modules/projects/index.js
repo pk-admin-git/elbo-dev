@@ -14,12 +14,14 @@ const state = {
     DocuObjectItems: [],
     DocuFloorItems: [],
     CableListItems: [],
+    CableListElements: [],
     SpecItems: [],
 
     CategorySelected: false,
     ActiveCategory: '',
     ActiveObject: '',
     ActiveFloor: '',
+    ActiveCableListElement: '',
     
     
 };
@@ -85,6 +87,14 @@ const mutations = {
     },
     UPDATE_NEW_CABLE_LIST_ITEM(state, payload){
         state.CableListItems.push(payload);
+    },
+
+    /* Kabelzuglisten-Element */
+    UPDATE_CABLE_LIST_ELEMENTS(state, payload){
+        state.CableListElements = payload;
+    },
+    UPDATE_NEW_CABLE_LIST_ELEMENT(state, payload){
+        state.CableListElements.push(payload);
     }
 };
 
@@ -191,6 +201,21 @@ const actions = {
                 commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
             });
     },
+
+    /* Kabelzuglisten-Element */
+
+    getCableListElements({ commit }, projectId, cableListId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/cableLists/' + cableListId + '/cableListElements', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_CABLE_LIST_ELEMENTS', response.data)
+            });
+    },
+    addNewCableListElement({ commit }, payload){
+        axios.post('http://46.101.114.150/api/cableListElements', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data);
+            });
+    },
 };
 
 const getters = {
@@ -217,6 +242,9 @@ const getters = {
     ActiveFloor: state => state.ActiveFloor,
 
     CableLists: state => state.CableListItems,
+
+    CableListElements: state => state.CableListElements,
+    CableListElementsLength: state => state.CableListElements.length
     
 };
 
