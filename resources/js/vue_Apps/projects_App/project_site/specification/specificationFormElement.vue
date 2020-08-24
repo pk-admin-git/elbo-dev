@@ -1,9 +1,9 @@
 <template>
 <div class="row">
     <div class="row col-12 p-0 my-4"> 
-        <h4 class="card-title col-lg-4 col-md-5 col-sm-8 col-10 px-0 m-0 d-flex align-items-center">Neue Position Einfügen</h4>
+        <h4 class="card-title col-lg-5 col-md-6 col-sm-8 col-10 px-0 m-0 d-flex align-items-center">Neue Position Einfügen</h4>
         <span   style="cursor:pointer"
-                class="fas fa-plus-circle fa-lg col-lg-8 col-md-7 col-sm-4 col-2 p-3 d-flex justify-content-end align-items-center"
+                class="fas fa-plus-circle fa-lg col-lg-7 col-md-6 col-sm-4 col-2 p-3 d-flex justify-content-end align-items-center"
                 @click="showNewPositionForm"
                 v-if="!newPositionForm"></span>
     </div>
@@ -102,7 +102,7 @@ export default {
                 return this.specFormQuantity
             },
             set: function(newValue) {
-                this.specFormQuantity = parseFloat(newValue.replace(/,/, "." ))
+                this.specFormQuantity = Math.round(parseFloat(newValue.replace(/,/, "." )))
             }
         },
         convertSpecFormUnitPrice: {
@@ -110,7 +110,7 @@ export default {
                 return this.specFormUnitPrice
             },
             set: function(newValue) {
-                this.specFormUnitPrice = parseFloat(newValue.replace(/,/, "." ))
+                this.specFormUnitPrice = (Math.round(parseFloat(newValue.replace(/,/, "." ))*100)) /100
             }
         },
         convertSpecFormHourPrice: {
@@ -118,7 +118,7 @@ export default {
                 return this.specFormHourPrice
             },
             set: function(newValue) {
-                this.specFormHourPrice = parseFloat(newValue.replace(/,/, "." ))
+                this.specFormHourPrice = (Math.round(parseFloat(newValue.replace(/,/, "." ))*100)) /100
             }
         }
         
@@ -136,9 +136,9 @@ export default {
                 LongText: this.specFormLongText,
                 Quantity: this.specFormQuantity,
                 Unit: this.specFormUnit,
-                UnitPrice: this.specFormUnitPrice,
-                TotalPrice: this.specFormQuantity * this.specFormUnitPrice,
-                HourPrice: this.specFormHourPrice,
+                UnitPrice: this.specFormUnitPrice.toFixed(2) *100,
+                TotalPrice: this.specFormQuantity * this.specFormUnitPrice.toFixed(2) *100,
+                HourPrice: this.specFormHourPrice.toFixed(2)*100,
             }
             this.$store.dispatch('addNewSpecItem', NewPosition)
             this.specFormPosition = ''

@@ -1,6 +1,6 @@
 <template>
     
-        
+
     <div class="row mb-2"> 
         <div class="card col p-0">
             <div class="row">
@@ -36,6 +36,7 @@
             </div>
         </div>
     </div>
+
 </template>
 
 
@@ -53,9 +54,9 @@
                 return "#specification"+index;
             },
             convertUnitPriceToMinutes(UnitPrice) {
-                let hourPrice = 48
-                let minutes = 60/(hourPrice/UnitPrice)
-                return Math.floor(minutes)
+                let hourPrice = this.SpecItem.HourPrice
+                let minutes = 60/((hourPrice/100)/(UnitPrice/100))
+                return minutes.toFixed(2)
             },
             TotalMinutes(Quantity, Minutes) {
                 return Quantity*Minutes

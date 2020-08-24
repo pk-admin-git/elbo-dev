@@ -2710,6 +2710,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2781,6 +2783,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'specificationElement',
   props: ['SpecItem'],
@@ -2792,9 +2795,9 @@ __webpack_require__.r(__webpack_exports__);
       return "#specification" + index;
     },
     convertUnitPriceToMinutes: function convertUnitPriceToMinutes(UnitPrice) {
-      var hourPrice = 48;
-      var minutes = 60 / (hourPrice / UnitPrice);
-      return Math.floor(minutes);
+      var hourPrice = this.SpecItem.HourPrice;
+      var minutes = 60 / (hourPrice / 100 / (UnitPrice / 100));
+      return minutes.toFixed(2);
     },
     TotalMinutes: function TotalMinutes(Quantity, Minutes) {
       return Quantity * Minutes;
@@ -2913,7 +2916,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.specFormQuantity;
       },
       set: function set(newValue) {
-        this.specFormQuantity = parseFloat(newValue.replace(/,/, "."));
+        this.specFormQuantity = Math.round(parseFloat(newValue.replace(/,/, ".")));
       }
     },
     convertSpecFormUnitPrice: {
@@ -2921,7 +2924,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.specFormUnitPrice;
       },
       set: function set(newValue) {
-        this.specFormUnitPrice = parseFloat(newValue.replace(/,/, "."));
+        this.specFormUnitPrice = Math.round(parseFloat(newValue.replace(/,/, ".")) * 100) / 100;
       }
     },
     convertSpecFormHourPrice: {
@@ -2929,7 +2932,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.specFormHourPrice;
       },
       set: function set(newValue) {
-        this.specFormHourPrice = parseFloat(newValue.replace(/,/, "."));
+        this.specFormHourPrice = Math.round(parseFloat(newValue.replace(/,/, ".")) * 100) / 100;
       }
     }
   },
@@ -2946,9 +2949,9 @@ __webpack_require__.r(__webpack_exports__);
         LongText: this.specFormLongText,
         Quantity: this.specFormQuantity,
         Unit: this.specFormUnit,
-        UnitPrice: this.specFormUnitPrice,
-        TotalPrice: this.specFormQuantity * this.specFormUnitPrice,
-        HourPrice: this.specFormHourPrice
+        UnitPrice: this.specFormUnitPrice.toFixed(2) * 100,
+        TotalPrice: this.specFormQuantity * this.specFormUnitPrice.toFixed(2) * 100,
+        HourPrice: this.specFormHourPrice.toFixed(2) * 100
       };
       this.$store.dispatch('addNewSpecItem', NewPosition);
       this.specFormPosition = '';
@@ -40541,24 +40544,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", { staticClass: "h1 my-4" }, [_vm._v("Leistungsverzeichnis")]),
-      _vm._v(" "),
-      _c("specificationFormElement", {
-        attrs: { SpecItems: _vm.SpecItems, projectId: _vm.projectId }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.SpecItems, function(SpecItem) {
-        return _c("specificationElement", {
-          key: SpecItem.id,
-          attrs: { SpecItem: SpecItem }
+  return _c("div", { staticClass: "d-flex flex-column align-items-center" }, [
+    _c("h1", { staticClass: "h1 my-4 align-self-start" }, [
+      _vm._v("Leistungsverzeichnis")
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-lg-9 col-md-11 col-12" },
+      [
+        _c("specificationFormElement", {
+          attrs: { SpecItems: _vm.SpecItems, projectId: _vm.projectId }
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.SpecItems, function(SpecItem) {
+          return _c("specificationElement", {
+            key: SpecItem.id,
+            attrs: { SpecItem: SpecItem }
+          })
         })
-      })
-    ],
-    2
-  )
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40702,7 +40710,7 @@ var render = function() {
         "h4",
         {
           staticClass:
-            "card-title col-lg-4 col-md-5 col-sm-8 col-10 px-0 m-0 d-flex align-items-center"
+            "card-title col-lg-5 col-md-6 col-sm-8 col-10 px-0 m-0 d-flex align-items-center"
         },
         [_vm._v("Neue Position Einfügen")]
       ),
@@ -40710,7 +40718,7 @@ var render = function() {
       !_vm.newPositionForm
         ? _c("span", {
             staticClass:
-              "fas fa-plus-circle fa-lg col-lg-8 col-md-7 col-sm-4 col-2 p-3 d-flex justify-content-end align-items-center",
+              "fas fa-plus-circle fa-lg col-lg-7 col-md-6 col-sm-4 col-2 p-3 d-flex justify-content-end align-items-center",
             staticStyle: { cursor: "pointer" },
             on: { click: _vm.showNewPositionForm }
           })
