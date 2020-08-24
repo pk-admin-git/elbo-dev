@@ -27,4 +27,9 @@ class cablelist extends Model
 
         return $this->hasMany('App\documentation');
     }
+
+    public function cableListElements(){
+
+        return $this->hasMany('App\cableListElement');
+    }
 }
