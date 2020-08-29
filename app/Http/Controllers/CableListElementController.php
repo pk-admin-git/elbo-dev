@@ -12,7 +12,7 @@ class CableListElementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($cableList)
+    public function index($project, $cableList)
     {
         $cableListElements = cableListElement::where('CableListId', $cableList)->get();
 

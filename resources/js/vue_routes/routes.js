@@ -4,7 +4,7 @@ import projectNav from '../vue_Apps/projects_App/project_site/projectNav.vue'
 import projectOverview from '../vue_Apps/projects_App/project_site/overview/projectOverview.vue'
 import projectSpecification from '../vue_Apps/projects_App/project_site/specification/projectSpecification.vue'
 import DocuOverview from '../vue_Apps/projects_App/project_site/docu/docuOverview.vue'
-import DocuCableList from '../vue_Apps/projects_App/project_site/docu/docuCableList.vue'
+import DocuCableList from '../vue_Apps/projects_App/project_site/cablelist/docuCableList.vue'
 
 export const projectRoutes = [
     {

@@ -1899,17 +1899,47 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _docuCableListElement_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableListElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue");
-/* harmony import */ var _docuCableListForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableListForm.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'cableListElementMeasure',
+  props: []
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _docuCableListElement_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableListElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue");
+/* harmony import */ var _docuCableListForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableListForm.vue */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue");
 //
 //
 //
@@ -1963,15 +1993,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cableListElementMeasure_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cableListElementMeasure.vue */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue");
 //
 //
 //
@@ -1983,27 +2014,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableListElement',
-  props: ['CableListElement']
+  props: ['CableListElement'],
+  components: [_cableListElementMeasure_vue__WEBPACK_IMPORTED_MODULE_0__["default"]]
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -39524,10 +39547,60 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=template&id=45d212de&":
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=template&id=45d212de& ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=template&id=775ff958&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=template&id=775ff958& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "alert alert-secondary row", attrs: { role: "alert" } },
+      [
+        _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
+          _c("span", [_vm._v("Raum:")]),
+          _c("span", [_vm._v("Nummerr")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
+          _c("span", [_vm._v("Position:")]),
+          _c("span", [_vm._v("Nummer")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
+          _c("span", [_vm._v("Menge")]),
+          _c("span", [_vm._v("Zahl m")])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=template&id=76282435&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=template&id=76282435& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -39610,10 +39683,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=template&id=07469d5b&":
-/*!****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=template&id=07469d5b& ***!
-  \****************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=template&id=6a398f37&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=template&id=6a398f37& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -39642,50 +39715,22 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "card-body" })
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c(
-        "div",
-        { staticClass: "alert alert-secondary row", attrs: { role: "alert" } },
-        [
-          _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
-            _c("span", [_vm._v("Raum:")]),
-            _c("span", [_vm._v("Nummer")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
-            _c("span", [_vm._v("Position:")]),
-            _c("span", [_vm._v("Nummer")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
-            _c("span", [_vm._v("Menge")]),
-            _c("span", [_vm._v("Zahl m")])
-          ])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=template&id=3ae0c0f5&":
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=template&id=3ae0c0f5& ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=template&id=669a7c99&":
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=template&id=669a7c99& ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58184,17 +58229,86 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue":
-/*!********************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue ***!
-  \********************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _docuCableList_vue_vue_type_template_id_45d212de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableList.vue?vue&type=template&id=45d212de& */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=template&id=45d212de&");
-/* harmony import */ var _docuCableList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableList.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _cableListElementMeasure_vue_vue_type_template_id_775ff958___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cableListElementMeasure.vue?vue&type=template&id=775ff958& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=template&id=775ff958&");
+/* harmony import */ var _cableListElementMeasure_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cableListElementMeasure.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _cableListElementMeasure_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _cableListElementMeasure_vue_vue_type_template_id_775ff958___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _cableListElementMeasure_vue_vue_type_template_id_775ff958___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cableListElementMeasure_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./cableListElementMeasure.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cableListElementMeasure_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=template&id=775ff958&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=template&id=775ff958& ***!
+  \******************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cableListElementMeasure_vue_vue_type_template_id_775ff958___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./cableListElementMeasure.vue?vue&type=template&id=775ff958& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/cableListElementMeasure.vue?vue&type=template&id=775ff958&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cableListElementMeasure_vue_vue_type_template_id_775ff958___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_cableListElementMeasure_vue_vue_type_template_id_775ff958___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _docuCableList_vue_vue_type_template_id_76282435___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableList.vue?vue&type=template&id=76282435& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=template&id=76282435&");
+/* harmony import */ var _docuCableList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableList.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -58205,8 +58319,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _docuCableList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _docuCableList_vue_vue_type_template_id_45d212de___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _docuCableList_vue_vue_type_template_id_45d212de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _docuCableList_vue_vue_type_template_id_76282435___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _docuCableList_vue_vue_type_template_id_76282435___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -58216,54 +58330,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue"
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=template&id=45d212de&":
-/*!***************************************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=template&id=45d212de& ***!
-  \***************************************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=template&id=76282435&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=template&id=76282435& ***!
+  \********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_template_id_45d212de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableList.vue?vue&type=template&id=45d212de& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue?vue&type=template&id=45d212de&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_template_id_45d212de___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_template_id_76282435___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableList.vue?vue&type=template&id=76282435& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue?vue&type=template&id=76282435&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_template_id_76282435___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_template_id_45d212de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableList_vue_vue_type_template_id_76282435___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue ***!
-  \***************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _docuCableListElement_vue_vue_type_template_id_07469d5b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableListElement.vue?vue&type=template&id=07469d5b& */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=template&id=07469d5b&");
-/* harmony import */ var _docuCableListElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableListElement.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=script&lang=js&");
+/* harmony import */ var _docuCableListElement_vue_vue_type_template_id_6a398f37___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableListElement.vue?vue&type=template&id=6a398f37& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=template&id=6a398f37&");
+/* harmony import */ var _docuCableListElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableListElement.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -58274,8 +58388,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _docuCableListElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _docuCableListElement_vue_vue_type_template_id_07469d5b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _docuCableListElement_vue_vue_type_template_id_07469d5b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _docuCableListElement_vue_vue_type_template_id_6a398f37___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _docuCableListElement_vue_vue_type_template_id_6a398f37___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -58285,54 +58399,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue"
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListElement.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListElement.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=template&id=07469d5b&":
-/*!**********************************************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=template&id=07469d5b& ***!
-  \**********************************************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=template&id=6a398f37&":
+/*!***************************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=template&id=6a398f37& ***!
+  \***************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_template_id_07469d5b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListElement.vue?vue&type=template&id=07469d5b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListElement.vue?vue&type=template&id=07469d5b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_template_id_07469d5b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_template_id_6a398f37___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListElement.vue?vue&type=template&id=6a398f37& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListElement.vue?vue&type=template&id=6a398f37&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_template_id_6a398f37___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_template_id_07469d5b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListElement_vue_vue_type_template_id_6a398f37___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue":
-/*!************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue ***!
-  \************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _docuCableListForm_vue_vue_type_template_id_3ae0c0f5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableListForm.vue?vue&type=template&id=3ae0c0f5& */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=template&id=3ae0c0f5&");
-/* harmony import */ var _docuCableListForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableListForm.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _docuCableListForm_vue_vue_type_template_id_669a7c99___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./docuCableListForm.vue?vue&type=template&id=669a7c99& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=template&id=669a7c99&");
+/* harmony import */ var _docuCableListForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./docuCableListForm.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -58343,8 +58457,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _docuCableListForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _docuCableListForm_vue_vue_type_template_id_3ae0c0f5___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _docuCableListForm_vue_vue_type_template_id_3ae0c0f5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _docuCableListForm_vue_vue_type_template_id_669a7c99___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _docuCableListForm_vue_vue_type_template_id_669a7c99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -58354,38 +58468,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue"
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=template&id=3ae0c0f5&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=template&id=3ae0c0f5& ***!
-  \*******************************************************************************************************************/
+/***/ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=template&id=669a7c99&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=template&id=669a7c99& ***!
+  \************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_template_id_3ae0c0f5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListForm.vue?vue&type=template&id=3ae0c0f5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/docuCableListForm.vue?vue&type=template&id=3ae0c0f5&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_template_id_3ae0c0f5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_template_id_669a7c99___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./docuCableListForm.vue?vue&type=template&id=669a7c99& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableListForm.vue?vue&type=template&id=669a7c99&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_template_id_669a7c99___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_template_id_3ae0c0f5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_docuCableListForm_vue_vue_type_template_id_669a7c99___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -59409,7 +59523,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_Apps_projects_App_project_site_overview_projectOverview_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/overview/projectOverview.vue */ "./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue");
 /* harmony import */ var _vue_Apps_projects_App_project_site_specification_projectSpecification_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/specification/projectSpecification.vue */ "./resources/js/vue_Apps/projects_App/project_site/specification/projectSpecification.vue");
 /* harmony import */ var _vue_Apps_projects_App_project_site_docu_docuOverview_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/docu/docuOverview.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuOverview.vue");
-/* harmony import */ var _vue_Apps_projects_App_project_site_docu_docuCableList_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/docu/docuCableList.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuCableList.vue");
+/* harmony import */ var _vue_Apps_projects_App_project_site_cablelist_docuCableList_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/cablelist/docuCableList.vue */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue");
 
 
 
@@ -59457,7 +59571,7 @@ var projectRoutes = [{
   path: '/projectApp/project/:projectId/projectDocu/:cableListId',
   components: {
     navTab: _vue_Apps_projects_App_project_site_projectNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    content: _vue_Apps_projects_App_project_site_docu_docuCableList_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    content: _vue_Apps_projects_App_project_site_cablelist_docuCableList_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   props: {
     navTab: true,
