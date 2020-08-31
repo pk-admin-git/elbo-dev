@@ -60259,7 +60259,7 @@ var actions = {
   /* Übersicht Etagen */
   getDocuFloorItems: function getDocuFloorItems(_ref12, projectId) {
     var commit = _ref12.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuFloors', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_FLOOR_ITEMS', response.data);
     });
   },
@@ -60277,7 +60277,7 @@ var actions = {
   /* Übersicht Räume */
   getDocuRoomItems: function getDocuRoomItems(_ref15, projectId) {
     var commit = _ref15.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/rooms', axiosConfig).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuRooms', axiosConfig).then(function (response) {
       commit('UPDATE_DOCU_ROOM_ITEMS', response.data);
     });
   },

@@ -44,13 +44,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::delete('/docuObjects/{object}', 'DocuObjectController@destroy')->middleware('cors');
 
         /* Projekt-Etagen */
-        Route::get('/project/{project}/floors', 'DocuFloorController@index')->middleware('cors');
+        Route::get('/project/{project}/docuFloors', 'DocuFloorController@index')->middleware('cors');
         Route::post('/docuFloors', 'DocuFloorController@store')->middleware('cors');
         Route::patch('/docuFloors/{floor}', 'DocuFloorController@update')->middleware('cors');
         Route::delete('/docuFloors/{floor}', 'DocuFloorController@destroy')->middleware('cors');
 
          /* Projekt-Räume */
-         Route::get('/project/{project}/rooms', 'DocuRoomController@index')->middleware('cors');
+         Route::get('/project/{project}/docuRooms', 'DocuRoomController@index')->middleware('cors');
          Route::post('/docuRooms', 'DocuRoomController@store')->middleware('cors');
          Route::patch('/docuRooms/{room}', 'DocuRoomController@update')->middleware('cors');
          Route::delete('/docuRooms/{room}', 'DocuRoomController@destroy')->middleware('cors');

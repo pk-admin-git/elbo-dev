@@ -189,7 +189,7 @@ const actions = {
 
     /* Übersicht Etagen */
     getDocuFloorItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig)
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuFloors', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_FLOOR_ITEMS', response.data)
             });
@@ -206,7 +206,7 @@ const actions = {
 
     /* Übersicht Räume */
     getDocuRoomItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/rooms', axiosConfig)
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuRooms', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_ROOM_ITEMS', response.data)
             });
