@@ -273,12 +273,13 @@ const getters = {
     ActiveFloor: state => state.ActiveFloor,
 
     /* Übersicht Räume */
-    DocuRoomsFiltered: state => floorId => state.DocuRoomItems.filter(rooms => rooms.DocuFloor === floorId),
+    DocuRoomsFiltered: state => floorId => state.DocuRoomItems.filter(rooms => rooms.DocuFloorId === floorId),
 
     /* Übersicht Kabelzuglisten */
     CableLists: state => state.CableListItems,
 
     /* Dokumentation Kabelzugliste */
+    CableListById: state => cableListId => state.CableListItems.find(CableListItem => CableListItem.id === cableListId),
     CableListElements: state => state.CableListElements,
     CableListElementsLength: state => state.CableListElements.length
     

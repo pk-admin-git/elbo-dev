@@ -17,7 +17,8 @@
 
             <cableListElement v-for="CableListElement in CableListElements"
                                 :key="CableListElement.id"
-                                :CableListElement="CableListElement"/>
+                                :CableListElement="CableListElement"
+                                :cableList="cableList"/>
 
             
 
@@ -37,7 +38,7 @@ import cableListForm from './docuCableListForm.vue'
 export default {
     name: 'docuCableList',
     props: [
-        'projectId', 'cableListId'
+        'projectId', 'cableListId',
     ],
     components: {
         cableListElement,
@@ -49,6 +50,9 @@ export default {
     computed: {
         CableListElements() {
             return this.$store.getters.CableListElements
+        },
+        cableList() {
+            return (this.$store.getters.CableListById(Number(this.cableListId)))
         }
     },
     

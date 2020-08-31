@@ -1975,6 +1975,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1990,6 +1991,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     CableListElements: function CableListElements() {
       return this.$store.getters.CableListElements;
+    },
+    cableList: function cableList() {
+      return this.$store.getters.CableListById(Number(this.cableListId));
     }
   }
 });
@@ -2042,23 +2046,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableListElement',
-  props: ['CableListElement'],
+  props: ['CableListElement', 'cableList'],
   components: {
     cableListElementMeasure: _cableListElementMeasure_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
       MeasureFormVisible: false,
-      device: '',
+      room: '',
       deviceNumber: ''
     };
   },
   methods: {
     showMeasureForm: function showMeasureForm() {
       this.MeasureFormVisible = !this.MeasureFormVisible;
+    },
+    docuRooms: function docuRooms(floorId) {
+      return this.$store.getters.DocuRoomsFiltered(floorId);
     }
   }
 });
@@ -2100,13 +2113,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCableListForm',
   props: ['cableListId'],
   data: function data() {
     return {
       CableListFormVisible: false,
-      device: '',
+      room: '',
       deviceNumber: ''
     };
   },
@@ -2124,6 +2143,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('addNewCableListElement', NewCableListElement);
       this.device = '';
       this.deviceNumber = '';
+    },
+    docuRooms: function docuRooms(floorId) {
+      return this.$store.getters.DocuRoomsFiltered(floorId);
     }
   }
 });
@@ -2199,8 +2221,10 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.$store.dispatch('getDocuObjectItems', this.projectId);
     this.$store.dispatch('getDocuFloorItems', this.projectId);
+    this.$store.dispatch('getDocuRoomItems', this.projectId);
     this.$store.dispatch('getDocuCategoryItems', this.projectId);
     this.$store.dispatch('getCableListItems', this.projectId);
+    this.$store.dispatch('getDocuRoomItems', this.projectId);
   },
   computed: {},
   methods: {}
@@ -2760,6 +2784,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'overviewRoomElement',
   props: ['projectId'],
@@ -2771,9 +2799,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    activeObject: function activeObject() {
-      return this.$store.getters.ActiveObject;
-    },
     activeFloor: function activeFloor() {
       return this.$store.getters.ActiveFloor;
     }
@@ -2783,18 +2808,15 @@ __webpack_require__.r(__webpack_exports__);
       this.newRoomShow = !this.newRoomShow;
     },
     docuRooms: function docuRooms(floorId) {
-      console.log(floorId);
-      /* return this.$store.getters.DocuRoomsFiltered(floorId) */
+      return this.$store.getters.DocuRoomsFiltered(floorId);
     },
     addNewDocuRoom: function addNewDocuRoom() {
       var NewDocuRoom = {
         Room: this.room,
         ProjectId: this.projectId,
-        DocuObjectId: this.activeObject,
         DocuFloorId: this.activeFloor
       };
       this.$store.dispatch('addNewDocuRoom', NewDocuRoom);
-      this.newRoomShow = !this.newRoomShow;
       this.room = '';
     }
   }
@@ -39781,7 +39803,10 @@ var render = function() {
       _vm._l(_vm.CableListElements, function(CableListElement) {
         return _c("cableListElement", {
           key: CableListElement.id,
-          attrs: { CableListElement: CableListElement }
+          attrs: {
+            CableListElement: CableListElement,
+            cableList: _vm.cableList
+          }
         })
       }),
       _vm._v(" "),
@@ -39918,33 +39943,60 @@ var render = function() {
                               "card-header row d-flex justify-content-center"
                           },
                           [
-                            _c(
-                              "h5",
-                              { staticClass: "h5 col-8 p-0 text-center" },
-                              [_vm._v("Raum: ")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
+                            _c("div", { staticClass: "col-lg-3 col-12" }, [
+                              _c("label", { attrs: { for: "inputRoom" } }, [
+                                _vm._v("Raum")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.device,
-                                  expression: "device"
-                                }
-                              ],
-                              staticClass: "form-control col-6 mb-2",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.device },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model.lazy",
+                                      value: _vm.room,
+                                      expression: "room",
+                                      modifiers: { lazy: true }
+                                    }
+                                  ],
+                                  staticClass: "custom-select",
+                                  attrs: { id: "inputRoom" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.room = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
                                   }
-                                  _vm.device = $event.target.value
-                                }
-                              }
-                            }),
+                                },
+                                _vm._l(
+                                  _vm.docuRooms(_vm.cableList.FloorId),
+                                  function(docuRoom) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: docuRoom.id,
+                                        domProps: { value: docuRoom.id }
+                                      },
+                                      [_vm._v(_vm._s(docuRoom.Room))]
+                                    )
+                                  }
+                                ),
+                                0
+                              )
+                            ]),
                             _vm._v(" "),
                             _c(
                               "h5",
@@ -40062,31 +40114,56 @@ var render = function() {
               "div",
               { staticClass: "card-header row d-flex justify-content-center" },
               [
-                _c("h5", { staticClass: "h5 col-8 p-0 text-center" }, [
-                  _vm._v("Meldertyp: ")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("label", { attrs: { for: "inputRoom" } }, [
+                    _vm._v("Raum")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.device,
-                      expression: "device"
-                    }
-                  ],
-                  staticClass: "form-control col-6 mb-2",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.device },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.lazy",
+                          value: _vm.room,
+                          expression: "room",
+                          modifiers: { lazy: true }
+                        }
+                      ],
+                      staticClass: "custom-select",
+                      attrs: { id: "inputRoom" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.room = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
                       }
-                      _vm.device = $event.target.value
-                    }
-                  }
-                }),
+                    },
+                    _vm._l(_vm.docuRooms(_vm.cableList.FloorId), function(
+                      docuRoom
+                    ) {
+                      return _c(
+                        "option",
+                        {
+                          key: docuRoom.id,
+                          domProps: { value: _vm.docuObject.id }
+                        },
+                        [_vm._v(_vm._s(_vm.docuObject.Object))]
+                      )
+                    }),
+                    0
+                  )
+                ]),
                 _vm._v(" "),
                 _c("h5", { staticClass: "h5 col-8 p-0 text-center" }, [
                   _vm._v("Meldegruppennummer:")
@@ -40919,22 +40996,28 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.activeFloor
-          ? _c(
-              "div",
-              { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
-              _vm._l(_vm.docuRooms(_vm.activeFloor), function(docuRoom) {
-                return _c(
-                  "div",
-                  {
-                    key: docuRoom.id,
-                    staticClass: "list-group-item",
-                    attrs: { docuRoom: docuRoom }
-                  },
-                  [_vm._v(" " + _vm._s(docuRoom.Room) + " ")]
-                )
-              }),
-              0
-            )
+          ? _c("div", { staticClass: "list-group col-12 my-3 mb-5" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.docuRooms(_vm.activeFloor), function(docuRoom) {
+                  return _c(
+                    "div",
+                    {
+                      key: docuRoom.id,
+                      staticClass: "list-group-item col-2",
+                      attrs: { docuRoom: docuRoom }
+                    },
+                    [
+                      _vm._v(
+                        " " + _vm._s(docuRoom.Room) + " \n                "
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
           : _vm._e()
       ])
     ]
@@ -60380,7 +60463,7 @@ var getters = {
   DocuRoomsFiltered: function DocuRoomsFiltered(state) {
     return function (floorId) {
       return state.DocuRoomItems.filter(function (rooms) {
-        return rooms.DocuFloor === floorId;
+        return rooms.DocuFloorId === floorId;
       });
     };
   },
@@ -60391,6 +60474,13 @@ var getters = {
   },
 
   /* Dokumentation Kabelzugliste */
+  CableListById: function CableListById(state) {
+    return function (cableListId) {
+      return state.CableListItems.find(function (CableListItem) {
+        return CableListItem.id === cableListId;
+      });
+    };
+  },
   CableListElements: function CableListElements(state) {
     return state.CableListElements;
   },

@@ -24,11 +24,15 @@
                 </form>    
             </div>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5" v-if="activeFloor">
-                <div v-for="docuRoom in docuRooms(activeFloor)"
-                    :key="docuRoom.id"
-                    :docuRoom="docuRoom"
-                    class="list-group-item"> {{docuRoom.Room}} </div>   
+            
+            <div class="list-group col-12 my-3 mb-5" v-if="activeFloor">
+                <div class="row"> 
+                    <div v-for="docuRoom in docuRooms(activeFloor)"
+                        :key="docuRoom.id"
+                        :docuRoom="docuRoom"
+                        class="list-group-item col-2"> {{docuRoom.Room}} 
+                    </div>
+                </div>   
             </div>
         </div>
     </div> 
@@ -48,9 +52,6 @@ export default {
         }
     },
     computed: {
-        activeObject() {
-            return this.$store.getters.ActiveObject
-        },
         activeFloor() {
             return this.$store.getters.ActiveFloor
         }
@@ -60,18 +61,15 @@ export default {
             this.newRoomShow = !this.newRoomShow
         },
         docuRooms(floorId){
-            console.log(floorId)
-            /* return this.$store.getters.DocuRoomsFiltered(floorId) */
+            return this.$store.getters.DocuRoomsFiltered(floorId)
         },
         addNewDocuRoom(){
         const NewDocuRoom = {
             Room: this.room,
             ProjectId: this.projectId,
-            DocuObjectId: this.activeObject,
             DocuFloorId: this.activeFloor,
         }
         this.$store.dispatch('addNewDocuRoom', NewDocuRoom)
-        this.newRoomShow = !this.newRoomShow
         this.room= ''
         },
     },

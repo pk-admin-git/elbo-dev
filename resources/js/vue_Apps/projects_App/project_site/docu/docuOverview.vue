@@ -59,10 +59,14 @@ export default {
             this.$store.dispatch('getDocuObjectItems', this.projectId)
 
             this.$store.dispatch('getDocuFloorItems', this.projectId)
+
+            this.$store.dispatch('getDocuRoomItems', this.projectId)
             
             this.$store.dispatch('getDocuCategoryItems', this.projectId)
 
             this.$store.dispatch('getCableListItems', this.projectId)
+
+            this.$store.dispatch('getDocuRoomItems', this.projectId)
             
         },
         computed: {
