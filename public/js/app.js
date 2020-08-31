@@ -1922,6 +1922,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableListElementMeasure',
   props: []
@@ -1982,7 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
     cableListForm: _docuCableListForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
-    this.$store.dispatch('getCableListElements', this.projectId, this.cableListId);
+    this.$store.dispatch('getCableListElements', [this.projectId, this.cableListId]);
   },
   computed: {
     CableListElements: function CableListElements() {
@@ -2014,11 +2017,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableListElement',
   props: ['CableListElement'],
-  components: [_cableListElementMeasure_vue__WEBPACK_IMPORTED_MODULE_0__["default"]]
+  components: {
+    cableListElementMeasure: _cableListElementMeasure_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      MeasureFormVisible: false,
+      device: '',
+      deviceNumber: ''
+    };
+  },
+  methods: {
+    showMeasureForm: function showMeasureForm() {
+      this.MeasureFormVisible = !this.MeasureFormVisible;
+    }
+  }
 });
 
 /***/ }),
@@ -2101,6 +2143,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _overviewObjectElement_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./overviewObjectElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewObjectElement.vue");
 /* harmony import */ var _overviewFloorElement_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./overviewFloorElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewFloorElement.vue");
 /* harmony import */ var _overviewCableListElement_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./overviewCableListElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewCableListElement.vue");
+/* harmony import */ var _overviewRoomElement_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./overviewRoomElement.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue");
 //
 //
 //
@@ -2131,6 +2174,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -2145,7 +2193,8 @@ __webpack_require__.r(__webpack_exports__);
     overviewCategoryElement: _overviewCategoryElement_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     overviewObjectElement: _overviewObjectElement_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     overviewFloorElement: _overviewFloorElement_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    overviewCableListElement: _overviewCableListElement_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    overviewCableListElement: _overviewCableListElement_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    overviewRoomElement: _overviewRoomElement_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   created: function created() {
     this.$store.dispatch('getDocuObjectItems', this.projectId);
@@ -2660,6 +2709,93 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch('setActiveObject', '');
         this.$store.dispatch('setActiveFloor', '');
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'overviewRoomElement',
+  props: ['projectId'],
+  data: function data() {
+    return {
+      newRoomShow: false,
+      room: '',
+      activeRoomToggle: false
+    };
+  },
+  computed: {
+    activeObject: function activeObject() {
+      return this.$store.getters.ActiveObject;
+    },
+    activeFloor: function activeFloor() {
+      return this.$store.getters.ActiveFloor;
+    }
+  },
+  methods: {
+    showNewRoomInput: function showNewRoomInput() {
+      this.newRoomShow = !this.newRoomShow;
+    },
+    docuRooms: function docuRooms(floorId) {
+      console.log(floorId);
+      /* return this.$store.getters.DocuRoomsFiltered(floorId) */
+    },
+    addNewDocuRoom: function addNewDocuRoom() {
+      var NewDocuRoom = {
+        Room: this.room,
+        ProjectId: this.projectId,
+        DocuObjectId: this.activeObject,
+        DocuFloorId: this.activeFloor
+      };
+      this.$store.dispatch('addNewDocuRoom', NewDocuRoom);
+      this.newRoomShow = !this.newRoomShow;
+      this.room = '';
     }
   }
 });
@@ -39715,7 +39851,138 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" })
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _vm._l(3, function(cableListElementMeasure, index) {
+              return _c("cableListElementMeasure", { key: index })
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "d-flex flex-column align-items-center" },
+              [
+                !_vm.MeasureFormVisible
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0 fas text-center"
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "fa-plus-circle fa-lg",
+                          staticStyle: { cursor: "pointer" },
+                          on: { click: _vm.showMeasureForm }
+                        })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.MeasureFormVisible
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0 fas text-center"
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "fa-times-circle fa-lg mr-3",
+                          staticStyle: { cursor: "pointer" },
+                          on: { click: _vm.showMeasureForm }
+                        }),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "fa-check-circle fa-lg",
+                          staticStyle: { cursor: "pointer" },
+                          on: { click: _vm.showMeasureForm }
+                        })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.MeasureFormVisible
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0"
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "card-header row d-flex justify-content-center"
+                          },
+                          [
+                            _c(
+                              "h5",
+                              { staticClass: "h5 col-8 p-0 text-center" },
+                              [_vm._v("Raum: ")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.device,
+                                  expression: "device"
+                                }
+                              ],
+                              staticClass: "form-control col-6 mb-2",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.device },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.device = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "h5",
+                              { staticClass: "h5 col-8 p-0 text-center" },
+                              [_vm._v("Meldegruppennummer:")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.deviceNumber,
+                                  expression: "deviceNumber"
+                                }
+                              ],
+                              staticClass: "form-control col-6",
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.deviceNumber },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.deviceNumber = $event.target.value
+                                }
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]
+            )
+          ],
+          2
+        )
       ]
     )
   ])
@@ -39893,7 +40160,9 @@ var render = function() {
           _vm._v(" "),
           _c("overviewObjectElement", { attrs: { projectId: _vm.projectId } }),
           _vm._v(" "),
-          _c("overviewFloorElement", { attrs: { projectId: _vm.projectId } })
+          _c("overviewFloorElement", { attrs: { projectId: _vm.projectId } }),
+          _vm._v(" "),
+          _c("overviewRoomElement", { attrs: { projectId: _vm.projectId } })
         ],
         1
       )
@@ -40559,6 +40828,114 @@ var render = function() {
           }),
           0
         )
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=template&id=f3c20a0a&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=template&id=f3c20a0a& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "card border-0 col-12 bg-transparent mt-1" },
+    [
+      _c("div", { staticClass: "card-body row p-0 align-items-start" }, [
+        _c("h5", { staticClass: "h5 col-10 pl-0" }, [_vm._v("Räume")]),
+        _vm._v(" "),
+        _vm.activeFloor != "" && _vm.newRoomShow !== true
+          ? _c("span", {
+              staticClass:
+                "fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end",
+              staticStyle: { cursor: "pointer" },
+              on: { click: _vm.showNewRoomInput }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.newRoomShow
+          ? _c(
+              "div",
+              { staticClass: "col-2 d-flex justify-content-end mb-3 mt-2" },
+              [
+                _c("span", {
+                  staticClass: "fas fa-times-circle fa-lg mr-3",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.showNewRoomInput }
+                }),
+                _vm._v(" "),
+                _c("span", {
+                  staticClass: "fas fa-check-circle fa-lg",
+                  staticStyle: { cursor: "pointer" },
+                  on: { click: _vm.addNewDocuRoom }
+                })
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 pl-0" }, [
+          _c("form", { staticClass: "col p-0" }, [
+            _vm.newRoomShow
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.room,
+                      expression: "room"
+                    }
+                  ],
+                  staticClass: "form-control mr-2",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.room },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.room = $event.target.value
+                    }
+                  }
+                })
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.activeFloor
+          ? _c(
+              "div",
+              { staticClass: "list-group list-group-action col-12 my-3 mb-5" },
+              _vm._l(_vm.docuRooms(_vm.activeFloor), function(docuRoom) {
+                return _c(
+                  "div",
+                  {
+                    key: docuRoom.id,
+                    staticClass: "list-group-item",
+                    attrs: { docuRoom: docuRoom }
+                  },
+                  [_vm._v(" " + _vm._s(docuRoom.Room) + " ")]
+                )
+              }),
+              0
+            )
+          : _vm._e()
       ])
     ]
   )
@@ -58850,6 +59227,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _overviewRoomElement_vue_vue_type_template_id_f3c20a0a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./overviewRoomElement.vue?vue&type=template&id=f3c20a0a& */ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=template&id=f3c20a0a&");
+/* harmony import */ var _overviewRoomElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./overviewRoomElement.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _overviewRoomElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _overviewRoomElement_vue_vue_type_template_id_f3c20a0a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _overviewRoomElement_vue_vue_type_template_id_f3c20a0a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_overviewRoomElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./overviewRoomElement.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_overviewRoomElement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=template&id=f3c20a0a&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=template&id=f3c20a0a& ***!
+  \*********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_overviewRoomElement_vue_vue_type_template_id_f3c20a0a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./overviewRoomElement.vue?vue&type=template&id=f3c20a0a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/docu/overviewRoomElement.vue?vue&type=template&id=f3c20a0a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_overviewRoomElement_vue_vue_type_template_id_f3c20a0a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_overviewRoomElement_vue_vue_type_template_id_f3c20a0a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue":
 /*!**************************************************************************************!*\
   !*** ./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue ***!
@@ -59618,6 +60064,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 /* axios.defaults.baseURL = 'http://46.101.114.150/api' */
 
@@ -59629,13 +60087,23 @@ var axiosConfig = {
   }
 };
 var state = {
+  /* Übersicht Projekte */
   ProjectItems: [],
+
+  /* Übersicht */
   DocuCategoryItems: [],
   DocuObjectItems: [],
   DocuFloorItems: [],
+  DocuRoomItems: [],
   CableListItems: [],
+
+  /* Dokumentation */
   CableListElements: [],
+
+  /* Leistungsverzeichnis */
   SpecItems: [],
+
+  /* Selektionen, Status */
   CategorySelected: false,
   ActiveCategory: '',
   ActiveObject: '',
@@ -59659,7 +60127,7 @@ var mutations = {
     state.SpecItems.push(payload);
   },
 
-  /* Dokumentation Kategorien */
+  /* Übersicht Kategorien */
   UPDATE_DOCU_CATEGORY_ITEMS: function UPDATE_DOCU_CATEGORY_ITEMS(state, payload) {
     state.DocuCategoryItems = payload;
   },
@@ -59673,7 +60141,7 @@ var mutations = {
     state.CategorySelected = payload;
   },
 
-  /* Dokumentation Gebäude */
+  /* Übersicht Gebäude */
   UPDATE_DOCU_OBJECT_ITEMS: function UPDATE_DOCU_OBJECT_ITEMS(state, payload) {
     state.DocuObjectItems = payload;
   },
@@ -59684,7 +60152,7 @@ var mutations = {
     state.ActiveObject = payload;
   },
 
-  /* Dokumentation Etagen */
+  /* Übersicht Etagen */
   UPDATE_DOCU_FLOOR_ITEMS: function UPDATE_DOCU_FLOOR_ITEMS(state, payload) {
     state.DocuFloorItems = payload;
   },
@@ -59695,7 +60163,15 @@ var mutations = {
     state.ActiveFloor = payload;
   },
 
-  /* Kabelzuglisten */
+  /* Übersicht Räume */
+  UPDATE_DOCU_ROOM_ITEMS: function UPDATE_DOCU_ROOM_ITEMS(state, payload) {
+    state.DocuRoomItems = payload;
+  },
+  UPDATE_NEW_DOCU_ROOM_ITEM: function UPDATE_NEW_DOCU_ROOM_ITEM(state, payload) {
+    state.DocuRoomItems.push(payload);
+  },
+
+  /* Übersicht Kabelzuglisten */
   UPDATE_CABLE_LIST_ITEMS: function UPDATE_CABLE_LIST_ITEMS(state, payload) {
     state.CableListItems = payload;
   },
@@ -59703,7 +60179,7 @@ var mutations = {
     state.CableListItems.push(payload);
   },
 
-  /* Kabelzuglisten-Element */
+  /* Dokumentation Kabelzugliste */
   UPDATE_CABLE_LIST_ELEMENTS: function UPDATE_CABLE_LIST_ELEMENTS(state, payload) {
     state.CableListElements = payload;
   },
@@ -59712,7 +60188,7 @@ var mutations = {
   }
 };
 var actions = {
-  /* Dokumentation Kategorien */
+  /* Übersicht Kategorien */
   getDocuCategoryItems: function getDocuCategoryItems(_ref, projectId) {
     var commit = _ref.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig).then(function (response) {
@@ -59762,7 +60238,7 @@ var actions = {
     });
   },
 
-  /* Dokumentation Gebäude */
+  /* Übersicht Gebäude */
   getDocuObjectItems: function getDocuObjectItems(_ref9, id) {
     var commit = _ref9.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig).then(function (response) {
@@ -59780,7 +60256,7 @@ var actions = {
     commit('UPDATE_ACTIVE_OBJECT', activeObject);
   },
 
-  /* Dokumentation Etagen */
+  /* Übersicht Etagen */
   getDocuFloorItems: function getDocuFloorItems(_ref12, projectId) {
     var commit = _ref12.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig).then(function (response) {
@@ -59798,29 +60274,48 @@ var actions = {
     commit('UPDATE_ACTIVE_FLOOR', activeFloor);
   },
 
-  /* Kabelzuglisten */
-  getCableListItems: function getCableListItems(_ref15, projectId) {
+  /* Übersicht Räume */
+  getDocuRoomItems: function getDocuRoomItems(_ref15, projectId) {
     var commit = _ref15.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/rooms', axiosConfig).then(function (response) {
+      commit('UPDATE_DOCU_ROOM_ITEMS', response.data);
+    });
+  },
+  addNewDocuRoom: function addNewDocuRoom(_ref16, payload) {
+    var commit = _ref16.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/docuRooms', payload).then(function (response) {
+      commit('UPDATE_NEW_DOCU_ROOM_ITEM', response.data);
+    });
+  },
+
+  /* Übersicht Kabelzuglisten */
+  getCableListItems: function getCableListItems(_ref17, projectId) {
+    var commit = _ref17.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig).then(function (response) {
       commit('UPDATE_CABLE_LIST_ITEMS', response.data);
     });
   },
-  addNewCableList: function addNewCableList(_ref16, payload) {
-    var commit = _ref16.commit;
+  addNewCableList: function addNewCableList(_ref18, payload) {
+    var commit = _ref18.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableLists', payload).then(function (response) {
       commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
     });
   },
 
-  /* Kabelzuglisten-Element */
-  getCableListElements: function getCableListElements(_ref17, projectId, cableListId) {
-    var commit = _ref17.commit;
+  /* Dokumentation Kabelzugliste */
+  getCableListElements: function getCableListElements(_ref19, _ref20) {
+    var commit = _ref19.commit;
+
+    var _ref21 = _slicedToArray(_ref20, 2),
+        projectId = _ref21[0],
+        cableListId = _ref21[1];
+
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists/' + cableListId + '/cableListElements', axiosConfig).then(function (response) {
       commit('UPDATE_CABLE_LIST_ELEMENTS', response.data);
     });
   },
-  addNewCableListElement: function addNewCableListElement(_ref18, payload) {
-    var commit = _ref18.commit;
+  addNewCableListElement: function addNewCableListElement(_ref22, payload) {
+    var commit = _ref22.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableListElements', payload).then(function (response) {
       commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data);
     });
@@ -59858,13 +60353,15 @@ var getters = {
     return state.SpecItems.length;
   },
 
-  /* Dokumentation */
+  /* Übersicht Gebäude */
   DocuObjects: function DocuObjects(state) {
     return state.DocuObjectItems;
   },
   ActiveObject: function ActiveObject(state) {
     return state.ActiveObject;
   },
+
+  /* Übersicht Etagen */
   DocuFloors: function DocuFloors(state) {
     return state.DocuFloorItems;
   },
@@ -59878,9 +60375,22 @@ var getters = {
   ActiveFloor: function ActiveFloor(state) {
     return state.ActiveFloor;
   },
+
+  /* Übersicht Räume */
+  DocuRoomsFiltered: function DocuRoomsFiltered(state) {
+    return function (floorId) {
+      return state.DocuRoomItems.filter(function (rooms) {
+        return rooms.DocuFloor === floorId;
+      });
+    };
+  },
+
+  /* Übersicht Kabelzuglisten */
   CableLists: function CableLists(state) {
     return state.CableListItems;
   },
+
+  /* Dokumentation Kabelzugliste */
   CableListElements: function CableListElements(state) {
     return state.CableListElements;
   },

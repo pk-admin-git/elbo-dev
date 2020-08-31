@@ -16,6 +16,10 @@
             <!-- Etagen -->
 
             <overviewFloorElement :projectId="projectId"/>
+
+            <!-- Räume -->
+
+            <overviewRoomElement :projectId="projectId"/>
         </div>
     </div>
 
@@ -33,6 +37,7 @@ import overviewCategoryElement from './overviewCategoryElement.vue'
 import overviewObjectElement from './overviewObjectElement.vue'
 import overviewFloorElement from './overviewFloorElement.vue'
 import overviewCableListElement from './overviewCableListElement.vue'
+import overviewRoomElement from './overviewRoomElement.vue'
 
 export default {
     name: 'docuOverview',
@@ -48,6 +53,7 @@ export default {
             overviewObjectElement,
             overviewFloorElement,
             overviewCableListElement,
+            overviewRoomElement,
         },
         created() {
             this.$store.dispatch('getDocuObjectItems', this.projectId)

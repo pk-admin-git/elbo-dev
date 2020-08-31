@@ -9,6 +9,9 @@
         <div class="col-12 d-flex justify-content-between">
             <span>Menge</span><span>Zahl m</span>
         </div>
+
+
+
     </div>
 </template>
 

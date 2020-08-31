@@ -44,7 +44,7 @@ export default {
         cableListForm,
     },
     created() {
-            this.$store.dispatch('getCableListElements', this.projectId, this.cableListId)
+            this.$store.dispatch('getCableListElements', [this.projectId, this.cableListId])
     },
     computed: {
         CableListElements() {

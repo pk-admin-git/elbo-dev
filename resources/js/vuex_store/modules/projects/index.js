@@ -9,14 +9,24 @@ let axiosConfig = {
 }
 
 const state = {
+
+    /* Übersicht Projekte */
     ProjectItems: [],
+
+    /* Übersicht */
     DocuCategoryItems: [],
     DocuObjectItems: [],
     DocuFloorItems: [],
+    DocuRoomItems: [],
     CableListItems: [],
+
+    /* Dokumentation */
     CableListElements: [],
+
+    /* Leistungsverzeichnis */
     SpecItems: [],
 
+    /* Selektionen, Status */
     CategorySelected: false,
     ActiveCategory: '',
     ActiveObject: '',
@@ -45,7 +55,7 @@ const mutations = {
         state.SpecItems.push(payload);
     },
     
-    /* Dokumentation Kategorien */
+    /* Übersicht Kategorien */
     UPDATE_DOCU_CATEGORY_ITEMS(state, payload){
         state.DocuCategoryItems = payload;
     },
@@ -59,7 +69,7 @@ const mutations = {
         state.CategorySelected = payload;
     },
 
-    /* Dokumentation Gebäude */
+    /* Übersicht Gebäude */
     UPDATE_DOCU_OBJECT_ITEMS(state, payload){
         state.DocuObjectItems = payload;
     },
@@ -70,7 +80,7 @@ const mutations = {
         state.ActiveObject = payload;
     },
 
-    /* Dokumentation Etagen */
+    /* Übersicht Etagen */
     UPDATE_DOCU_FLOOR_ITEMS(state, payload){
         state.DocuFloorItems = payload;
     },
@@ -81,7 +91,15 @@ const mutations = {
         state.ActiveFloor = payload;
     },
 
-    /* Kabelzuglisten */
+    /* Übersicht Räume */
+    UPDATE_DOCU_ROOM_ITEMS(state, payload){
+        state.DocuRoomItems = payload;
+    },
+    UPDATE_NEW_DOCU_ROOM_ITEM(state, payload){
+        state.DocuRoomItems.push(payload);
+    },
+
+    /* Übersicht Kabelzuglisten */
     UPDATE_CABLE_LIST_ITEMS(state, payload){
         state.CableListItems = payload;
     },
@@ -89,7 +107,7 @@ const mutations = {
         state.CableListItems.push(payload);
     },
 
-    /* Kabelzuglisten-Element */
+    /* Dokumentation Kabelzugliste */
     UPDATE_CABLE_LIST_ELEMENTS(state, payload){
         state.CableListElements = payload;
     },
@@ -101,7 +119,7 @@ const mutations = {
 const actions = {
 
 
-    /* Dokumentation Kategorien */
+    /* Übersicht Kategorien */
 
     getDocuCategoryItems({ commit }, projectId){
         axios.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig)
@@ -152,7 +170,7 @@ const actions = {
             });
     },
 
-    /* Dokumentation Gebäude */
+    /* Übersicht Gebäude */
     getDocuObjectItems({ commit }, id){
         axios.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig)
             .then((response) => {
@@ -169,8 +187,7 @@ const actions = {
         commit('UPDATE_ACTIVE_OBJECT', activeObject)
     },
 
-    /* Dokumentation Etagen */
-
+    /* Übersicht Etagen */
     getDocuFloorItems({ commit }, projectId){
         axios.get('http://46.101.114.150/api/project/' + projectId + '/floors', axiosConfig)
             .then((response) => {
@@ -187,8 +204,21 @@ const actions = {
         commit('UPDATE_ACTIVE_FLOOR', activeFloor)
     },
 
-    /* Kabelzuglisten */
+    /* Übersicht Räume */
+    getDocuRoomItems({ commit }, projectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/rooms', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_DOCU_ROOM_ITEMS', response.data)
+            });
+    },
+    addNewDocuRoom({ commit }, payload){
+        axios.post('http://46.101.114.150/api/docuRooms', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_DOCU_ROOM_ITEM', response.data);
+            });
+    },
 
+    /* Übersicht Kabelzuglisten */
     getCableListItems({ commit }, projectId){
         axios.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig)
             .then((response) => {
@@ -202,9 +232,9 @@ const actions = {
             });
     },
 
-    /* Kabelzuglisten-Element */
+    /* Dokumentation Kabelzugliste */
 
-    getCableListElements({ commit }, projectId, cableListId){
+    getCableListElements({commit}, [projectId, cableListId]){
         axios.get('http://46.101.114.150/api/project/' + projectId + '/cableLists/' + cableListId + '/cableListElements', axiosConfig)
             .then((response) => {
                 commit('UPDATE_CABLE_LIST_ELEMENTS', response.data)
@@ -233,16 +263,22 @@ const getters = {
     SpecItems: state => state.SpecItems,
     SpecItemsLength: state => state.SpecItems.length,
 
-    /* Dokumentation */
+    /* Übersicht Gebäude */
     DocuObjects: state => state.DocuObjectItems,
     ActiveObject: state => state.ActiveObject,
     
+    /* Übersicht Etagen */
     DocuFloors: state => state.DocuFloorItems,
     DocuFloorsFiltered: state => objectId => state.DocuFloorItems.filter(floors => floors.DocuObjectId === objectId),
     ActiveFloor: state => state.ActiveFloor,
 
+    /* Übersicht Räume */
+    DocuRoomsFiltered: state => floorId => state.DocuRoomItems.filter(rooms => rooms.DocuFloor === floorId),
+
+    /* Übersicht Kabelzuglisten */
     CableLists: state => state.CableListItems,
 
+    /* Dokumentation Kabelzugliste */
     CableListElements: state => state.CableListElements,
     CableListElementsLength: state => state.CableListElements.length
     

@@ -1,13 +1,13 @@
 <template>
-<div class="d-flex flex-column align-items-center"
->
+<div class="d-flex flex-column align-items-center">
+    
     <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0 fas text-center" v-if="!CableListFormVisible" >
-                <span class="fa-plus-circle fa-2x" style="cursor:pointer" @click="showCableListForm"></span>    
-            </div>
+        <span class="fa-plus-circle fa-2x" style="cursor:pointer" @click="showCableListForm"></span>    
+    </div>
 
-            <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0 fas text-center" v-if="CableListFormVisible" >
-                <span class="fa-times-circle fa-2x mr-3" style="cursor:pointer" @click="showCableListForm"></span>
-                <span class="fa-check-circle fa-2x" style="cursor:pointer" @click="addNewCableListElement"></span>        
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0 fas text-center" v-if="CableListFormVisible" >
+        <span class="fa-times-circle fa-2x mr-3" style="cursor:pointer" @click="showCableListForm"></span>
+        <span class="fa-check-circle fa-2x" style="cursor:pointer" @click="addNewCableListElement"></span>        
     </div>
 
     <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0" v-if="CableListFormVisible">
