@@ -14,7 +14,7 @@ class MeasurmentController extends Controller
      */
     public function index($project)
     {
-        $measurments = measurments::where('ProjectId', $project)->get();
+        $measurments = measurment::where('ProjectId', $project)->get();
 
         return $measurments;
     }
@@ -34,7 +34,7 @@ class MeasurmentController extends Controller
             'Current' => 'required',
         ]);
 
-        $measurments = measurments::create($data);
+        $measurments = measurment::create($data);
 
         return response($measurments, 201);
     }
