@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-
-    
-
-
     /**
      * Display a listing of the resource.
      * 

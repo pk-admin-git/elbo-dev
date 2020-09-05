@@ -13,14 +13,8 @@
     <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0" v-if="CableListFormVisible">
         <div class="card-header row d-flex justify-content-center">
             
-            <div class="col-12">
-                <label for="inputRoom">Raum</label>
-                <select id="inputRoom" class="custom-select" v-model.lazy="room">
-                    <option v-for="docuRoom in docuRooms(cableList.FloorId)"
-                            :key="docuRoom.id"
-                            :value="docuObject.id">{{docuObject.Object}}</option>
-                </select>
-             </div>
+            <h5 class="h5 col-8 p-0 text-center">Meldertyp:</h5>
+            <input type="text" class="form-control col-6" v-model="device"/>
 
             <h5 class="h5 col-8 p-0 text-center">Meldegruppennummer:</h5>
             <input type="text" class="form-control col-6" v-model="deviceNumber"/>
@@ -42,7 +36,7 @@ export default {
     data() {
         return {
             CableListFormVisible: false,
-            room: '',
+            device: '',
             deviceNumber: '',
 
         }
@@ -61,11 +55,7 @@ export default {
             this.$store.dispatch('addNewCableListElement', NewCableListElement)
             this.device= ''
             this.deviceNumber= ''
-            
         },
-        docuRooms(floorId){
-            return this.$store.getters.DocuRoomsFiltered(floorId)
-        }, 
     }
 
     

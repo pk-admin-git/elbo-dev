@@ -18,15 +18,10 @@
             <cableListElement v-for="CableListElement in CableListElements"
                                 :key="CableListElement.id"
                                 :CableListElement="CableListElement"
-                                :cableList="cableList"/>
+                                :cableListId="cableListId"/>
 
             
-
             <cableListForm :cableListId="cableListId"/>
-
-
-        
-
 
     </div>
 </template>
@@ -51,10 +46,8 @@ export default {
         CableListElements() {
             return this.$store.getters.CableListElements
         },
-        cableList() {
-            return (this.$store.getters.CableListById(Number(this.cableListId)))
-        }
     },
+    
     
     
 }

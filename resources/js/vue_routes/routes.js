@@ -5,6 +5,7 @@ import projectOverview from '../vue_Apps/projects_App/project_site/overview/proj
 import projectSpecification from '../vue_Apps/projects_App/project_site/specification/projectSpecification.vue'
 import DocuOverview from '../vue_Apps/projects_App/project_site/docu/docuOverview.vue'
 import DocuCableList from '../vue_Apps/projects_App/project_site/cablelist/docuCableList.vue'
+import measurment from '../vue_Apps/projects_App/project_site/measurment/measurment.vue'
 
 export const projectRoutes = [
     {
@@ -43,6 +44,14 @@ export const projectRoutes = [
         components: {
             navTab: projectNav,
             content: DocuCableList
+        },
+        props: {navTab: true, content: true},
+    },
+    {
+    path: '/projectApp/project/:projectId/measurment',
+        components: {
+            navTab: projectNav,
+            content: measurment
         },
         props: {navTab: true, content: true},
     }

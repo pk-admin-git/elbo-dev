@@ -27,6 +27,7 @@ let projects = new Vue({
 
 
 
+
 Vue.directive('click-outside', {
     bind: function (el, binding, vnode) {
       el.clickOutsideEvent = function (event) {

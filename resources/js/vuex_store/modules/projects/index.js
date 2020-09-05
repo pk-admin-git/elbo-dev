@@ -26,13 +26,15 @@ const state = {
     /* Leistungsverzeichnis */
     SpecItems: [],
 
+    /* Aufmaß */
+    Measurments: [],
+
     /* Selektionen, Status */
     CategorySelected: false,
     ActiveCategory: '',
     ActiveObject: '',
     ActiveFloor: '',
-    ActiveCableListElement: '',
-    
+    ActiveCableList: '',
     
 };
 
@@ -106,6 +108,9 @@ const mutations = {
     UPDATE_NEW_CABLE_LIST_ITEM(state, payload){
         state.CableListItems.push(payload);
     },
+    UPDATE_ACTIVE_CABLELIST(state, payload){
+        state.ActiveCableList = payload;
+    },
 
     /* Dokumentation Kabelzugliste */
     UPDATE_CABLE_LIST_ELEMENTS(state, payload){
@@ -113,6 +118,14 @@ const mutations = {
     },
     UPDATE_NEW_CABLE_LIST_ELEMENT(state, payload){
         state.CableListElements.push(payload);
+    },
+
+     /* Aufmass */
+     UPDATE_MEASURMENTS(state, payload){
+        state.CableListElements = payload;
+    },
+    UPDATE_NEW_MEASURMENTS(state, payload){
+        state.Measurments.push(payload);
     }
 };
 
@@ -231,6 +244,9 @@ const actions = {
                 commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
             });
     },
+    setActiveCableList({commit}, activeCableList){
+        commit('UPDATE_ACTIVE_CABLELIST', activeCableList)
+    },
 
     /* Dokumentation Kabelzugliste */
 
@@ -244,6 +260,20 @@ const actions = {
         axios.post('http://46.101.114.150/api/cableListElements', payload)
             .then((response) => {
                 commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data);
+            });
+    },
+
+    /* Aufmaß */
+    getMeasurments({commit}, projectId){
+        axios.get('http://46.101.114.150/api/project/' + projectId + '/measurments', axiosConfig)
+            .then((response) => {
+                commit('UPDATE_MEASURMENTS', response.data)
+            });
+    },
+    addNewMeasurment({ commit }, payload){
+        axios.post('http://46.101.114.150/api/measurments', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_MEASURMENTS', response.data);
             });
     },
 };
@@ -277,11 +307,16 @@ const getters = {
 
     /* Übersicht Kabelzuglisten */
     CableLists: state => state.CableListItems,
+    ActiveCableList: state => state.ActiveCableList,
 
     /* Dokumentation Kabelzugliste */
     CableListById: state => cableListId => state.CableListItems.find(CableListItem => CableListItem.id === cableListId),
     CableListElements: state => state.CableListElements,
-    CableListElementsLength: state => state.CableListElements.length
+    CableListElementsLength: state => state.CableListElements.length,
+
+    /* Aufmaß */
+    Measurments: state => state.Measurments,
+    MeasurmentsLenght: state => state.Measurments.lenght
     
 };
 

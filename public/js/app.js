@@ -1971,11 +1971,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1991,9 +1986,6 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     CableListElements: function CableListElements() {
       return this.$store.getters.CableListElements;
-    },
-    cableList: function cableList() {
-      return this.$store.getters.CableListById(Number(this.cableListId));
     }
   }
 });
@@ -2052,27 +2044,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'cableListElement',
-  props: ['CableListElement', 'cableList'],
+  props: ['CableListElement', 'cableListId'],
   components: {
     cableListElementMeasure: _cableListElementMeasure_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      MeasureFormVisible: false,
+      MeasureFormVisible: true,
       room: '',
       deviceNumber: ''
     };
   },
+  computed: {
+    getActiveCableList: function getActiveCableList() {
+      /* return this.$store.getters.ActiveCableList */
+    },
+    cableList: function cableList() {
+      return this.$store.getters.CableListById(Number(this.cableListId));
+    },
+    docuRooms: function docuRooms() {
+      return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId);
+    }
+  },
   methods: {
     showMeasureForm: function showMeasureForm() {
       this.MeasureFormVisible = !this.MeasureFormVisible;
-    },
-    docuRooms: function docuRooms(floorId) {
-      return this.$store.getters.DocuRoomsFiltered(floorId);
     }
+    /* docuRooms(floorId){
+        return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId)
+    }, */
+
   }
 });
 
@@ -2113,19 +2131,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'docuCableListForm',
   props: ['cableListId'],
   data: function data() {
     return {
       CableListFormVisible: false,
-      room: '',
+      device: '',
       deviceNumber: ''
     };
   },
@@ -2143,9 +2155,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('addNewCableListElement', NewCableListElement);
       this.device = '';
       this.deviceNumber = '';
-    },
-    docuRooms: function docuRooms(floorId) {
-      return this.$store.getters.DocuRoomsFiltered(floorId);
     }
   }
 });
@@ -2312,6 +2321,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'overviewCableListElement',
   props: ['projectId'],
@@ -2398,6 +2408,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('addNewCableList', NewCableList);
       this.newCableListShow = !this.newCableListShow;
       this.cableList = '';
+    },
+    setActiveCableList: function setActiveCableList(cableListId) {
+      this.$store.dispatch('setActiveCableList', cableListId);
     }
   }
 });
@@ -2824,6 +2837,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'measurment',
+  props: ['projectId'],
+  data: function data() {
+    return {};
+  },
+  methods: {
+    addNewMeasurment: function addNewMeasurment() {
+      var NewMeasurment = {
+        ProjectID: this.projectID,
+        Number: this.$store.getters.MeasurmentsLenght + 1,
+        Closed: 0,
+        Current: 0
+      };
+      this.$store.dispatch('addNewMeasurment', NewMeasurment);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue?vue&type=script&lang=js& ***!
@@ -2924,6 +3006,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -39805,7 +39888,7 @@ var render = function() {
           key: CableListElement.id,
           attrs: {
             CableListElement: CableListElement,
-            cableList: _vm.cableList
+            cableListId: _vm.cableListId
           }
         })
       }),
@@ -39943,7 +40026,59 @@ var render = function() {
                               "card-header row d-flex justify-content-center"
                           },
                           [
-                            _c("div", { staticClass: "col-lg-3 col-12" }, [
+                            _c("div", { staticClass: "col-12 mb-2" }, [
+                              _c("label", { attrs: { for: "inputRoom" } }, [
+                                _vm._v("Position")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model.lazy",
+                                      value: _vm.room,
+                                      expression: "room",
+                                      modifiers: { lazy: true }
+                                    }
+                                  ],
+                                  staticClass: "custom-select",
+                                  attrs: { id: "inputRoom" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.room = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.docuRooms, function(docuRoom) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: docuRoom.id,
+                                      domProps: { value: docuRoom.id }
+                                    },
+                                    [_vm._v(_vm._s(docuRoom.Room))]
+                                  )
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-12 mb-2" }, [
                               _c("label", { attrs: { for: "inputRoom" } }, [
                                 _vm._v("Raum")
                               ]),
@@ -39981,50 +40116,47 @@ var render = function() {
                                     }
                                   }
                                 },
-                                _vm._l(
-                                  _vm.docuRooms(_vm.cableList.FloorId),
-                                  function(docuRoom) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: docuRoom.id,
-                                        domProps: { value: docuRoom.id }
-                                      },
-                                      [_vm._v(_vm._s(docuRoom.Room))]
-                                    )
-                                  }
-                                ),
+                                _vm._l(_vm.docuRooms, function(docuRoom) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: docuRoom.id,
+                                      domProps: { value: docuRoom.id }
+                                    },
+                                    [_vm._v(_vm._s(docuRoom.Room))]
+                                  )
+                                }),
                                 0
                               )
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "h5",
-                              { staticClass: "h5 col-8 p-0 text-center" },
-                              [_vm._v("Meldegruppennummer:")]
-                            ),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.deviceNumber,
-                                  expression: "deviceNumber"
-                                }
-                              ],
-                              staticClass: "form-control col-6",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.deviceNumber },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                            _c("div", { staticClass: "col-12 mb-2" }, [
+                              _c("h6", { staticClass: "h6" }, [
+                                _vm._v("Menge:fg")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.deviceNumber,
+                                    expression: "deviceNumber"
                                   }
-                                  _vm.deviceNumber = $event.target.value
+                                ],
+                                staticClass: "form-control col-12",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.deviceNumber },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.deviceNumber = $event.target.value
+                                  }
                                 }
-                              }
-                            })
+                              })
+                            ])
                           ]
                         )
                       ]
@@ -40114,56 +40246,31 @@ var render = function() {
               "div",
               { staticClass: "card-header row d-flex justify-content-center" },
               [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("label", { attrs: { for: "inputRoom" } }, [
-                    _vm._v("Raum")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.lazy",
-                          value: _vm.room,
-                          expression: "room",
-                          modifiers: { lazy: true }
-                        }
-                      ],
-                      staticClass: "custom-select",
-                      attrs: { id: "inputRoom" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.room = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    _vm._l(_vm.docuRooms(_vm.cableList.FloorId), function(
-                      docuRoom
-                    ) {
-                      return _c(
-                        "option",
-                        {
-                          key: docuRoom.id,
-                          domProps: { value: _vm.docuObject.id }
-                        },
-                        [_vm._v(_vm._s(_vm.docuObject.Object))]
-                      )
-                    }),
-                    0
-                  )
+                _c("h5", { staticClass: "h5 col-8 p-0 text-center" }, [
+                  _vm._v("Meldertyp:")
                 ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.device,
+                      expression: "device"
+                    }
+                  ],
+                  staticClass: "form-control col-6",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.device },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.device = $event.target.value
+                    }
+                  }
+                }),
                 _vm._v(" "),
                 _c("h5", { staticClass: "h5 col-8 p-0 text-center" }, [
                   _vm._v("Meldegruppennummer:")
@@ -40484,7 +40591,12 @@ var render = function() {
             key: cableList.id,
             staticClass: "list-group-item list-group-item-action p-0 mb-3",
             class: _vm.getColor(cableList.CategoryId),
-            attrs: { cableList: cableList, type: "button" }
+            attrs: { cableList: cableList, type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.setActiveCableList(cableList.id)
+              }
+            }
           },
           [
             _c(
@@ -41030,6 +41142,103 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=template&id=2c0d9aba&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=template&id=2c0d9aba& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h1", { staticClass: "h1 mt-4 mb-5" }, [_vm._v("Aufmaß")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary mb-3", attrs: { type: "button" } },
+        [_vm._v("Neues Aufmaß")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card col-12 col-sm-6 offset-sm-3 " }, [
+        _c("div", { staticClass: "card-body row" }, [
+          _c("div", { staticClass: "col-12 row mb-2" }, [
+            _c("h5", { staticClass: "h5 d-inline col-10" }, [
+              _vm._v("Aufmaß 1")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 custom-control custom-switch" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "customSwitch1" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "custom-control-label",
+                attrs: { for: "customSwitch1" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 row mb-2" }, [
+            _c("h5", { staticClass: "h5 d-inline col-10" }, [
+              _vm._v("Aufmaß 2")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 custom-control custom-switch" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "customSwitch2" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "custom-control-label",
+                attrs: { for: "customSwitch2" }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 row mb-2" }, [
+            _c("h5", { staticClass: "h5 d-inline col-10" }, [
+              _vm._v("Aufmaß 3")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 custom-control custom-switch" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "customSwitch3" }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "custom-control-label",
+                attrs: { for: "customSwitch3" }
+              })
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue?vue&type=template&id=706910fe&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue?vue&type=template&id=706910fe&scoped=true& ***!
@@ -41242,11 +41451,28 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                to: "/projectApp/project/" + _vm.ProjectItem.id + "/measurment",
+                "data-toggle": "tab"
+              }
+            },
+            [_vm._v("Aufmaß")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3)
+      _vm._m(2)
     ])
   ])
 }
@@ -41258,16 +41484,6 @@ var staticRenderFns = [
     return _c("li", { staticClass: "nav-item" }, [
       _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
         _vm._v("Arbeitsnachweise")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Aufmaß")
       ])
     ])
   },
@@ -59379,6 +59595,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _measurment_vue_vue_type_template_id_2c0d9aba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./measurment.vue?vue&type=template&id=2c0d9aba& */ "./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=template&id=2c0d9aba&");
+/* harmony import */ var _measurment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./measurment.vue?vue&type=script&lang=js& */ "./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _measurment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _measurment_vue_vue_type_template_id_2c0d9aba___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _measurment_vue_vue_type_template_id_2c0d9aba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_measurment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./measurment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_measurment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=template&id=2c0d9aba&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=template&id=2c0d9aba& ***!
+  \******************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_measurment_vue_vue_type_template_id_2c0d9aba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./measurment.vue?vue&type=template&id=2c0d9aba& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue?vue&type=template&id=2c0d9aba&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_measurment_vue_vue_type_template_id_2c0d9aba___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_measurment_vue_vue_type_template_id_2c0d9aba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue":
 /*!**************************************************************************************!*\
   !*** ./resources/js/vue_Apps/projects_App/project_site/overview/projectOverview.vue ***!
@@ -60053,6 +60338,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vue_Apps_projects_App_project_site_specification_projectSpecification_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/specification/projectSpecification.vue */ "./resources/js/vue_Apps/projects_App/project_site/specification/projectSpecification.vue");
 /* harmony import */ var _vue_Apps_projects_App_project_site_docu_docuOverview_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/docu/docuOverview.vue */ "./resources/js/vue_Apps/projects_App/project_site/docu/docuOverview.vue");
 /* harmony import */ var _vue_Apps_projects_App_project_site_cablelist_docuCableList_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/cablelist/docuCableList.vue */ "./resources/js/vue_Apps/projects_App/project_site/cablelist/docuCableList.vue");
+/* harmony import */ var _vue_Apps_projects_App_project_site_measurment_measurment_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../vue_Apps/projects_App/project_site/measurment/measurment.vue */ "./resources/js/vue_Apps/projects_App/project_site/measurment/measurment.vue");
+
 
 
 
@@ -60101,6 +60388,16 @@ var projectRoutes = [{
   components: {
     navTab: _vue_Apps_projects_App_project_site_projectNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     content: _vue_Apps_projects_App_project_site_cablelist_docuCableList_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  props: {
+    navTab: true,
+    content: true
+  }
+}, {
+  path: '/projectApp/project/:projectId/measurment',
+  components: {
+    navTab: _vue_Apps_projects_App_project_site_projectNav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    content: _vue_Apps_projects_App_project_site_measurment_measurment_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
     navTab: true,
@@ -60186,12 +60483,15 @@ var state = {
   /* Leistungsverzeichnis */
   SpecItems: [],
 
+  /* Aufmaß */
+  Measurments: [],
+
   /* Selektionen, Status */
   CategorySelected: false,
   ActiveCategory: '',
   ActiveObject: '',
   ActiveFloor: '',
-  ActiveCableListElement: ''
+  ActiveCableList: ''
 };
 var mutations = {
   /* Projekte */
@@ -60261,6 +60561,9 @@ var mutations = {
   UPDATE_NEW_CABLE_LIST_ITEM: function UPDATE_NEW_CABLE_LIST_ITEM(state, payload) {
     state.CableListItems.push(payload);
   },
+  UPDATE_ACTIVE_CABLELIST: function UPDATE_ACTIVE_CABLELIST(state, payload) {
+    state.ActiveCableList = payload;
+  },
 
   /* Dokumentation Kabelzugliste */
   UPDATE_CABLE_LIST_ELEMENTS: function UPDATE_CABLE_LIST_ELEMENTS(state, payload) {
@@ -60268,6 +60571,14 @@ var mutations = {
   },
   UPDATE_NEW_CABLE_LIST_ELEMENT: function UPDATE_NEW_CABLE_LIST_ELEMENT(state, payload) {
     state.CableListElements.push(payload);
+  },
+
+  /* Aufmass */
+  UPDATE_MEASURMENTS: function UPDATE_MEASURMENTS(state, payload) {
+    state.CableListElements = payload;
+  },
+  UPDATE_NEW_MEASURMENTS: function UPDATE_NEW_MEASURMENTS(state, payload) {
+    state.Measurments.push(payload);
   }
 };
 var actions = {
@@ -60384,23 +60695,41 @@ var actions = {
       commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
     });
   },
+  setActiveCableList: function setActiveCableList(_ref19, activeCableList) {
+    var commit = _ref19.commit;
+    commit('UPDATE_ACTIVE_CABLELIST', activeCableList);
+  },
 
   /* Dokumentation Kabelzugliste */
-  getCableListElements: function getCableListElements(_ref19, _ref20) {
-    var commit = _ref19.commit;
+  getCableListElements: function getCableListElements(_ref20, _ref21) {
+    var commit = _ref20.commit;
 
-    var _ref21 = _slicedToArray(_ref20, 2),
-        projectId = _ref21[0],
-        cableListId = _ref21[1];
+    var _ref22 = _slicedToArray(_ref21, 2),
+        projectId = _ref22[0],
+        cableListId = _ref22[1];
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/cableLists/' + cableListId + '/cableListElements', axiosConfig).then(function (response) {
       commit('UPDATE_CABLE_LIST_ELEMENTS', response.data);
     });
   },
-  addNewCableListElement: function addNewCableListElement(_ref22, payload) {
-    var commit = _ref22.commit;
+  addNewCableListElement: function addNewCableListElement(_ref23, payload) {
+    var commit = _ref23.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/cableListElements', payload).then(function (response) {
       commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data);
+    });
+  },
+
+  /* Aufmaß */
+  getMeasurments: function getMeasurments(_ref24, projectId) {
+    var commit = _ref24.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://46.101.114.150/api/project/' + projectId + '/measurments', axiosConfig).then(function (response) {
+      commit('UPDATE_MEASURMENTS', response.data);
+    });
+  },
+  addNewMeasurment: function addNewMeasurment(_ref25, payload) {
+    var commit = _ref25.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/measurments', payload).then(function (response) {
+      commit('UPDATE_NEW_MEASURMENTS', response.data);
     });
   }
 };
@@ -60472,6 +60801,9 @@ var getters = {
   CableLists: function CableLists(state) {
     return state.CableListItems;
   },
+  ActiveCableList: function ActiveCableList(state) {
+    return state.ActiveCableList;
+  },
 
   /* Dokumentation Kabelzugliste */
   CableListById: function CableListById(state) {
@@ -60486,6 +60818,14 @@ var getters = {
   },
   CableListElementsLength: function CableListElementsLength(state) {
     return state.CableListElements.length;
+  },
+
+  /* Aufmaß */
+  Measurments: function Measurments(state) {
+    return state.Measurments;
+  },
+  MeasurmentsLenght: function MeasurmentsLenght(state) {
+    return state.Measurments.lenght;
   }
 };
 var projectsModul = {

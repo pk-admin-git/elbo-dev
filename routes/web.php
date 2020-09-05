@@ -21,15 +21,9 @@ Route::get('/', function () {
     return view('projects');
 }); */
 
-        Route::get('/projectApp/{vue_capture?}', function () {
-            return view('vue.projects');
-        })->where('vue_capture', '[\/\w\.-]*');
-
-
-
-Route::get('/shiftplan', function () {
-    return view('shiftplan');
-});
+Route::get('/projectApp/{vue_capture?}', function () {
+    return view('vue.projects');
+})->where('vue_capture', '[\/\w\.-]*')->middleware('auth');
 
 Auth::routes();
 

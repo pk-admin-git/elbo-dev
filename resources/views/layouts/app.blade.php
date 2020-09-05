@@ -9,7 +9,12 @@
 
     <title>ELBO</title>
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -17,19 +22,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
-        <!-- <nav class="navbar navbar-dark bg-dark shadow-sm flex-md-nowrap sticky-top p-1">
-            <button class="navbar-toggler d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button> 
-            <a class="navbar-brand mx-4 my-1" href="#">ELBO</a> -->
-            
-            
-        </nav>
 
         <div class="containder-fluid">
             <div class="row">
@@ -54,11 +50,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/shiftplan">Dienstplan</a>
                             </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif 
                         </ul>
                         <div class="dropdown">
                             <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
@@ -83,6 +74,7 @@
                         @yield('content')
                     
                 </main>
+                
                 
             
             

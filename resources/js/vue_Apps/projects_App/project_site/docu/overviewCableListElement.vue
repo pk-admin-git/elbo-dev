@@ -53,6 +53,7 @@
                     :cableList="cableList"
                     class="list-group-item list-group-item-action p-0 mb-3"
                     :class="getColor(cableList.CategoryId)"
+                    @click="setActiveCableList(cableList.id)"
                     type="button">
                     <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/' + cableList.id" 
                         style="text-decoration:none; color:inherit;"
@@ -140,6 +141,9 @@ export default {
             this.newCableListShow = !this.newCableListShow
             this.cableList= ''
             
+        },
+        setActiveCableList(cableListId) {
+            this.$store.dispatch('setActiveCableList', cableListId)
         }
     }
 }

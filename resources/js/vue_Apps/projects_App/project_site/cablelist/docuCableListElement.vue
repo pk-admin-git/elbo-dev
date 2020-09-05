@@ -19,17 +19,31 @@
                 <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0" v-if="MeasureFormVisible">
                     <div class="card-header row d-flex justify-content-center">
                         
-                         <div class="col-lg-3 col-12">
+                        <div class="col-12 mb-2">
+                            <label for="inputRoom">Position</label>
+                            <select id="inputRoom" class="custom-select" v-model.lazy="room">
+                                <option v-for="docuRoom in docuRooms"
+                                        :key="docuRoom.id"
+                                        :value="docuRoom.id">{{docuRoom.Room}}</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-12 mb-2">
                             <label for="inputRoom">Raum</label>
                             <select id="inputRoom" class="custom-select" v-model.lazy="room">
-                                <option v-for="docuRoom in docuRooms(cableList.FloorId)"
+                                <option v-for="docuRoom in docuRooms"
                                         :key="docuRoom.id"
                                         :value="docuRoom.id">{{docuRoom.Room}}</option>
                             </select>
                         </div>
 
-                        <h5 class="h5 col-8 p-0 text-center">Meldegruppennummer:</h5>
-                        <input type="text" class="form-control col-6" v-model="deviceNumber"/>
+                        <div class="col-12 mb-2">
+                        <h6 class="h6">Menge:fg</h6>
+                        <input type="text" class="form-control col-12" v-model="deviceNumber"/>
+                        </div>
+                        
+
+                        
 
                     </div>
                 </div>
@@ -47,27 +61,37 @@ export default {
     name: 'cableListElement',
     props: [
         'CableListElement',
-        'cableList'
+        'cableListId'
     ],
     components: { 
         cableListElementMeasure
     },
     data() {
         return {
-            MeasureFormVisible: false,
+            MeasureFormVisible: true,
             room: '',
             deviceNumber: '',
 
         }
     },
-       
+    computed: {
+        getActiveCableList() {
+            /* return this.$store.getters.ActiveCableList */
+        },
+        cableList() {
+            return (this.$store.getters.CableListById(Number(this.cableListId)))
+        },
+        docuRooms(){
+            return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId)
+        },
+    },       
     methods: {
         showMeasureForm() {
             this.MeasureFormVisible = !this.MeasureFormVisible
         },
-        docuRooms(floorId){
-            return this.$store.getters.DocuRoomsFiltered(floorId)
-        },
+        /* docuRooms(floorId){
+            return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId)
+        }, */
     }
 
 }

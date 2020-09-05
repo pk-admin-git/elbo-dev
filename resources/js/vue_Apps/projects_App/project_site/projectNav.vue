@@ -17,7 +17,8 @@
                 <a class="nav-link" href="#">Arbeitsnachweise</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Aufmaß</a>
+                <router-link :to="'/projectApp/project/' + ProjectItem.id + '/measurment'"
+                class="nav-link" data-toggle="tab">Aufmaß</router-link>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pläne</a>
