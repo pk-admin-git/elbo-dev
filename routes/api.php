@@ -72,3 +72,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::post('/documentations', 'DocumentationController@store')->middleware('cors');
         Route::patch('/documentations/{documentation}', 'DocumentationController@update')->middleware('cors');
         Route::delete('/documentations/{documentation}', 'DocumentationController@destroy')->middleware('cors');
+
+        /* Aufmaß */
+        Route::get('/project/{project}/measurments', 'MeasurmentController@index')->middleware('cors');
+        Route::post('/measurments', 'MeasurmentController@store')->middleware('cors');
+        Route::patch('/measurments/{measurment}', 'MeasurmentController@update')->middleware('cors');
+        Route::delete('/measurments/{measurment}', 'MeasurmentController@destroy')->middleware('cors');
