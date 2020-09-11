@@ -2081,16 +2081,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     docuRooms: function docuRooms() {
       return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId);
+    },
+    currentMeasurment: function currentMeasurment() {
+      return this.$store.getters.CurrentMeasurment;
     }
   },
   methods: {
     showMeasureForm: function showMeasureForm() {
       this.MeasureFormVisible = !this.MeasureFormVisible;
     }
-    /* docuRooms(floorId){
-        return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId)
-    }, */
-
   }
 });
 
@@ -2875,31 +2874,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'measurment',
   props: ['projectId'],
   data: function data() {
     return {};
   },
+  created: function created() {
+    this.$store.dispatch('getMeasurments', this.projectId);
+  },
+  computed: {
+    measurments: function measurments() {
+      return this.$store.getters.Measurments;
+    }
+  },
   methods: {
     addNewMeasurment: function addNewMeasurment() {
       var NewMeasurment = {
-        ProjectID: this.projectID,
-        Number: this.$store.getters.MeasurmentsLenght + 1,
+        ProjectId: this.projectId,
+        Number: this.$store.getters.MeasurmentsLength + 1,
         Closed: 0,
         Current: 0
       };
       this.$store.dispatch('addNewMeasurment', NewMeasurment);
+    },
+    setCurrentMsr: function setCurrentMsr(measurmentId) {
+      /* oldCurrentMsr = this.$store.getters.CurrentMeasurment */
+      var NewValue = {
+        Current: 1
+      };
+      this.$store.dispatch('setCurrentMeasurment', measurmentId, NewValue);
     }
   }
 });
@@ -41117,7 +41121,7 @@ var render = function() {
                     "div",
                     {
                       key: docuRoom.id,
-                      staticClass: "list-group-item col-2",
+                      staticClass: "list-group-item col-lg-2 col-md-3 col-4",
                       attrs: { docuRoom: docuRoom }
                     },
                     [
@@ -41157,82 +41161,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "h1 mt-4 mb-5" }, [_vm._v("Aufmaß")]),
-      _vm._v(" "),
+  return _c("div", [
+    _c("h1", { staticClass: "h1 mt-4 mb-5" }, [_vm._v("Aufmaß")]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary mb-3",
+        attrs: { type: "button" },
+        on: { click: _vm.addNewMeasurment }
+      },
+      [_vm._v("Neues Aufmaß")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "card col-12 col-sm-6 offset-sm-3 " }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary mb-3", attrs: { type: "button" } },
-        [_vm._v("Neues Aufmaß")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "card col-12 col-sm-6 offset-sm-3 " }, [
-        _c("div", { staticClass: "card-body row" }, [
-          _c("div", { staticClass: "col-12 row mb-2" }, [
-            _c("h5", { staticClass: "h5 d-inline col-10" }, [
-              _vm._v("Aufmaß 1")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 custom-control custom-switch" }, [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "customSwitch1" }
-              }),
+        "div",
+        { staticClass: "card-body row" },
+        _vm._l(_vm.measurments, function(measurment) {
+          return _c(
+            "div",
+            {
+              key: measurment.id,
+              staticClass: "col-12 p-0 row my-2",
+              attrs: { measurment: measurment }
+            },
+            [
+              _c("h5", { staticClass: "h5 d-inline col-8 m-0" }, [
+                _vm._v("Aufmaß " + _vm._s(measurment.Number))
+              ]),
               _vm._v(" "),
-              _c("label", {
-                staticClass: "custom-control-label",
-                attrs: { for: "customSwitch1" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 row mb-2" }, [
-            _c("h5", { staticClass: "h5 d-inline col-10" }, [
-              _vm._v("Aufmaß 2")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 custom-control custom-switch" }, [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "customSwitch2" }
-              }),
-              _vm._v(" "),
-              _c("label", {
-                staticClass: "custom-control-label",
-                attrs: { for: "customSwitch2" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 row mb-2" }, [
-            _c("h5", { staticClass: "h5 d-inline col-10" }, [
-              _vm._v("Aufmaß 3")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 custom-control custom-switch" }, [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "customSwitch3" }
-              }),
-              _vm._v(" "),
-              _c("label", {
-                staticClass: "custom-control-label",
-                attrs: { for: "customSwitch3" }
-              })
-            ])
-          ])
-        ])
-      ])
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col-4 custom-control custom-switch d-flex justify-content-end "
+                },
+                [
+                  _c("input", {
+                    staticClass: "custom-control-input",
+                    attrs: { type: "checkbox", id: "customSwitch1" },
+                    on: {
+                      click: function($event) {
+                        return _vm.setCurrentMsr(_vm.measurments.id)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", {
+                    staticClass: "custom-control-label",
+                    attrs: { for: "customSwitch1" }
+                  })
+                ]
+              )
+            ]
+          )
+        }),
+        0
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -60485,6 +60475,8 @@ var state = {
 
   /* Aufmaß */
   Measurments: [],
+  oldCurrentMsr: '',
+  newCurrentMsr: '',
 
   /* Selektionen, Status */
   CategorySelected: false,
@@ -60575,10 +60567,14 @@ var mutations = {
 
   /* Aufmass */
   UPDATE_MEASURMENTS: function UPDATE_MEASURMENTS(state, payload) {
-    state.CableListElements = payload;
+    state.Measurments = payload;
   },
   UPDATE_NEW_MEASURMENTS: function UPDATE_NEW_MEASURMENTS(state, payload) {
     state.Measurments.push(payload);
+  },
+  UPDATE_CURRENT_MEASURMENT: function UPDATE_CURRENT_MEASURMENT(state, oldCurrentMsr, newCurrentMsr) {
+    state.oldCurrentMsr = oldCurrentMsr;
+    state.newCurrentMsr = newCurrentMsr;
   }
 };
 var actions = {
@@ -60731,6 +60727,11 @@ var actions = {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/measurments', payload).then(function (response) {
       commit('UPDATE_NEW_MEASURMENTS', response.data);
     });
+  },
+  setCurrentMeasurment: function setCurrentMeasurment(measurmentId, payload) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://46.101.114.150/api/measurment/' + measurmentId, payload).then(function (response) {
+      console.log(response.data);
+    });
   }
 };
 var getters = {
@@ -60824,8 +60825,13 @@ var getters = {
   Measurments: function Measurments(state) {
     return state.Measurments;
   },
-  MeasurmentsLenght: function MeasurmentsLenght(state) {
-    return state.Measurments.lenght;
+  MeasurmentsLength: function MeasurmentsLength(state) {
+    return state.Measurments.length;
+  },
+  CurrentMeasurment: function CurrentMeasurment(state) {
+    return state.Measurments.find(function (measurment) {
+      return measurment.Current == 1;
+    });
   }
 };
 var projectsModul = {

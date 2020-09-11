@@ -30,7 +30,7 @@
                     <div v-for="docuRoom in docuRooms(activeFloor)"
                         :key="docuRoom.id"
                         :docuRoom="docuRoom"
-                        class="list-group-item col-2"> {{docuRoom.Room}} 
+                        class="list-group-item col-lg-2 col-md-3 col-4"> {{docuRoom.Room}} 
                     </div>
                 </div>   
             </div>

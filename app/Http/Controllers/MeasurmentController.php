@@ -38,4 +38,17 @@ class MeasurmentController extends Controller
 
         return response($measurments, 201);
     }
+
+    public function update(Request $request, measurment $measurment)
+    {
+        $data = $request->validate([
+            'Number' => 'integer',
+            'ProjectId' => 'integer',
+            'Closed' => 'boolean',
+            'Current' => 'boolean',
+        ]);
+        $measurment->update($data);
+
+        return response($measurment, 200);
+    }
 }

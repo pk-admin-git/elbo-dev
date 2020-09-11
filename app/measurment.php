@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class measurment extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'ProjectId', 'Number', 'Closed', 'Current'
+    ];
     
     public function project(){
     

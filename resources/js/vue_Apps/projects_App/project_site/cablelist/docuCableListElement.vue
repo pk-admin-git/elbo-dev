@@ -84,14 +84,15 @@ export default {
         docuRooms(){
             return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId)
         },
-    },       
+        currentMeasurment() {
+            return this.$store.getters.CurrentMeasurment
+        }
+    },
     methods: {
         showMeasureForm() {
             this.MeasureFormVisible = !this.MeasureFormVisible
         },
-        /* docuRooms(floorId){
-            return this.$store.getters.DocuRoomsFiltered(this.cableList.FloorId)
-        }, */
+        
     }
 
 }

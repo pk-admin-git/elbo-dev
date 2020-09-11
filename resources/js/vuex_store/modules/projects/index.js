@@ -28,6 +28,8 @@ const state = {
 
     /* Aufmaß */
     Measurments: [],
+    oldCurrentMsr: '',
+    newCurrentMsr:'',
 
     /* Selektionen, Status */
     CategorySelected: false,
@@ -120,12 +122,16 @@ const mutations = {
         state.CableListElements.push(payload);
     },
 
-     /* Aufmass */
-     UPDATE_MEASURMENTS(state, payload){
-        state.CableListElements = payload;
+    /* Aufmass */
+    UPDATE_MEASURMENTS(state, payload){
+        state.Measurments = payload;
     },
     UPDATE_NEW_MEASURMENTS(state, payload){
         state.Measurments.push(payload);
+    },
+    UPDATE_CURRENT_MEASURMENT(state, oldCurrentMsr, newCurrentMsr){
+        state.oldCurrentMsr = oldCurrentMsr
+        state.newCurrentMsr = newCurrentMsr
     }
 };
 
@@ -276,6 +282,12 @@ const actions = {
                 commit('UPDATE_NEW_MEASURMENTS', response.data);
             });
     },
+    setCurrentMeasurment(measurmentId, payload){
+        axios.post('http://46.101.114.150/api/measurment/' + measurmentId, payload)
+            .then(response => {
+            console.log(response.data)
+            })
+    },
 };
 
 const getters = {
@@ -316,7 +328,8 @@ const getters = {
 
     /* Aufmaß */
     Measurments: state => state.Measurments,
-    MeasurmentsLenght: state => state.Measurments.lenght
+    MeasurmentsLength: state => state.Measurments.length,
+    CurrentMeasurment: state => state.Measurments.find(measurment => measurment.Current == 1)
     
 };
 
