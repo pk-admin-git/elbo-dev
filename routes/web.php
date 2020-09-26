@@ -22,7 +22,7 @@ Route::get('/', function () {
 }); */
 
 Route::get('/projectApp/{vue_capture?}', function () {
-    return view('vue.projects');
+    return view('spa');
 })->where('vue_capture', '[\/\w\.-]*')->middleware('auth');
 
 Auth::routes();

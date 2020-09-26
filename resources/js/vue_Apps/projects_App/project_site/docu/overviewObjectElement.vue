@@ -1,14 +1,14 @@
 <template>
     <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
-        <div class="card-body p-0 row">
+        <div class="card-body py-0 row">
             
-            <h5 class="h5 col-10 pl-0">Gebäude</h5>
+            <h5 class="h5 col-10 p-0">Gebäude</h5>
             <span   style="cursor:pointer"
-                        class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end" 
+                        class="fas fa-plus-circle fa-lg mt-1 p-0 col-2 d-flex justify-content-end" 
                         @click="showNewObjectInput"
                         v-if="!newObjectShow"></span>
             
-            <div class="mt-2 col-2 d-flex justify-content-end mb-3" v-if="newObjectShow">
+            <div class="mt-1 col-2 d-flex justify-content-end p-0 mb-3" v-if="newObjectShow">
                 <span   style="cursor:pointer"
                         class="fas fa-times-circle fa-lg mr-3"
                         @click="showNewObjectInput"></span>
@@ -18,13 +18,13 @@
             </div>
             
 
-            <div class="col-12 pl-0">
+            <div class="col-12 p-0" v-if="newObjectShow">
                 <form class="col p-0">
-                <input type="text" class="form-control"  v-if="newObjectShow" v-model="object"/>
+                <input type="text" class="form-control" v-model="object"/>
                 </form>
             </div>
 
-            <div class="list-group col-12 my-3 mb-5">
+            <div class="list-group col-12 p-0 mt-3 mb-5">
                 <div v-for="docuObject in docuObjects"
                     :key="docuObject.id"
                     :docuObject="docuObject"

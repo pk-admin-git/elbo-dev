@@ -1,7 +1,7 @@
 <template>
      <div class="card-body align-items-start mt-3">
          <div class="row">
-            <h3 class="h3 col-10 mb-4 pl-0">Kabelzuglisten</h3>
+            <h3 class="h3 col-10 mb-4 ">Kabelzuglisten</h3>
             <span   style="cursor:pointer"
                     class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end"
                     @click="showNewCableList"
@@ -57,11 +57,24 @@
                     type="button">
                     <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/' + cableList.id" 
                         style="text-decoration:none; color:inherit;"
-                        class="row">
+                        class="row px-3">
                         <div class="col-12 font-weight-bold p-2 border-md-right border-dark">{{cableList.name}}</div>
                         <div class="col-4 border-right border-dark p-2"> {{getCategory(cableList.CategoryId)}}</div>
                         <div class="col-4 border-right border-dark p-2">{{getObject(cableList.ObjectId)}}</div>
                         <div class="col-4 p-2">{{getFloor(cableList.FloorId)}}</div>
+                    </router-link>
+                </button>
+                
+            </div>
+            
+            <!-- Neue Vuetify-Kabelzugliste -->
+            <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
+                <button 
+                    class="list-group-item list-group-item-action p-0 mb-3"
+                    type="button">
+                    <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/CablelistV2/1'" 
+                        style="text-decoration:none; color:inherit;"
+                        class="row px-3"> Neue Kabelzugliste
                     </router-link>
                 </button>
                 

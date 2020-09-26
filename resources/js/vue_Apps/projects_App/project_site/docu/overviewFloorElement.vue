@@ -1,14 +1,14 @@
 <template>
    <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
-        <div class="card-body row p-0 align-items-start">
+        <div class="card-body row align-items-start py-0">
             
-            <h5 class="h5 col-10 pl-0">Etagen</h5>
+            <h5 class="h5 col-10 p-0">Etagen</h5>
             <span   style="cursor:pointer"
-                    class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end" 
+                    class="fas fa-plus-circle fa-lg mt-1 p-0 col-2 d-flex justify-content-end" 
                     @click="showNewFloorInput"
                     v-if="(activeObject != '') && (newFloorShow !== true)"></span>
 
-            <div class="col-2 d-flex justify-content-end mb-3 mt-2" v-if="newFloorShow"> 
+            <div class="col-2 d-flex justify-content-end mb-3 mt-1 p-0" v-if="newFloorShow"> 
                 <span   style="cursor:pointer"
                         class="fas fa-times-circle fa-lg mr-3"
                         @click="showNewFloorInput"></span>
@@ -18,13 +18,13 @@
             </div>
             
             
-            <div class="col-12 pl-0">    
+            <div class="col-12 p-0" v-if="newFloorShow">    
                 <form class="col p-0">
-                <input type="text" class="form-control mr-2" v-if="newFloorShow" v-model="floor"/>
+                <input type="text" class="form-control mr-2" v-model="floor"/>
                 </form>    
             </div>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5" v-if="activeObject">
+            <div class="list-group list-group-action col-12 mt-3 mb-5 p-0" v-if="activeObject">
                 <div v-for="docuFloor in docuFloors(activeObject)"
                     :key="docuFloor.id"
                     :docuFloor="docuFloor"

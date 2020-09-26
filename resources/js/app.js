@@ -1,17 +1,50 @@
 require('./bootstrap');
 window.Vue = require('vue');
+Vue.use(VueRouter)
+Vue.use(Vuetify)
+
+//Vuetify
+import Vuetify from 'vuetify/lib'
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import '@mdi/font/css/materialdesignicons.css'
+const opts = {
+    defaultAssets: {
+        font: true,
+        icons: 'md'
+      },
+      icons: {
+        iconfont: 'mdi',
+      }
+}
+
+//Vue Router
+import VueRouter from 'vue-router'
 
 //ProjectsApp
-import VueRouter from 'vue-router'
 import { projectRoutes } from './vue_routes/routes'
 import store from './vuex_store/ProjectsVuex.js'
 
-Vue.use(VueRouter)
+
+
+//SPA
+import appContainer from './vue SPA/app-Container.vue'
+Vue.component('app-Container', appContainer);
 
 
 const projectRouter = new VueRouter({
     mode: 'history',
     routes: projectRoutes,
+})
+
+
+let SPA = new Vue({
+    store,
+    router: projectRouter,
+    vuetify: new Vuetify(opts),
+    el: '#appContainer',
+    components: {
+        appContainer
+    }
 })
 
 
@@ -25,21 +58,3 @@ let projects = new Vue({
     render: h => h(shiftplanApp),
 }).$mount('#shiftplanApp'); */
 
-
-
-
-Vue.directive('click-outside', {
-    bind: function (el, binding, vnode) {
-      el.clickOutsideEvent = function (event) {
-        // here I check that click was outside the el and his children
-        if (!(el == event.target || el.contains(event.target))) {
-          // and if it did, call method provided in attribute value
-          vnode.context[binding.expression](event);
-        }
-      };
-      document.body.addEventListener('click', el.clickOutsideEvent)
-    },
-    unbind: function (el) {
-      document.body.removeEventListener('click', el.clickOutsideEvent)
-    },
-  });

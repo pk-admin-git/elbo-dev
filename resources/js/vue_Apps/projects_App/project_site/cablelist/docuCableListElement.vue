@@ -1,6 +1,6 @@
 <template>
 <div class="d-flex flex-column align-items-center">
-    <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0">
+    <div class="card col-11 col-sm-10 col-md-8 col-lg-6 bg-light m-3 p-0">
         <div class="card-header"><h5 class="h5 mb-0">{{CableListElement.Device}}: {{CableListElement.DeviceNumber}}</h5></div>
         <div class="card-body">
             <cableListElementMeasure v-for="(cableListElementMeasure, index) in 3"
@@ -16,10 +16,10 @@
                     <span class="fa-check-circle fa-lg" style="cursor:pointer" @click="showMeasureForm"></span>        
                 </div>
 
-                <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 px-0" v-if="MeasureFormVisible">
+                <div class="card col-12 col-sm-10 col-md-8 col-lg-6 bg-light m-3 py-0" v-if="MeasureFormVisible">
                     <div class="card-header row d-flex justify-content-center">
                         
-                        <div class="col-12 mb-2">
+                        <div class="col-12">
                             <label for="inputRoom">Position</label>
                             <select id="inputRoom" class="custom-select" v-model.lazy="room">
                                 <option v-for="docuRoom in docuRooms"
@@ -28,7 +28,7 @@
                             </select>
                         </div>
                         
-                        <div class="col-12 mb-2">
+                        <div class="col-12">
                             <label for="inputRoom">Raum</label>
                             <select id="inputRoom" class="custom-select" v-model.lazy="room">
                                 <option v-for="docuRoom in docuRooms"
@@ -37,7 +37,7 @@
                             </select>
                         </div>
 
-                        <div class="col-12 mb-2">
+                        <div class="col-12">
                         <h6 class="h6">Menge:fg</h6>
                         <input type="text" class="form-control col-12" v-model="deviceNumber"/>
                         </div>
@@ -68,7 +68,7 @@ export default {
     },
     data() {
         return {
-            MeasureFormVisible: true,
+            MeasureFormVisible: false,
             room: '',
             deviceNumber: '',
 

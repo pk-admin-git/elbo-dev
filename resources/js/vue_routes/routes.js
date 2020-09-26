@@ -7,6 +7,10 @@ import DocuOverview from '../vue_Apps/projects_App/project_site/docu/docuOvervie
 import DocuCableList from '../vue_Apps/projects_App/project_site/cablelist/docuCableList.vue'
 import measurment from '../vue_Apps/projects_App/project_site/measurment/measurment.vue'
 
+/* Neue Vuetify-Komponenten */
+import DocuCableListV2 from '../vue_Apps/projects_App/project_site/cableList-v2/docucableList-v2.vue'
+
+
 export const projectRoutes = [
     {
         path: '/projectApp/projects/activeProjects',
@@ -43,7 +47,7 @@ export const projectRoutes = [
         path: '/projectApp/project/:projectId/projectDocu/:cableListId',
         components: {
             navTab: projectNav,
-            content: DocuCableList
+            content: DocuCableListV2
         },
         props: {navTab: true, content: true},
     },
@@ -54,5 +58,15 @@ export const projectRoutes = [
             content: measurment
         },
         props: {navTab: true, content: true},
-    }
+    },
+
+    /* Neue Vuetify-Componenten */
+    /* {    
+        path: '/projectApp/project/:projectId/projectDocu/CablelistV2/1',
+        components: {
+            navTab: projectNav,
+            content: DocuCableListV2
+        },
+        props: {navTab: true, content: true},
+    }, */
 ]

@@ -16,10 +16,13 @@
                     <input type="checkbox" 
                         class="custom-control-input" 
                         id="customSwitch1"
+                        name='customSwitch1'
                         @click="setCurrentMsr(measurments.id)">
                     <label class="custom-control-label" for="customSwitch1"></label>
                 </div>
             </div>
+
+            <ToggleButton></ToggleButton>
 
         </div>
     </div>
@@ -28,8 +31,13 @@
 </template>
 
 <script>
+import ToggleButton from '../../../../vue_Elements/switchButton'
+
 export default {
     name: 'measurment',
+    components: {
+        ToggleButton,
+    },
     props: [
         'projectId'
     ],
@@ -44,6 +52,9 @@ export default {
     computed: {
         measurments(){
             return this.$store.getters.Measurments
+        },
+        currentMsr(){
+            return this.$store.getters.CurrentMeasurment.id
         }
     },       
     methods: {

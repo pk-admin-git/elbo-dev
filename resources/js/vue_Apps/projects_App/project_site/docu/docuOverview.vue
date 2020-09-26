@@ -2,8 +2,8 @@
 <div>
     <h1 class="h1 mt-4">Dokumentation</h1>
     <div class="card bg-transparent mt-5">
-        <div class="card-body row align-items-start p-0">
-            <h3 class="h3 col-12 mt-3 mb-4">Überblick</h3>
+        <div class="card-body row align-items-start">
+            <h3 class="h3 col-12 mt-3 mb-2">Überblick</h3>
 
             <!-- Kategorien -->
 

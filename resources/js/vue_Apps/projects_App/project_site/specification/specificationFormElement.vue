@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-    <div class="row col-12 p-0 my-4"> 
+    <div class="row col-12"> 
         <h4 class="card-title col-lg-5 col-md-6 col-sm-8 col-10 px-0 m-0 d-flex align-items-center">Neue Position Einfügen</h4>
         <span   style="cursor:pointer"
                 class="fas fa-plus-circle fa-lg col-lg-7 col-md-6 col-sm-4 col-2 p-3 d-flex justify-content-end align-items-center"
@@ -30,13 +30,13 @@
         
             <div class="col-sm-6 col-12">
                 <div class="row">
-                    <div class="col-6 p-0">                    
+                    <div class="col-6 py-0">                    
                         <h6 class="card-title p-2 m-0">Menge</h6>
                         <div class="pb-3 pr-3">
                             <input type="text" class="form-control" v-model="convertSpecFormQuantity">   
                         </div>
                     </div>
-                    <div class="col-6 p-0">
+                    <div class="col-6 py-0">
                         <h6 class="card-title p-2 m-0">Einheit</h6>
                         <div class="pb-3 ">
                             <input type="text" class="form-control" v-model="specFormUnit">   
@@ -45,13 +45,13 @@
                 </div>
             
                 <div class="row">
-                    <div class="col-6 p-0">                    
+                    <div class="col-6 pt-0">                    
                         <h6 class="card-title p-2 m-0">EP</h6>
                         <div class="pb-3 pr-3">
                             <input type="text" class="form-control" v-model="convertSpecFormUnitPrice">   
                         </div>
                     </div>
-                    <div class="col-6 p-0">
+                    <div class="col-6 pt-0">
                         <h6 class="card-title p-2 m-0">Stundensatz</h6>
                         <div class="pb-3 ">
                             <input type="text" class="form-control" v-model="convertSpecFormHourPrice">   

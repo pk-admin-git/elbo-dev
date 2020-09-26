@@ -2,10 +2,10 @@
     
 
     <div class="row mb-2"> 
-        <div class="card col p-0">
+        <div class="card py-0 col">
             <div class="row">
                 <h5 class="card-title col-lg-4 col-6 p-1 border-bottom m-0">Position: {{SpecItem.PositionText}}</h5>
-                <div class="col-lg-8 col-6 border-bottom">
+                <div class="col-lg-8 col-6 p-0 border-bottom">
                     <h5 class="mb-2 p-inline pt-1">
                     <span class="mb-2">{{SpecItem.ShortText}}</span>
                     <span   class="btn p-0 pl-2"
