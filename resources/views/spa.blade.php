@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="user-id" content="{{ Auth::user()->id }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -27,7 +28,6 @@
 </head>
 <body>
     <div id="appContainer">
-       
         <app-Container></app-Container>
     </div>      
 </body>

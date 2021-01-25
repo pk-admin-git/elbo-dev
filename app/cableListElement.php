@@ -12,4 +12,9 @@ class cableListElement extends Model
 
         return $this->belongsTo('App\cableList');
     }
+
+    public function documentations(){
+
+        return $this->hasMany('App\documentation');
+    }
 }

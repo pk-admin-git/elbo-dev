@@ -1,40 +1,60 @@
 <template>
-   <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
-        <div class="card-body row align-items-start py-0">
-            
-            <h5 class="h5 col-10 p-0">Etagen</h5>
-            <span   style="cursor:pointer"
-                    class="fas fa-plus-circle fa-lg mt-1 p-0 col-2 d-flex justify-content-end" 
-                    @click="showNewFloorInput"
-                    v-if="(activeObject != '') && (newFloorShow !== true)"></span>
+   <v-col cols=12 md=4>
+    <!-- Etagen -->
+    <v-card tile elevation="0" class="px-2">
+    <v-row>
+        <v-col cols="8">
+            <v-card-title class="py-0">Etagen</v-card-title>
+        </v-col>
+        <v-col cols="4" class="d-flex align-end flex-column"
+                v-if="(activeObject != '') && (newFloorShow !== true)">
+            <v-btn icon 
+                    @click="showNewFloorInput">
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-col>
+        <v-col cols="4" class="d-flex justify-end"
+            v-if="newFloorShow">
+            <v-btn icon
+                    @click="addNewDocuFloor">
+                <v-icon>mdi-check</v-icon>
+            </v-btn>
+            <v-btn icon 
+                    @click="showNewFloorInput">
+                <v-icon>mdi-window-close</v-icon>
+            </v-btn>
+        </v-col>
 
-            <div class="col-2 d-flex justify-content-end mb-3 mt-1 p-0" v-if="newFloorShow"> 
-                <span   style="cursor:pointer"
-                        class="fas fa-times-circle fa-lg mr-3"
-                        @click="showNewFloorInput"></span>
-                <span   style="cursor:pointer"
-                        class="fas fa-check-circle fa-lg"
-                        @click="addNewDocuFloor"></span>
-            </div>
+        <!-- Neue Etage anlegen -->
+        <v-col cols="12" v-if="newFloorShow">
+        
+        <v-form class="px-3">
+            <v-text-field
+                v-model="floor"
+                label="Name der Etage"
+                required>
+            </v-text-field>
             
-            
-            <div class="col-12 p-0" v-if="newFloorShow">    
-                <form class="col p-0">
-                <input type="text" class="form-control mr-2" v-model="floor"/>
-                </form>    
-            </div>
-
-            <div class="list-group list-group-action col-12 mt-3 mb-5 p-0" v-if="activeObject">
-                <div v-for="docuFloor in docuFloors(activeObject)"
-                    :key="docuFloor.id"
-                    :docuFloor="docuFloor"
-                    @click="setActiveFloor(docuFloor.id)"
-                    style="cursor:pointer"
-                    :class="docuFloor.id === activeFloor ? 'active' : ''" 
-                    class="list-group-item list-group-item-action"> {{docuFloor.Floor}} </div>   
-            </div>
-        </div>
-    </div> 
+        </v-form>
+        </v-col>
+        
+        <!-- Ausgabe Etagen -->
+        <v-col cols="12">
+        <v-list class="p-0">
+        <v-list-item-group color="primary" value="activeFloor">
+            <v-list-item v-for="docuFloor in docuFloors(activeObject)"
+                        :key="docuFloor.id"
+                        :docuFloor="docuFloor"
+                        :input-value="activeFloor === docuFloor.id ? true : false"
+                        @click="setActiveFloor(docuFloor.id)">
+                        {{docuFloor.Floor}}
+            </v-list-item>
+        </v-list-item-group>   
+        </v-list>
+        </v-col>
+    </v-row>
+    </v-card>
+</v-col> 
 </template>
 
 <script>

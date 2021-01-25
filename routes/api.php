@@ -68,7 +68,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::delete('/cableListElements/{cableListElement}', 'CableListElementController@destroy')->middleware('cors');
 
         /* Projekt-Dokumentation */
-        Route::get('/project/{project}/cableLists/{cableList}/documentation', 'DocumentationController@index')->middleware('cors');
+        Route::get('/project/{project}/cableListElements/{cableListElementId}/documentations', 'DocumentationController@index')->middleware('cors');
         Route::post('/documentations', 'DocumentationController@store')->middleware('cors');
         Route::patch('/documentations/{documentation}', 'DocumentationController@update')->middleware('cors');
         Route::delete('/documentations/{documentation}', 'DocumentationController@destroy')->middleware('cors');

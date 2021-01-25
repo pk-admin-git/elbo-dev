@@ -1,41 +1,64 @@
 <template>
-    <div class="card border-0 col-12 bg-transparent mt-1">
-        <div class="card-body row py-0 align-items-start">
-            
-            <h5 class="h5 col-10 pl-0">Räume</h5>
-            <span   style="cursor:pointer"
-                    class="fas fa-plus-circle fa-lg mt-2 col-2 px-0 d-flex justify-content-end" 
-                    @click="showNewRoomInput"
-                    v-if="(activeFloor != '') && (newRoomShow !== true)"></span>
+<v-col cols="12">
+    <!-- Räume -->
+    <v-card tile elevation="0" class="px-2">
+        <v-row>
+            <v-col cols="8">
+                <v-card-title class="py-0">Räume</v-card-title>
+            </v-col>
+            <v-col cols="4" class="d-flex align-end flex-column"
+                    v-if="(activeFloor != '') && (newRoomShow !== true)">
+                <v-btn icon 
+                        @click="showNewRoomInput">
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </v-col>
+            <v-col cols="4" class="d-flex justify-end"
+                v-if="newRoomShow">
+                <v-btn icon
+                        @click="addNewDocuRoom">
+                    <v-icon>mdi-check</v-icon>
+                </v-btn>
+                <v-btn icon 
+                        @click="showNewRoomInput">
+                    <v-icon>mdi-window-close</v-icon>
+                </v-btn>
+            </v-col>
 
-            <div class="col-2 d-flex justify-content-end mb-3 mt-2 px-0" v-if="newRoomShow"> 
-                <span   style="cursor:pointer"
-                        class="fas fa-times-circle fa-lg mr-3"
-                        @click="showNewRoomInput"></span>
-                <span   style="cursor:pointer"
-                        class="fas fa-check-circle fa-lg"
-                        @click="addNewDocuRoom"></span>
-            </div>
+            <!-- Neuen Raum anlegen -->
+            <v-col cols="12" v-if="newRoomShow">
             
+            <v-form class="px-3">
+                <v-text-field
+                    v-model="room"
+                    label="Name des Raumes"
+                    required>
+                </v-text-field>
+                
+            </v-form>
+            </v-col>
             
-            <div class="col-12 px-0" v-if="newRoomShow">    
-                <form class="col p-0">
-                <input type="text" class="form-control mr-2" v-model="room"/>
-                </form>    
-            </div>
-
+            <!-- Ausgabe Räume -->
             
-            <div class="list-group col-12 my-3 mb-5" v-if="activeFloor">
-                <div class="row"> 
-                    <div v-for="docuRoom in docuRooms(activeFloor)"
-                        :key="docuRoom.id"
-                        :docuRoom="docuRoom"
-                        class="list-group-item col-lg-2 col-md-3 col-4"> {{docuRoom.Room}} 
-                    </div>
-                </div>   
-            </div>
-        </div>
-    </div> 
+            <v-col cols="12">
+                <v-item-group color="primary">
+                    <v-row no-gutters>
+                    <v-col cols="2" v-for="docuRoom in docuRooms(activeFloor)"
+                                    :key="docuRoom.id"
+                                    :docuRoom="docuRoom">
+                        <v-item>
+                            <v-sheet outlined height="40"
+                                    class="d-flex align-center justify-center">
+                                {{docuRoom.Room}}
+                            </v-sheet>
+                        </v-item>
+                    </v-col>
+                    </v-row>
+                </v-item-group> 
+            </v-col>  
+        </v-row>
+    </v-card>
+</v-col>
 </template>
 
 <script>

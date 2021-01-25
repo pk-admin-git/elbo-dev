@@ -1,5 +1,5 @@
 import axios from 'axios';
-/* axios.defaults.baseURL = 'http://46.101.114.150/api' */
+axios.defaults.baseURL = 'http://127.0.0.1:8000/'
 let axiosConfig = {
     headers: {
         "Content-Type": "Content-Type: application/json",
@@ -22,14 +22,14 @@ const state = {
 
     /* Dokumentation */
     CableListElements: [],
+    DocuElements: [],
 
     /* Leistungsverzeichnis */
     SpecItems: [],
 
     /* Aufmaß */
     Measurments: [],
-    oldCurrentMsr: '',
-    newCurrentMsr:'',
+    CurrentMeasurment: '',
 
     /* Selektionen, Status */
     CategorySelected: false,
@@ -121,6 +121,12 @@ const mutations = {
     UPDATE_NEW_CABLE_LIST_ELEMENT(state, payload){
         state.CableListElements.push(payload);
     },
+    UPDATE_DOCU_ELEMENTS(state, payload) {
+        state.DocuElements = payload
+    },
+    UPDATE_NEW_DOCU_ELEMENT(state, payload){
+        state.DocuElements.push(payload)
+    },
 
     /* Aufmass */
     UPDATE_MEASURMENTS(state, payload){
@@ -129,9 +135,22 @@ const mutations = {
     UPDATE_NEW_MEASURMENTS(state, payload){
         state.Measurments.push(payload);
     },
-    UPDATE_CURRENT_MEASURMENT(state, oldCurrentMsr, newCurrentMsr){
-        state.oldCurrentMsr = oldCurrentMsr
-        state.newCurrentMsr = newCurrentMsr
+    UPDATE_CURRENT_MEASURMENT(state, [oldCurrentMsr, newCurrentMsr]){
+        
+        const indexOld = state.Measurments.findIndex(msr => msr.id === oldCurrentMsr.data.id)
+        if (indexOld !== -1){
+            state.Measurments.splice(indexOld, 1, oldCurrentMsr.data)
+        }
+        else{
+            console.log("Index not found")
+        }
+        const indexNew = state.Measurments.findIndex(msr => msr.id === newCurrentMsr.data.id)
+        if (indexNew !== -1){
+            state.Measurments.splice(indexNew, 1, newCurrentMsr.data)
+        }
+        else{
+            console.log("Index not found")
+        }
     }
 };
 
@@ -141,13 +160,13 @@ const actions = {
     /* Übersicht Kategorien */
 
     getDocuCategoryItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuCategories', axiosConfig)
+        axios.get('api/project/' + projectId + '/docuCategories', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_CATEGORY_ITEMS', response.data)
             });
     },
     addNewDocuCategory({ commit }, payload){
-        axios.post('http://46.101.114.150/api/docuCategories', payload)
+        axios.post('api/docuCategories', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_CATEGORY_ITEM', response.data);
             });
@@ -162,13 +181,13 @@ const actions = {
     /* Leistungsverzeichnis */
 
     getSpecItems({ commit }, projectId) {
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/specification', axiosConfig)
+        axios.get('api/project/' + projectId + '/specification', axiosConfig)
             .then((response) => {
                 commit('UPDATE_SPEC_ITEMS', response.data)
             });
     },
     addNewSpecItem({ commit}, payload) {
-        axios.post('http://46.101.114.150/api/specifications', payload)
+        axios.post('api/specifications', payload)
         .then((response) => {
             commit('NEW_SPEC_ITEM', response.data)
         });
@@ -177,13 +196,13 @@ const actions = {
 
     /* Projekte */
     getProjectItems({ commit }){
-        axios.get('http://46.101.114.150/api/projects', axiosConfig)
+        axios.get('api/projects', axiosConfig)
             .then((response) => {
                 commit('UPDATE_PROJECT_ITEMS', response.data)
             });
     },
     addNewProject({ commit }, payload){
-        axios.post('http://46.101.114.150/api/projects', payload)
+        axios.post('api/projects', payload)
             .then((response) => {
                 commit('UPDATE_NEW_PROJECT_ITEM', response.data);
             });
@@ -191,13 +210,13 @@ const actions = {
 
     /* Übersicht Gebäude */
     getDocuObjectItems({ commit }, id){
-        axios.get('http://46.101.114.150/api/project/' + id + '/docuObjects', axiosConfig)
+        axios.get('api/project/' + id + '/docuObjects', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_OBJECT_ITEMS', response.data)
             });
     },
     addNewDocuObject({ commit }, payload){
-        axios.post('http://46.101.114.150/api/docuObjects', payload)
+        axios.post('api/docuObjects', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_OBJECT_ITEM', response.data);
             });
@@ -208,13 +227,13 @@ const actions = {
 
     /* Übersicht Etagen */
     getDocuFloorItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuFloors', axiosConfig)
+        axios.get('api/project/' + projectId + '/docuFloors', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_FLOOR_ITEMS', response.data)
             });
     },
     addNewDocuFloor({ commit }, payload){
-        axios.post('http://46.101.114.150/api/docuFloors', payload)
+        axios.post('api/docuFloors', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_FLOOR_ITEM', response.data);
             });
@@ -225,13 +244,13 @@ const actions = {
 
     /* Übersicht Räume */
     getDocuRoomItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/docuRooms', axiosConfig)
+        axios.get('api/project/' + projectId + '/docuRooms', axiosConfig)
             .then((response) => {
                 commit('UPDATE_DOCU_ROOM_ITEMS', response.data)
             });
     },
     addNewDocuRoom({ commit }, payload){
-        axios.post('http://46.101.114.150/api/docuRooms', payload)
+        axios.post('api/docuRooms', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_ROOM_ITEM', response.data);
             });
@@ -239,13 +258,13 @@ const actions = {
 
     /* Übersicht Kabelzuglisten */
     getCableListItems({ commit }, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/cableLists', axiosConfig)
+        axios.get('api/project/' + projectId + '/cableLists', axiosConfig)
             .then((response) => {
                 commit('UPDATE_CABLE_LIST_ITEMS', response.data)
             });
     },
     addNewCableList({ commit }, payload){
-        axios.post('http://46.101.114.150/api/cableLists', payload)
+        axios.post('api/cableLists', payload)
             .then((response) => {
                 commit('UPDATE_NEW_CABLE_LIST_ITEM', response.data);
             });
@@ -257,36 +276,51 @@ const actions = {
     /* Dokumentation Kabelzugliste */
 
     getCableListElements({commit}, [projectId, cableListId]){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/cableLists/' + cableListId + '/cableListElements', axiosConfig)
+        axios.get('api/project/' + projectId + '/cableLists/' + cableListId + '/cableListElements', axiosConfig)
             .then((response) => {
                 commit('UPDATE_CABLE_LIST_ELEMENTS', response.data)
             });
     },
     addNewCableListElement({ commit }, payload){
-        axios.post('http://46.101.114.150/api/cableListElements', payload)
+        axios.post('api/cableListElements', payload)
             .then((response) => {
                 commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data);
             });
     },
+    getDocu({ commit }, [projectId, cableListId]){
+        axios.get('api/project/' + projectId + '/cableListElements/' + cableListId + '/documentations', axiosConfig)
+        .then((response) => {
+            commit('UPDATE_DOCU_ELEMENTS', response.data)
+        })
+    },
+    addNewDocu({ commit }, payload){
+        axios.post('api/documentations', payload)
+            .then((response) => {
+                commit('UPDATE_NEW_DOCU_ELEMENT', response.data)
+            })
+    },
 
     /* Aufmaß */
     getMeasurments({commit}, projectId){
-        axios.get('http://46.101.114.150/api/project/' + projectId + '/measurments', axiosConfig)
+        axios.get('api/project/' + projectId + '/measurments', axiosConfig)
             .then((response) => {
                 commit('UPDATE_MEASURMENTS', response.data)
             });
     },
     addNewMeasurment({ commit }, payload){
-        axios.post('http://46.101.114.150/api/measurments', payload)
+        axios.post('api/measurments', payload)
             .then((response) => {
                 commit('UPDATE_NEW_MEASURMENTS', response.data);
             });
     },
-    setCurrentMeasurment(measurmentId, payload){
-        axios.post('http://46.101.114.150/api/measurment/' + measurmentId, payload)
-            .then(response => {
-            console.log(response.data)
-            })
+    setCurrentMeasurment({ commit }, [oldCurrent, oldValue, newCurrent, newValue]){
+        axios.all([
+            axios.patch('api/measurments/' + oldCurrent, oldValue),
+            axios.patch('api/measurments/' + newCurrent, newValue) 
+        ])
+        .then(axios.spread((objOld, objNew) => {
+            commit('UPDATE_CURRENT_MEASURMENT', [objOld, objNew])
+        }))
     },
 };
 
@@ -304,6 +338,7 @@ const getters = {
     /* LV */
     SpecItems: state => state.SpecItems,
     SpecItemsLength: state => state.SpecItems.length,
+    SpecItemById: state => specId => state.SpecItems.find(specItem => specItem.id === specId),
 
     /* Übersicht Gebäude */
     DocuObjects: state => state.DocuObjectItems,
@@ -322,14 +357,29 @@ const getters = {
     ActiveCableList: state => state.ActiveCableList,
 
     /* Dokumentation Kabelzugliste */
-    CableListById: state => cableListId => state.CableListItems.find(CableListItem => CableListItem.id === cableListId),
+    CableListById:  state =>  cableListId => state.CableListItems.find(CableListItem => CableListItem.id === cableListId),
     CableListElements: state => state.CableListElements,
     CableListElementsLength: state => state.CableListElements.length,
+    SpecElementsByCableListElement: (state, getters) => (cableListElementId) => {
+        const specItemsArray = state.DocuElements.filter(DocuElements => DocuElements.CableListElementId === cableListElementId)
+                .map(item => item.SpecificationId)
+        return getters.SpecItems.filter(item => specItemsArray.includes(item.id))
+        },
+    RoomElementsBySpecElement: (state) => (cableListElementId) => {
+        return state.DocuElements.filter(item => item.CableListElementId === cableListElementId)
+        },
+    RoomById: state => RoomId => state.DocuRoomItems.find(room => room.id === RoomId),
+    FloorById: state => FloorId => state.DocuFloorItems.find(floor => floor.id === FloorId),
+    ObjectById: state => ObjectId => state.DocuObjectItems.find(object => object.id === ObjectId),
 
     /* Aufmaß */
     Measurments: state => state.Measurments,
     MeasurmentsLength: state => state.Measurments.length,
-    CurrentMeasurment: state => state.Measurments.find(measurment => measurment.Current == 1)
+    CurrentMeasurment(state) {
+        
+        const currentMsr = state.Measurments.find(measurment => measurment.Current == 1)
+        return currentMsr
+    }
     
 };
 

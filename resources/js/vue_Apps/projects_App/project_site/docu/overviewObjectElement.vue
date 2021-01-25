@@ -1,41 +1,60 @@
 <template>
-    <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
-        <div class="card-body py-0 row">
-            
-            <h5 class="h5 col-10 p-0">Gebäude</h5>
-            <span   style="cursor:pointer"
-                        class="fas fa-plus-circle fa-lg mt-1 p-0 col-2 d-flex justify-content-end" 
-                        @click="showNewObjectInput"
-                        v-if="!newObjectShow"></span>
-            
-            <div class="mt-1 col-2 d-flex justify-content-end p-0 mb-3" v-if="newObjectShow">
-                <span   style="cursor:pointer"
-                        class="fas fa-times-circle fa-lg mr-3"
-                        @click="showNewObjectInput"></span>
-                <span   style="cursor:pointer"
-                        class="fas fa-check-circle fa-lg"
-                        @click="addNewDocuObject"></span>
-            </div>
-            
+<v-col cols="12" md="4">
+    <!-- Gebäude -->
+    <v-card tile elevation="0" class="px-2">
+        <v-row>
+            <v-col cols="8">
+                <v-card-title class="py-0">Gebäude</v-card-title>
+            </v-col>
+            <v-col cols="4" class="d-flex align-end flex-column"
+                    v-if="!newObjectShow">
+                <v-btn icon 
+                        @click="showNewObjectInput">
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </v-col>
+            <v-col cols="4" class="d-flex justify-end"
+                v-if="newObjectShow">
+                <v-btn icon
+                        @click="addNewDocuObject">
+                    <v-icon>mdi-check</v-icon>
+                </v-btn>
+                <v-btn icon 
+                        @click="showNewObjectInput">
+                    <v-icon>mdi-window-close</v-icon>
+                </v-btn>
+            </v-col>
 
-            <div class="col-12 p-0" v-if="newObjectShow">
-                <form class="col p-0">
-                <input type="text" class="form-control" v-model="object"/>
-                </form>
-            </div>
-
-            <div class="list-group col-12 p-0 mt-3 mb-5">
-                <div v-for="docuObject in docuObjects"
-                    :key="docuObject.id"
-                    :docuObject="docuObject"
-                    @click="setActiveObject(docuObject.id)"
-                    style="cursor:pointer"
-                    :class="docuObject.id === activeObject ? 'active' : ''"
-                    class="list-group-item list-group-item-action"> {{docuObject.Object}} </div>
+            <!-- Neues Gebäude anlegen -->
+            <v-col cols="12" v-if="newObjectShow">
+            
+            <v-form class="px-3">
+                <v-text-field
+                    v-model="object"
+                    label="Name des Gebäudes"
+                    required>
+                </v-text-field>
                 
-            </div>
-        </div>
-    </div>
+            </v-form>
+            </v-col>
+            
+            <!-- Ausgabe Gebäude -->
+            <v-col cols="12">
+            <v-list class="p-0">
+            <v-list-item-group color="primary">
+                <v-list-item v-for="docuObject in docuObjects"
+                            :key="docuObject.id"
+                            :docuObject="docuObject"
+                            :input-value="activeObject === docuObject.id ? true : false"
+                            @click="setActiveObject(docuObject.id)">
+                            {{docuObject.Object}}
+                </v-list-item>
+            </v-list-item-group>   
+            </v-list>
+            </v-col>
+        </v-row>
+    </v-card>
+</v-col>
 </template>
 
 

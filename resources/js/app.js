@@ -24,11 +24,10 @@ import VueRouter from 'vue-router'
 import { projectRoutes } from './vue_routes/routes'
 import store from './vuex_store/ProjectsVuex.js'
 
-
-
 //SPA
 import appContainer from './vue SPA/app-Container.vue'
 Vue.component('app-Container', appContainer);
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 
 const projectRouter = new VueRouter({
@@ -48,11 +47,11 @@ let SPA = new Vue({
 })
 
 
-let projects = new Vue({
+/* let projects = new Vue({
     store,
     el: '#projectApp',
     router: projectRouter,
-}); 
+});  */
 
 /* let shiftplan = new Vue({
     render: h => h(shiftplanApp),

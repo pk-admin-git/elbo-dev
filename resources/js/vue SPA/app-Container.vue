@@ -41,11 +41,11 @@
     </v-app-bar>
 
     <v-main>
+      <router-view name="navTab"></router-view>
       <v-container class="mx-auto px-10">
 
         <v-row align="start" justify="start">
           <v-col>
-            <router-view name="navTab"></router-view>
             <router-view name="content"></router-view>
           </v-col>
         </v-row>

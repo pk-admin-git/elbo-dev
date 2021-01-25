@@ -1,8 +1,14 @@
 <template>
     
-     <v-item v-slot:default="{ active, toggle }">
+<v-item v-slot:default="{ active, toggle }">
     <div>
-        <v-card class="mx-auto" max-width="380" color="#E1F5FE">
+        <v-card class="mx-auto px-2" max-width="380" color="#E1F5FE">
+            <v-overlay :absolute="absolute" :value="alert">
+                <v-alert :value="alert" transition="fade-transition"
+                type="success">
+                    Erfolgreich
+                </v-alert>
+            </v-overlay>
             <v-card-title>
                 {{CableListElement.Device}} - {{CableListElement.DeviceNumber}}
                 <v-card-actions>
@@ -13,140 +19,153 @@
             </v-card-title>
 
             <v-expand-transition>
-            <div v-show="active">
-                <v-divider></v-divider>
-
-                <v-data-iterator
-                    :items="items"
-                    :items-per-page.sync="itemsPerPage"
-                    :page="page"
-                    hide-default-footer>
-
-                    <template v-slot:default="props">
-                        <v-row class="px-2">
-                        <v-col
-                            v-for="item in props.items"
-                            :key="item.name"
-                            cols="12" sm="6">
-                            <v-card>
-                            <v-card-title class="text-subtitle-1 p-2">{{item.name}}</v-card-title>
-                            <v-card-title class="text-subtitle-1 p-2">{{item.text}}</v-card-title>
-
-                            <v-divider class="m-0"></v-divider>
-
-                            <v-list dense>
-                                <v-list-item>
-                                    <v-list-item-content>Raum 1:</v-list-item-content>
-                                    <v-list-item-content class="align-end">Menge</v-list-item-content>
-                                </v-list-item>
-
-                                <v-list-item>
-                                    <v-list-item-content>Raum 2:</v-list-item-content>
-                                    <v-list-item-content class="align-end">Menge</v-list-item-content>
-                                </v-list-item>
-
-                                <v-list-item>
-                                    <v-list-item-content>Raum 3:</v-list-item-content>
-                                    <v-list-item-content class="align-end">Menge</v-list-item-content>
-                                </v-list-item>
-                            </v-list>
-                            </v-card>
+                <div v-show="active">
+                    <v-divider></v-divider>
+                    <v-expansion-panels >
+                        <v-expansion-panel v-for="specElement in specElements"
+                                            :key="specElement.id">
+                            <v-expansion-panel-header>
+                                <v-row no-gutters>
+                                    <v-col cols="4">
+                                        {{ specElement.PositionText }}
+                                    </v-col>
+                                    <v-col cols="8">
+                                        {{ specElement.ShortText}}
+                                    </v-col>
+                                </v-row>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <v-list dense>
+                                    <v-list-item-group>
+                                        <v-list-item v-for="specRoom in specRooms(specElement)"
+                                                        :key="specRoom.id">
+                                        
+                                        
+                                        <template v-slot="{ active }">
+                                            <v-hover v-slot="{ hover }">
+                                            <v-list-item-content>
+                                                <v-row>
+                                                    <v-col cols="3" class="py-0 d-flex align-center">
+                                                        {{specRoom.RoomText}}:
+                                                    </v-col>
+                                                    <v-col cols="3" class="py-0 d-flex align-center">
+                                                        {{specRoom.Amount}} {{specElement.Unit}}
+                                                    </v-col>
+                                                    <v-col cols="3" class="py-0 d-flex align-center">
+                                                        <v-chip :color="specRoom.MeasurmentId === CurrentMsr.id ? 'green' : 'grey'"
+                                                                :text-color="specRoom.MeasurmentId === CurrentMsr.id ? 'white' : 'black'" x-small
+                                                                class="d-flex justify-center">
+                                                            {{specRoom.MeasurmentNumber}}
+                                                        </v-chip>
+                                                    </v-col>
+                                                    <v-col cols="3" class="py-0 d-flex align-center justify-end">
+                                                        
+                                                            <editCableListMeasurment
+                                                            :cableListById="cableListById"
+                                                            :CableListElement="CableListElement"
+                                                            :specRoom="specRoom"
+                                                            :SpecItems="SpecItems"
+                                                            :CurrentMsr="CurrentMsr"/>
+                                                        
+                                                    </v-col>
+                                                </v-row>
+                                            </v-list-item-content>
+                                            </v-hover>
+                                        </template>
+                                        </v-list-item>
+                                    </v-list-item-group>
+                                </v-list>  
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                    </v-expansion-panels>
+                    
+                    <v-row>
+                        <v-col cols="12" class="d-flex justify-center">
+                            <newCableListMeasurment
+                            :cableListId="cableListId"
+                            :projectId="projectId"
+                            :cableListById="cableListById"
+                            :user="user"
+                            :CableListElement="CableListElement"
+                            :SpecItems="SpecItems"
+                            :CurrentMsr="CurrentMsr"
+                            />
                         </v-col>
-                        </v-row>
-                    </template>
-
-                    <template v-slot:footer>
-                        <v-row class="my-2">
-                            <v-col cols="4" class="text-left">
-                                <newCableListMeasurment/>
-                            </v-col>
-                            <v-col cols="8" class="text-right">
-                                <span class="mr-4 grey--text">
-                                    Seite {{ page }} von {{ numberOfPages }}
-                                </span>
-                                <v-btn
-                                    fab
-                                    small
-                                    dark
-                                    color="blue darken-3"
-                                    @click="formerPage">
-                                    <v-icon>mdi-chevron-left</v-icon>
-                                </v-btn>
-                                <v-btn
-                                    fab
-                                    small
-                                    dark
-                                    color="blue darken-3"
-                                    class="mx-3"
-                                    @click="nextPage">
-                                    <v-icon>mdi-chevron-right</v-icon>
-                                </v-btn>
-                            </v-col>
-                        </v-row>
-                    </template>
-                </v-data-iterator>
-            </div>
+                    </v-row>
+                </div>
+            
             </v-expand-transition>
         </v-card>
-        
         <div class="gradient-line-background"></div>
     </div>    
-    </v-item>
+</v-item>
 </template>
 
 <script>
 import newCableListMeasurment from './newCableListMeasurment' 
+import editCableListMeasurment from './editCableListMeasurment'
 
 export default {
     name: 'docuCableListelementV2',
     props: [
-        'CableListElement',
+        'CableListElement', 
+        'cableListId', 
+        'projectId', 
+        'cableListById', 
+        'user',
+        'measurments',
+        'SpecItems',
+        'CurrentMsr',
     ],
     components: {
-        newCableListMeasurment
+        newCableListMeasurment,
+        editCableListMeasurment
     },
     data() {
         return {
             show: false,
-            itemsPerPage: 2,
-            clickedElement: '',
-            page: 1,
-            items: [
-                {
-                name: '1.1.10.100',
-                text: "J-H(ST) 2x2x0,8 Brandmeldekabel"
-                },
-                {
-                name: '1.1.10.200',
-                text: "FPKu-Emf M20 halogenfrei"
-                },
-                {
-                name: '1.1.10.300',
-                text: "FPKu-Emf M20 halogenfrei"
-                },
-                {
-                name: '1.1.10.400',
-                text: "FPKu-Emf M20 halogenfrei"
-                },
-            ],
+            crudMessage: false,
+            alert: false,
+            absolute: true,
+            overlay: false,
+        } 
+    },
+    mounted: function () {
+        if(alert){
+        this.hide_alert();
         }
     },
     computed: {
-        numberOfPages () {
-        return Math.ceil(this.items.length / this.itemsPerPage)
+        
+        specElements() {
+            return this.$store.getters.SpecElementsByCableListElement(this.CableListElement.id)
         },
+        docuElements() {
+            return this.$store.getters.RoomElementsBySpecElement(this.CableListElement.id)
+        } 
     },
     methods: {
-        nextPage () {
-        if (this.page + 1 <= this.numberOfPages) this.page += 1
+        
+        specRooms(specElement) {
+            return this.$store.getters.RoomElementsBySpecElement(this.CableListElement.id)
+                .filter(item => item.SpecificationId === specElement.id)
         },
-        formerPage () {
-            if (this.page - 1 >= 1) this.page -= 1
+        deleteItem() {
+            this.alert = true
         },
-        updateItemsPerPage (number) {
-            this.itemsPerPage = number
+        hide_alert: function () {
+          window.setInterval(() => {
+                this.alert = false;
+            }, 4000)    
         },
     
     }
 }
 </script>
+
+<style scoped>
+.v-expansion-panel-content >>> .v-expansion-panel-content__wrap {  
+        padding: 0;
+    }
+</style>
+

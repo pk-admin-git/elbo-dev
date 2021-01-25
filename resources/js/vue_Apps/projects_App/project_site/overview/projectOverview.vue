@@ -75,6 +75,11 @@ export default {
     created() {
         this.$store.dispatch('getProjectItems');
     },
+    data() {
+        return {
+            user : this.$userId
+        }
+    },
 
     computed: {
         ProjectItem() {

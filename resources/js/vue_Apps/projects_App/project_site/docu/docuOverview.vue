@@ -1,27 +1,23 @@
 <template>
 <div>
-    <h1 class="h1 mt-4">Dokumentation</h1>
-    <div class="card bg-transparent mt-5">
-        <div class="card-body row align-items-start">
-            <h3 class="h3 col-12 mt-3 mb-2">Überblick</h3>
+    <div class="text-h3 mt-5 mb-8">Dokumentation</div>
+    <v-card class="p-3">    
+        <v-row no-gutters>    
 
             <!-- Kategorien -->
-
             <overviewCategoryElement :projectId="projectId"/>
-            
-            <!-- Gebäude -->
 
+            <!-- Gebäude -->
             <overviewObjectElement :projectId="projectId"/>
 
             <!-- Etagen -->
-
             <overviewFloorElement :projectId="projectId"/>
 
             <!-- Räume -->
-
             <overviewRoomElement :projectId="projectId"/>
-        </div>
-    </div>
+
+        </v-row>
+    </v-card>
 
     <div class="card border-0 bg-transparent">
             
@@ -65,8 +61,6 @@ export default {
             this.$store.dispatch('getDocuCategoryItems', this.projectId)
 
             this.$store.dispatch('getCableListItems', this.projectId)
-
-            this.$store.dispatch('getDocuRoomItems', this.projectId)
             
         },
         computed: {

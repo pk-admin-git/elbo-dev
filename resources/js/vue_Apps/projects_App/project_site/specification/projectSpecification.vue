@@ -1,17 +1,17 @@
 <template>
-    <div class="d-flex flex-column align-items-center">
+<div>    
+    <div class="text-h4 mt-5">Leistungsverzeichnis</div>
+    <v-row class="mt-6">
         
-        <h1 class="h1 my-4 align-self-start">Leistungsverzeichnis</h1>
-
-        <div class="col-lg-9 col-md-11 col-12">
+        <v-col cols="12">
             
-            <specificationFormElement :SpecItems="SpecItems" :projectId="projectId"/>
+                <specificationFormElement :SpecItems="SpecItems" :projectId="projectId"/>
 
-            <specificationElement v-for="SpecItem in SpecItems" 
-                                    :key="SpecItem.id"
-                                    :SpecItem="SpecItem"/>
-        </div>
-    </div>
+                <specificationElement :SpecItems="SpecItems"/>
+        </v-col>
+        
+    </v-row>
+</div>    
 </template>
 
 

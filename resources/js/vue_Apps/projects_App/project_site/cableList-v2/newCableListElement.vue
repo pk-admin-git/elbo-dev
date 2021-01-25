@@ -1,10 +1,5 @@
 <template>
-<v-dialog v-model="dialog" persistent max-width="600px">
-    <template v-slot:activator="{ on, attrs }">
-        <v-btn fixed dark fab bottom right color="pink" v-bind="attrs" v-on="on">
-            <v-icon>mdi-plus</v-icon>
-        </v-btn>
-    </template>
+<v-dialog :value="newElementDialog" persistent max-width="600px">
     <v-card>
         <v-card-title>
             <span class="headline">Neues Element</span>
@@ -23,7 +18,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">Schließen</v-btn>
+            <v-btn color="blue darken-1" text @click="closeDialog(false)">Schließen</v-btn>
             <v-btn color="blue darken-1" text @click="addNewCableListElement">Anlegen</v-btn>
         </v-card-actions>
     </v-card>
@@ -35,10 +30,10 @@
 export default {
     name: 'newCablelistElment',
     props: [
-        'cableListId'
+        'cableListId',
+        'newElementDialog'
     ],
     data: () => ({
-        dialog: false,
         device: '',
         deviceNumber: '',
     }),
@@ -55,6 +50,9 @@ export default {
             this.deviceNumber= ''
             this.dialog = false
         },
+        closeDialog(value) {
+            this.$emit('close-dialog', value)
+        }
     }   
 }
 </script>

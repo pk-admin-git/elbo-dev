@@ -1,86 +1,158 @@
 <template>
-     <div class="card-body align-items-start mt-3">
-         <div class="row">
-            <h3 class="h3 col-10 mb-4 ">Kabelzuglisten</h3>
-            <span   style="cursor:pointer"
-                    class="fas fa-plus-circle fa-lg mt-2 col-2 d-flex justify-content-end"
-                    @click="showNewCableList"
-                    v-if="!newCableListShow"></span>
 
-            <div class="col-2 d-flex justify-content-end mt-2" v-if="newCableListShow">
-                <span   style="cursor:pointer"
-                        class="fas fa-times-circle fa-lg mr-3"
-                        @click="showNewCableList"></span>
-                <span   style="cursor:pointer"
-                        class="fas fa-check-circle fa-lg"
-                        @click="addNewCableList"></span>
-            </div>
-        </div>
-        <div class="row mb-5" v-if="newCableListShow">
-            <div class="col-lg-3 col-12">
-                <label for="inputTitle">Titel</label>
-                <input id="inputTitle" type="text" class="form-control" v-model="cableList"/>
-             </div>
-            <div class="col-lg-3 col-12">
-                <label for="inputObject">Gebäude</label>
-                <select id="inputObject" class="custom-select" v-model.lazy="activeObject">
-                    <option v-for="docuObject in docuObjects"
-                            :key="docuObject.id"
-                            :value="docuObject.id">{{docuObject.Object}}</option>
-                </select>
-             </div>
-            <div class="col-lg-3 col-12">
-                <label for="inputFloor">Etage</label>
-                <select id="inputFloor" class="custom-select" v-model.lazy="activeFloor">
-                    <option v-for="docuFloor in docuFloors(activeObject)"
-                            :key="docuFloor.id"
-                            :value="docuFloor.id">{{docuFloor.Floor}}</option>
-                </select> 
-             </div>
-            <div class="col-lg-3 col-12">
-                <label for="inputCategory">Kategorie</label>
-                <select id="inputCategory" class="custom-select" v-model.lazy="activeCategory">
-                    <option v-for="docuCategory in docuCategories"
-                            :key="docuCategory.id"
-                            :value="docuCategory.id">{{docuCategory.Category}}</option>
-                </select>
-            </div>
-        </div>
+<!-- Formular Neuer Bereich -->
+<v-card elevation="0" tile class="mt-10">
+    <v-row>
+        <v-col cols="12" class="d-flex">
+            <div class="text-h4 mr-5 d-inline-flex align-self-center">Bereiche</div>
+            <v-btn icon v-if="!newCableListShow"
+                    @click="showNewCableList">
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <v-btn icon v-if="newCableListShow"
+                    @click="addNewCableList">
+                <v-icon>mdi-check</v-icon>
+            </v-btn>
+            <v-btn icon v-if="newCableListShow"
+                    @click="showNewCableList">
+                <v-icon>mdi-window-close</v-icon>
+            </v-btn>
+        </v-col>
+    </v-row>
 
-            <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
-                <button v-for="cableList in cableLists"
-                    :key="cableList.id"
-                    :cableList="cableList"
-                    class="list-group-item list-group-item-action p-0 mb-3"
-                    :class="getColor(cableList.CategoryId)"
-                    @click="setActiveCableList(cableList.id)"
-                    type="button">
-                    <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/' + cableList.id" 
-                        style="text-decoration:none; color:inherit;"
-                        class="row px-3">
-                        <div class="col-12 font-weight-bold p-2 border-md-right border-dark">{{cableList.name}}</div>
-                        <div class="col-4 border-right border-dark p-2"> {{getCategory(cableList.CategoryId)}}</div>
-                        <div class="col-4 border-right border-dark p-2">{{getObject(cableList.ObjectId)}}</div>
-                        <div class="col-4 p-2">{{getFloor(cableList.FloorId)}}</div>
-                    </router-link>
-                </button>
-                
-            </div>
+    <v-form v-if="newCableListShow">    
+        <v-row>
+            <v-col cols="12" lg="3">
+                <v-text-field
+                        v-model="cableList"
+                        label="Name des Bereiches"
+                        required>
+                </v-text-field>
+            </v-col>
+            <v-col cols="12" lg="3">
+                <v-select
+                    :items="docuObjects"
+                    v-model="activeObject"
+                    :item-text="'Object'"
+                    :item-value="'id'"
+                    label="Auswahl Gebäude"
+                ></v-select>
+            </v-col>
+            <v-col cols="12" lg="3">
+                <v-select
+                    :items="docuFloors(activeObject)"
+                    v-model="activeFloor"
+                    :item-text="'Floor'"
+                    :item-value="'id'"
+                    label="Auswahl Etage"
+                ></v-select>
+            </v-col>
+            <v-col cols="12" lg="3">
+                <v-select
+                    :items="docuCategories"
+                    v-model="activeCategory"
+                    :item-text="'Category'"
+                    :item-value="'id'"
+                    label="Auswahl Kategorie"
+                ></v-select>
+            </v-col>
+        </v-row>
+        <v-divider></v-divider>
+    </v-form>
+
+<!-- Bereiche -->
+
+    <v-data-iterator
+        :items="filteredCableLists"
+        :search="search"
+        :items-per-page="100"
+        hide-default-footer>
+
+        <!-- Auswahl Filter -->
+        <template v-slot:header>
+        <v-card elevation="0" class="mt-8">
+            <v-row>
+                <v-col class="py-0" md="4" cols="12">
+                    <v-select   v-model="filterCategories"
+                                :items="docuCategories"
+                                :item-text="'Category'"
+                                :item-value="'id'"
+                                label="Kategorie"
+                                multiple
+                                chips
+                                deletable-chips
+                                persistent-hint>
+                        <template v-slot:prepend>    
+                            <v-icon>
+                                mdi-filter-variant-plus
+                            </v-icon>
+                        </template>
+                    </v-select>
+                </v-col>
+                <v-col class="py-0" md="4" cols="12">
+                    <v-select   v-model="filterObjects"
+                                :items="docuObjects"
+                                :item-text="'Object'"
+                                :item-value="'id'"
+                                label="Gebäude"
+                                multiple
+                                chips
+                                deletable-chips
+                                persistent-hint>
+                        <template v-slot:prepend>    
+                            <v-icon>
+                                mdi-filter-variant-plus
+                            </v-icon>
+                        </template>
+                    </v-select>
+                </v-col>
+            </v-row>
+        </v-card>
+        </template>
+
+        <!-- Ausgabe Bereiche  -->
+        <template v-slot:default="props">
+            <v-row>
+            <v-col
+                v-for="item in props.items"
+                :key="item.id" cols="12" sm="6" md="4" lg="3"
+                :cableListId="item.id"
+                :cableList="item"
+                :projectId="projectId"
+                @click="setActiveCableList(item.id)">
+                <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/section/' + item.id"
+                   replace style="text-decoration:none">
+                    <v-card>
+                    <v-card-title v-if="filteredCableLists" class="subheading font-weight-bold"
+                                :class="getColor(item.CategoryId)">
+                        <!-- :class="getColor(cableList.CategoryId)" -->
+                        {{getCategory(item.CategoryId)}} - {{ item.name }}
+                    </v-card-title>
+
+                    <v-divider class="m-0"></v-divider>
+
+                    <v-list dense>
+                        <v-list-item>
+                        <v-list-item-content>Objekt:</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                            {{getObject(item.ObjectId)}}
+                        </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                        <v-list-item-content>Etage:</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                            {{getFloor(item.FloorId)}}
+                        </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                    </v-card>
+                </router-link>
+            </v-col>
+            </v-row>
+        </template>     
+    </v-data-iterator>
             
-            <!-- Neue Vuetify-Kabelzugliste -->
-            <div class="list-group list-group-action col-12 my-3 mb-5 p-0">
-                <button 
-                    class="list-group-item list-group-item-action p-0 mb-3"
-                    type="button">
-                    <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/CablelistV2/1'" 
-                        style="text-decoration:none; color:inherit;"
-                        class="row px-3"> Neue Kabelzugliste
-                    </router-link>
-                </button>
-                
-            </div>
-            
-        </div>
+</v-card>
 </template>
 
 <script>
@@ -93,9 +165,13 @@ export default {
         return {
             newCableListShow: false,
             cableList: '',
+            search: '',
+            filterCategories: [],
+            filterObjects: [],
         }
     },
     computed: {
+
         cableLists() {
             return this.$store.getters.CableLists
         },
@@ -118,11 +194,33 @@ export default {
             get() {return this.$store.getters.ActiveCategory},
             set(value) {this.$store.dispatch('setActiveCategory', value)}   
         },
-    },
+        filteredCableLists() {
+            let filterCat = this.filterCategories
+            let filterObj = this.filterObjects
+            const unfilteredList = this.cableLists
+            let filteredList = []
+            if(filterCat.length < 1 && filterObj.length < 1) {
+                return this.cableLists
+            }
+            if(filterCat.length >= 1 && filterObj.length < 1) {
+            filteredList = unfilteredList.filter(item => filterCat.includes(item.CategoryId))
+            }
+            if(filterCat.length < 1 && filterObj.length >= 1) {
+            filteredList = unfilteredList.filter(item => filterObj.includes(item.ObjectId))
+            }
+            if(filterCat.length >= 1 && filterObj.length >= 1) {
+            filteredList = unfilteredList.filter(item => filterCat.includes(item.CategoryId))
+                .filter(item => filterObj.includes(item.ObjectId))
+            }
+
+            return filteredList
+        },
+        
+    },    
     methods: {
         getColor(categoryId) {
             const category = this.$store.getters.DocuCategories.find(category => category.id === categoryId)
-            return 'list-group-item-' + category.color
+            return category.color
         },
         getCategory(categoryId) {
             const category = this.$store.getters.DocuCategories.find(category => category.id === categoryId)
@@ -142,6 +240,7 @@ export default {
         docuFloors(objectId){
             return this.$store.getters.DocuFloorsFiltered(objectId)
         },
+        
         addNewCableList() {
             const NewCableList = {
                 name: this.cableList,
@@ -157,7 +256,8 @@ export default {
         },
         setActiveCableList(cableListId) {
             this.$store.dispatch('setActiveCableList', cableListId)
-        }
+        },
+        
     }
 }
 </script>

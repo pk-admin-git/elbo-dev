@@ -1,54 +1,88 @@
 <template>
-    <div class="card border-0 col-12 col-lg-4 bg-transparent mt-1">
-        <div class="card-body row align-items-start py-0">
-            
-            <h5 class="h5 col-10 p-0">Kategorien</h5>
-            <span   style="cursor:pointer"
-                    class="fas fa-plus-circle fa-lg mt-1 col-2 p-0 d-flex justify-content-end" 
-                    @click="showNewCategoryInput"
-                    v-if="!newCategoryShow"></span>
+<v-col cols="12" md="4">
+    <!-- Kategorien -->
+    <v-card tile elevation="0" class="px-2">
+    <v-row>
+        <v-col cols="8">
+            <v-card-title class="py-0">Kategorien</v-card-title>
+        </v-col>
+        <v-col cols="4" class="d-flex align-end flex-column"
+                v-if="!newCategoryShow">
+            <v-btn icon 
+                    @click="showNewCategoryInput">
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-col>
+        <v-col cols="4" class="d-flex justify-end"
+            v-if="newCategoryShow">
+            <v-btn icon
+                    @click="addNewDocuCategory">
+                <v-icon>mdi-check</v-icon>
+            </v-btn>
+            <v-btn icon 
+                    @click="showNewCategoryInput">
+                <v-icon>mdi-window-close</v-icon>
+            </v-btn>
+        </v-col>
 
-            <div class="col-2 d-flex justify-content-end mb-3 p-0" v-if="newCategoryShow">
-                <span   style="cursor:pointer"
-                        class="fas fa-times-circle fa-lg mt-1 mr-3"
-                        @click="showNewCategoryInput"></span>
-                <span   style="cursor:pointer"
-                        class="fas fa-check-circle fa-lg mt-1"
-                        @click="addNewDocuCategory"></span>
-            </div>
-            
-            <div class="col-12 p-0 mb-3" v-if="newCategoryShow">   
-                <form class="col p-0">
-                <input type="text" class="form-control" v-model="category"/>
-                </form> 
-            </div>
-
-            <div class="col-12 p-0 d-flex justify-content-between mb-4"
-                 v-if="newCategoryShow">
-                        <button  v-for="(categoryColor, index) in categoryColors"
-                            :key="index"
-                            :categoryColor="categoryColor"
-                            class="btn"        
-                            style="height: 35px; width: 35px"
-                            :class="[bgColorNewCategory(categoryColor.color), 
-                                    categoryColor.color === newCategoryColor ? 'border border-dark active' : '']"
-                            @click="setActiveColor(categoryColor.color)">   
-                        </button>
-            </div>
-
-            <div class="list-group col-12 p-0 mt-3 mb-5">
-                <div v-for="docuCategory in docuCategories"
-                    :key="docuCategory.id"
-                    :docuCategory="docuCategory"
-                    @click="setActiveCategory(docuCategory.id)"
-                    class="list-group-item list-group-item-action"
-                    style="cursor:pointer"
-                    :class="[bgColorListGroup(docuCategory.color), docuCategory.id === activeCategory ? 'active' : '']"
-                    > {{docuCategory.Category}}</div>   
-            </div>
+        <!-- Neue Kategorie anlegen -->
+        <v-col cols="12" v-if="newCategoryShow">
         
-        </div>
-    </div>
+        <v-form class="px-3">
+            <v-text-field
+                v-model="category"
+                label="Name der Kategorie"
+                required>
+            </v-text-field>
+            <v-combobox
+                v-model="newCategoryColor"
+                label="Farbe"
+                :items="colors">
+                <template v-slot:item="{item}">
+                    <v-sheet
+                        rounded
+                        elevation="2"
+                        class="mx-auto"
+                        :color="item.color"
+                        height="25"
+                        width="100"
+                    ></v-sheet>
+                </template>
+                <template v-slot:selection="{item}">
+                    <v-sheet
+                            v-if="item === Object(item)"
+                            rounded
+                            elevation="2"
+                            class="mx-auto"
+                            :color="`${item.color}`"
+                            height="25"
+                            width="100"
+                    ></v-sheet>
+                </template>
+            </v-combobox>
+        </v-form>
+        </v-col>
+        
+        <!-- Ausgabe Kategorien -->
+        <v-col cols="12">
+        <v-item-group>
+            <v-item v-for="docuCategory in docuCategories"
+                    :key="docuCategory.id"
+                    :docuCategory="docuCategory">
+                <v-btn  tile block elevation="0"
+                        @click="setActiveCategory(docuCategory.id)"
+                        class="p-1 text-none"
+                        height="48"
+                        :color="docuCategory.color">
+                        {{docuCategory.Category}}
+                </v-btn>
+            </v-item>
+        </v-item-group>
+        </v-col>
+    </v-row>
+    </v-card>
+    
+</v-col>
 </template>
 
 
@@ -68,12 +102,12 @@
                 category: '',
                 newCategoryColor: '',
                 colors: [
-                    {color: 'primary'},
-                    {color: 'secondary'},
-                    {color: 'success'},
-                    {color: 'danger'},
-                    {color: 'warning'},
-                    {color: 'info'},
+                    {color:'red lighten-4'},
+                    {color:'indigo lighten-4'},
+                    {color:'teal lighten-4'},
+                    {color:'lime lighten-4'},
+                    {color:'yellow lighten-4'},
+                    {color:'purple lighten-4'}   
                 ],
                 
             }
@@ -114,7 +148,7 @@
             addNewDocuCategory(){
             const NewDocuCategory = {
                 Category: this.category,
-                color: this.newCategoryColor,
+                color: this.newCategoryColor.color,
                 ProjectId: this.projectId,
             }
             this.$store.dispatch('addNewDocuCategory', NewDocuCategory)

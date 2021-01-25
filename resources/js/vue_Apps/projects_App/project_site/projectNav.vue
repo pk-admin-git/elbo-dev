@@ -1,33 +1,25 @@
 <template>
-    <div>
-       <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <router-link :to="'/projectApp/project/'+ ProjectItem.id +'/projectOverview'" 
-                class="nav-link active" data-toggle="tab">Übersicht</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link :to="'/projectApp/project/'+ ProjectItem.id +'/projectSpecification'" 
-                class="nav-link" data-toggle="tab">LV</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link :to="'/projectApp/project/'+ ProjectItem.id +'/projectDocu/DocuOverview'"
-                class="nav-link" data-toggle="tab">Docu</router-link> 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Arbeitsnachweise</a>
-            </li>
-            <li class="nav-item">
-                <router-link :to="'/projectApp/project/' + ProjectItem.id + '/measurment'"
-                class="nav-link" data-toggle="tab">Aufmaß</router-link>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pläne</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Todo's</a>
-            </li>
-        </ul> 
-    </div>
+    <v-tabs dark show-arrows>
+        <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
+        <v-tab :to="'/projectApp/project/'+ projectId +'/projectOverview'">
+            Übersicht
+        </v-tab>
+        <v-tab :to="'/projectApp/project/'+ projectId +'/projectSpecification'">
+            LV
+        </v-tab>
+        <v-tab :to="'/projectApp/project/'+ projectId +'/projectDocu'">
+            Doku
+        </v-tab>
+        <v-tab :to="'/projectApp/project/'+ projectId +'/projectOverview'">
+            Arbeitsnachweise
+        </v-tab>
+        <v-tab :to="'/projectApp/project/' + projectId + '/measurment'">
+            Aufmaß
+        </v-tab>
+        <v-tab :to="'/projectApp/project/'+ projectId +'/projectOverview'">
+            TODOs
+        </v-tab>
+    </v-tabs>
 </template>
 
 <script>

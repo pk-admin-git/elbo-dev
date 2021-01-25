@@ -15,6 +15,7 @@ class CableListElementController extends Controller
     public function index($project, $cableList)
     {
         $cableListElements = cableListElement::where('CableListId', $cableList)->get();
+        
 
         return $cableListElements;
     }

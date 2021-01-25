@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class documentation extends Model
 {
+    protected $guarded = [];
+    
     public function project(){
     
        return $this->belongsTo('App\project');
@@ -13,7 +15,7 @@ class documentation extends Model
 
     public function specification(){
     
-        return $this->belongsTo('App\specification');
+        return $this->belongsTo('App\specification', 'SpecificationId');
     }
 
     public function measurment(){
@@ -44,6 +46,11 @@ class documentation extends Model
     public function cableList(){
     
         return $this->belongsTo('App\cablelist');
+    }
+
+    public function cableListElements(){
+
+        return $this->belongsTo('App\cableListElement');
     }
 
 }
