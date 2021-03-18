@@ -27,72 +27,7 @@
 <body>
     <div id="app">
 
-        <div class="containder-fluid">
-            <div class="row">
-                @auth
-                <nav class="navbar navbar-dark bg-dark shadow-sm flex-md-nowrap col-12 d-md-none">
-                    <button class="navbar-toggler d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebar">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand mx-4 mt-1" href="#">ELBO</a> 
-                </nav>
-                <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block bg-dark sidebar collapse">
-                
-                    <div class="side-sticky pt-3">
-                    <a class="navbar-brand mx-4 mb-4 d-none d-md-block" href="#">ELBO</a>
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/home">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/projectApp/projects/activeProjects">Bauprojekte</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/shiftplan">Dienstplan</a>
-                            </li>
-                        </ul>
-                        <div class="dropdown">
-                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
-                                Profil
-                            </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" type="button" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</button>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                        </div>
-                    </div>
-                </nav>    
-                @endauth
-
-                
-                <main class="col-md-10 col-lg-10 mt-3">
-                    
-                        @yield('content')
-                    
-                </main>
-                
-                
-            
-            
-            </div>
-        </div>
-       
-
-
-       
-    
-    
-    
-    </div>
-    
-        
-        
-        
-
+        @yield('content')
         
     </div>
 </body>

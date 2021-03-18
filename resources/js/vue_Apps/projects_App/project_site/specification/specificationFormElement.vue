@@ -102,7 +102,9 @@ export default {
                 return this.specFormQuantity
             },
             set: function(newValue) {
+                if (newValue != '') {
                 this.specFormQuantity = Math.round(parseFloat(newValue.replace(/,/, "." )))
+                }
             }
         },
         convertSpecFormUnitPrice: {
@@ -110,7 +112,9 @@ export default {
                 return this.specFormUnitPrice
             },
             set: function(newValue) {
+                if (newValue != '') {
                 this.specFormUnitPrice = (Math.round(parseFloat(newValue.replace(/,/, "." ))*100)) /100
+                }
             }
         },
         convertSpecFormHourPrice: {
@@ -118,7 +122,9 @@ export default {
                 return this.specFormHourPrice
             },
             set: function(newValue) {
+                if (newValue != '') {
                 this.specFormHourPrice = (Math.round(parseFloat(newValue.replace(/,/, "." ))*100)) /100
+                }
             }
         }
         

@@ -75,9 +75,7 @@ export default {
         }
     },
     computed: {
-        getActiveCableList() {
-            /* return this.$store.getters.ActiveCableList */
-        },
+        
         cableList() {
             return (this.$store.getters.CableListById(Number(this.cableListId)))
         },

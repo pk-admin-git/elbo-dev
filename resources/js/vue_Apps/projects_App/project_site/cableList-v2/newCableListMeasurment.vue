@@ -21,6 +21,7 @@
             </v-card-title>
             <v-card-text>
                 <v-container>
+                    <v-form v-model="valid">
                     <v-row>
                         <v-col cols="5">
                             <v-select
@@ -30,7 +31,8 @@
                                 return-object
                                 label="Gebäude"
                                 :disabled="ObjectFloorLocked"
-                                required>
+                                required
+                                :rules="[v => !!v || 'Auswahl erforderlich']">
                             </v-select>
                         </v-col>
                         <v-col cols="5">
@@ -41,7 +43,8 @@
                                 return-object
                                 label="Etage"
                                 :disabled="ObjectFloorLocked"
-                                required>
+                                required
+                                :rules="[v => !!v || 'Auswahl erforderlich']">
                             </v-select>
                         </v-col>
                         <v-col cols="2" class="d-flex justify-center align-center">
@@ -59,7 +62,8 @@
                             :item-text="'ShortText'"
                             return-object
                             label="Position"
-                            required>
+                            required
+                            :rules="[v => !!v || 'Auswahl erforderlich']">
                             <template v-slot:item="data">
                                 <v-row>
                                     <v-col cols="4">
@@ -79,14 +83,16 @@
                                 :item-text="'Room'"
                                 return-object
                                 label="Raum"
-                                required>
+                                required
+                                :rules="[v => !!v || 'Auswahl erforderlich']">
                             </v-select>
                         </v-col>
                         <v-col cols="4">
                             <v-text-field
                                 v-model="convertQuantity"
                                 label="Menge"
-                                required>
+                                required
+                                :rules="[v => !!v || 'Eingabe erforderlich']">
                             </v-text-field>
                         </v-col>
                         <v-col cols="4">
@@ -96,6 +102,7 @@
                             </v-checkbox>
                         </v-col>
                     </v-row>
+                    </v-form>
                 </v-container>
             </v-card-text>
             <v-card-actions>
@@ -125,6 +132,7 @@ export default {
         'CurrentMsr',
     ],
     data: () => ({
+        valid: false,
         dialog: false,
         specItem: '',
         object: '',
@@ -141,7 +149,9 @@ export default {
                 return this.quantity
             },
             set: function(newValue) {
+                if (newValue != '') {
                 this.quantity = (Math.round(parseFloat(newValue.replace(/,/, "." ))*100)) /100
+                }
             }
         },
         docuObjects() {
@@ -183,9 +193,13 @@ export default {
                 Amount : this.quantity,
                 Finished : this.finished
                 }
-            console.log(newDocu)
-            this.$store.dispatch('addNewDocu', newDocu)
-            this.dialog = false
+            if(this.valid) {
+                this.$store.dispatch('addNewDocu', newDocu)
+                this.dialog = false
+                this.ObjectFloorLocked = true
+                this.room = ''
+                this.quantity = ''
+            }
         }
     }   
 }

@@ -1,7 +1,7 @@
 <template>
     <div>
         
-        <ul class="nav nav-tabs">
+        <!-- <ul class="nav nav-tabs">
             <li class="nav-item">
                 <router-link to="/projects" 
                 class="nav-link active">Aktive Bauprojekte</router-link>
@@ -12,7 +12,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Archiv</a>
             </li>
-        </ul>
+        </ul> -->
     
     </div>
 </template>

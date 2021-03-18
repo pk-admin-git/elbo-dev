@@ -19,6 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+        Route::apiResources([
+            'users' => UserController::class,
+            'roles' => RolesController::class,
+            'permissions' => PermissionsController::class,
+        ]);
+
+
         /* Projekte */
         Route::get('/projects', 'ProjectController@index')->middleware('cors');
         Route::post('/projects', 'ProjectController@store')->middleware('cors');
@@ -65,6 +72,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::get('/project/{project}/cableLists/{cableList}/cableListElements', 'CableListElementController@index')->middleware('cors');
         Route::post('/cableListElements', 'CableListElementController@store')->middleware('cors');
         Route::patch('/cableListElements/{cableListElement}', 'CableListElementController@update')->middleware('cors');
+        Route::patch('/cableListElements/{cableListElement}/updateOrder', 'CableListElementController@updateOrder')->middleware('cors');
         Route::delete('/cableListElements/{cableListElement}', 'CableListElementController@destroy')->middleware('cors');
 
         /* Projekt-Dokumentation */

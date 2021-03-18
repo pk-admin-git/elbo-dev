@@ -6,14 +6,22 @@
         </v-card-title>
         <v-card-text>
             <v-container>
+                <v-form v-model="valid" ref="form">
                 <v-row>
                     <v-col cols="12" sm="6" >
-                        <v-text-field label="Element" required v-model="device"></v-text-field>
+                        <v-text-field label="Element" 
+                                    required
+                                    :rules="[v => !!v || 'Eingabe erforderlich']" 
+                                    v-model="device"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                        <v-text-field label="Bezeichnung/Nummer" v-model="deviceNumber"></v-text-field>
+                        <v-text-field label="Bezeichnung/Nummer"
+                                    required
+                                    :rules="[v => !!v || 'Eingabe erforderlich']" 
+                                    v-model="deviceNumber"></v-text-field>
                     </v-col>
                 </v-row>
+                </v-form>
             </v-container>
         </v-card-text>
         <v-card-actions>
@@ -34,8 +42,12 @@ export default {
         'newElementDialog'
     ],
     data: () => ({
+        valid: false,
         device: '',
         deviceNumber: '',
+        snackbar: false,
+        snackbarText: '',
+        snackbarColor: '',
     }),
     methods: {
         addNewCableListElement() {
@@ -45,14 +57,17 @@ export default {
                 CableListId: this.cableListId,
                 Position: this.$store.getters.CableListElementsLength + 1
             }
-            this.$store.dispatch('addNewCableListElement', NewCableListElement)
-            this.device= ''
-            this.deviceNumber= ''
-            this.dialog = false
+            if(this.valid) {
+                this.$store.dispatch('addNewCableListElement', NewCableListElement)
+                this.device= ''
+                this.deviceNumber= ''
+                this.$emit('close-dialog', false)
+                this.$refs.form.resetValidation()
+            }
         },
         closeDialog(value) {
             this.$emit('close-dialog', value)
-        }
+        },
     }   
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
    
     
-    <router-link    :to="'/projectApp/project/' + ProjectItem.id + '/projectOverview'"
+    <router-link    :to="'/elboApp/project/' + ProjectItem.id + '/projectOverview'"
                     tag="div" 
                     class="col-sm-6 col-md-4 card-project">
         <div class="card">

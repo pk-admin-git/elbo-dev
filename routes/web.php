@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('projects');
 }); */
 
-Route::get('/projectApp/{vue_capture?}', function () {
+Route::get('/elboApp/{vue_capture?}', function () {
     return view('spa');
 })->where('vue_capture', '[\/\w\.-]*')->middleware('auth');
 

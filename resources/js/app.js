@@ -21,8 +21,9 @@ const opts = {
 import VueRouter from 'vue-router'
 
 //ProjectsApp
-import { projectRoutes } from './vue_routes/routes'
+import { routes } from './vue_routes/routes.js'
 import store from './vuex_store/ProjectsVuex.js'
+
 
 //SPA
 import appContainer from './vue SPA/app-Container.vue'
@@ -30,15 +31,15 @@ Vue.component('app-Container', appContainer);
 Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 
-const projectRouter = new VueRouter({
+const appRouter = new VueRouter({
     mode: 'history',
-    routes: projectRoutes,
+    routes,
 })
 
 
 let SPA = new Vue({
     store,
-    router: projectRouter,
+    router: appRouter,
     vuetify: new Vuetify(opts),
     el: '#appContainer',
     components: {

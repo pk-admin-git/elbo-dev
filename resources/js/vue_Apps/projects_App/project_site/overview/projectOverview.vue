@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div v-if="ProjectItem">
       <h1 class="h1 my-4">{{ ProjectItem.name }}</h1>
 
-        <div class="row"> 
+        <!-- <div class="row"> 
             <div class="card col-12 col-lg m-2">
                 <div class="card-body">
                     <h5 class="card-title">Projektdaten</h5>
@@ -60,17 +60,23 @@
                     
                 </div>
             </div>
-        </div>
-
+        </div> -->
+        <docuOverview />
     </div>
 </template>
 
 <script>
+import docuOverview from './docuOverview.vue'
+
 export default {
     name: 'project',
+    components: {
+        docuOverview
+    },
     props: [
         'projectId',
     ],
+
     
     created() {
         this.$store.dispatch('getProjectItems');

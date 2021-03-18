@@ -12,12 +12,21 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/projectApp/projects/activeProjects">
+        <v-list-item link to="/elboApp/projects/activeProjects">
           <v-list-item-action>
             <v-icon>mdi-email</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Bauprojekte</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="/elboApp/users/overview">
+          <v-list-item-action>
+            <v-icon>mdi-email</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Benutzer</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -46,7 +55,10 @@
 
         <v-row align="start" justify="start">
           <v-col>
+
             <router-view name="content"></router-view>
+            <snackbarTimeout/>
+
           </v-col>
         </v-row>
 
@@ -56,16 +68,22 @@
 </template>
 
 <script>
+  import snackbarTimeout from '../CRUD Components/snackbar_timeout.vue'
   export default {
     props: {
       source: String,
+    },
+    components: {
+      snackbarTimeout,
     },
     data: () => ({
       drawer: null,
     }),
     methods: {
       logout() {
+        // eslint-disable-next-line no-undef
         axios.post('/logout')
+          // eslint-disable-next-line no-unused-vars
           .then( response => {
             window.location.href = "logout"
           })

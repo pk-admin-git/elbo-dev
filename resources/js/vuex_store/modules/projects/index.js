@@ -37,10 +37,20 @@ const state = {
     ActiveObject: '',
     ActiveFloor: '',
     ActiveCableList: '',
+
+    /* CRUD Messages */
+    snackbarObject: null,
+    snackbarTrigger: false
+     
     
 };
 
 const mutations = {
+
+    UPDATE_SNACKBAR(state, [payload, value]) {
+        state.snackbarObject = payload
+        state.snackbarTrigger = value
+    },
 
     /* Projekte */
     UPDATE_PROJECT_ITEMS(state, payload){
@@ -114,18 +124,34 @@ const mutations = {
         state.ActiveCableList = payload;
     },
 
-    /* Dokumentation Kabelzugliste */
+    /* Kabelzugliste */
     UPDATE_CABLE_LIST_ELEMENTS(state, payload){
         state.CableListElements = payload;
     },
     UPDATE_NEW_CABLE_LIST_ELEMENT(state, payload){
-        state.CableListElements.push(payload);
+        state.CableListElements.push(payload)
     },
+    DELETE_CABLE_LIST_ELEMENT(state, payload) {
+        
+        const index = state.CableListElements.findIndex(CableListElement => CableListElement.id === payload.id)
+        state.CableListElements.splice(index, 1)
+    },
+
+    /* Dokumentation */
     UPDATE_DOCU_ELEMENTS(state, payload) {
         state.DocuElements = payload
     },
     UPDATE_NEW_DOCU_ELEMENT(state, payload){
         state.DocuElements.push(payload)
+    },
+    UPDATE_EDITED_DOCU_ELEMENT(state, payload){
+        const index = state.DocuElements.findIndex(docuElement => docuElement.id === payload.id)
+        state.DocuElements.splice(index, 1, payload)
+    },
+    DELETE_DOCU_ELEMENT(state, payload) {
+        console.log(payload)
+        const index = state.DocuElements.findIndex(docuElement => docuElement.id === payload.id)
+        state.DocuElements.splice(index, 1)
     },
 
     /* Aufmass */
@@ -156,6 +182,10 @@ const mutations = {
 
 const actions = {
 
+    /* Errors */
+    removeErrors({ commit }) {
+        commit('UPDATE_SNACKBAR', [null, false])
+    },
 
     /* Übersicht Kategorien */
 
@@ -284,8 +314,42 @@ const actions = {
     addNewCableListElement({ commit }, payload){
         axios.post('api/cableListElements', payload)
             .then((response) => {
-                commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data);
+                commit('UPDATE_NEW_CABLE_LIST_ELEMENT', response.data,)
+            }).then(
+                commit('UPDATE_SNACKBAR', [
+                    {
+                    color: 'success', 
+                    text: 'Neues Element hinzugefügt',
+                    icon: 'check'},
+                    true
+            ])).then(
+                setTimeout(function(){
+                    commit('UPDATE_SNACKBAR', [null, false])}, 3000)
+            );
+    },
+    updateCableListOrder({ commit }, [payload, cableListId]) {
+
+        axios.patch('api/cableListElements/' + cableListId + '/updateOrder', 
+                    {elements : payload}, axiosConfig)
+            .then((response) => {
+                commit('UPDATE_CABLE_LIST_ELEMENTS', response.data)
             });
+    },
+    deleteCableListElement({ commit }, id) {
+        axios.delete('api/cableListElements/' + id)
+            .then((response) => {
+                commit('DELETE_CABLE_LIST_ELEMENT', response.data)
+            }).then(
+                commit('UPDATE_SNACKBAR', [
+                    {
+                    color: 'warning', 
+                    text: 'Element gelöscht',
+                    icon: 'check'},
+                    true
+            ])).then(
+                setTimeout(function(){
+                    commit('UPDATE_SNACKBAR', [null, false])}, 3000)
+            );
     },
     getDocu({ commit }, [projectId, cableListId]){
         axios.get('api/project/' + projectId + '/cableListElements/' + cableListId + '/documentations', axiosConfig)
@@ -297,7 +361,49 @@ const actions = {
         axios.post('api/documentations', payload)
             .then((response) => {
                 commit('UPDATE_NEW_DOCU_ELEMENT', response.data)
-            })
+            }).then(
+                commit('UPDATE_SNACKBAR', [
+                    {
+                    color: 'success', 
+                    text: 'Neues Element hinzugefügt',
+                    icon: 'check'},
+                    true
+            ])).then(
+                setTimeout(function(){
+                    commit('UPDATE_SNACKBAR', [null, false])}, 3000)
+            );
+    },
+    updateDocu({ commit }, [payload, docuId]) {
+        axios.patch('api/documentations/' + docuId, payload)
+            .then((response) => {
+                commit('UPDATE_EDITED_DOCU_ELEMENT', response.data)
+            }).then(
+                commit('UPDATE_SNACKBAR', [
+                    {
+                    color: 'success', 
+                    text: 'Element bearbeitet',
+                    icon: 'check'},
+                    true
+            ])).then(
+                setTimeout(function(){
+                    commit('UPDATE_SNACKBAR', [null, false])}, 3000)
+            );
+    },
+    deleteDocu({ commit }, docuId) {
+        axios.delete('api/documentations/' + docuId)
+            .then((response) => {
+                commit('DELETE_DOCU_ELEMENT', response.data)
+            }).then(
+                commit('UPDATE_SNACKBAR', [
+                    {
+                    color: 'warning', 
+                    text: 'Element gelöscht',
+                    icon: 'check'},
+                    true
+            ])).then(
+                setTimeout(function(){
+                    commit('UPDATE_SNACKBAR', [null, false])}, 3000)
+            );
     },
 
     /* Aufmaß */
@@ -330,6 +436,8 @@ const getters = {
     DocuCategories: state => state.DocuCategoryItems,
     ActiveCategory: state => state.ActiveCategory,
     CategorySelected: state => state.CategorySelected,
+    errorExists: state => state.snackbarTrigger,
+    getSnackbarObject: state => state.snackbarObject,
 
     /* Projekte */
     ProjectItems: state => state.ProjectItems,
@@ -371,6 +479,7 @@ const getters = {
     RoomById: state => RoomId => state.DocuRoomItems.find(room => room.id === RoomId),
     FloorById: state => FloorId => state.DocuFloorItems.find(floor => floor.id === FloorId),
     ObjectById: state => ObjectId => state.DocuObjectItems.find(object => object.id === ObjectId),
+    SpecById: state => specId => state.SpecItems.find(specItem => specItem.id === specId),
 
     /* Aufmaß */
     Measurments: state => state.Measurments,

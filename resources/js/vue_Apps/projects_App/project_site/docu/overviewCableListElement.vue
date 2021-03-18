@@ -1,4 +1,6 @@
 <template>
+<div>
+<div class="text-h3 mt-5 mb-8">Dokumentation</div>
 
 <!-- Formular Neuer Bereich -->
 <v-card elevation="0" tile class="mt-10">
@@ -20,13 +22,14 @@
         </v-col>
     </v-row>
 
-    <v-form v-if="newCableListShow">    
+    <v-form v-if="newCableListShow" v-model="valid">    
         <v-row>
             <v-col cols="12" lg="3">
                 <v-text-field
                         v-model="cableList"
                         label="Name des Bereiches"
-                        required>
+                        required
+                        :rules="[v => !!v || 'Eingabe erforderlich']">
                 </v-text-field>
             </v-col>
             <v-col cols="12" lg="3">
@@ -36,6 +39,8 @@
                     :item-text="'Object'"
                     :item-value="'id'"
                     label="Auswahl Gebäude"
+                    required
+                    :rules="[v => !!v || 'Auswahl erforderlich']"
                 ></v-select>
             </v-col>
             <v-col cols="12" lg="3">
@@ -45,6 +50,8 @@
                     :item-text="'Floor'"
                     :item-value="'id'"
                     label="Auswahl Etage"
+                    required
+                    :rules="[v => !!v || 'Auswahl erforderlich']"
                 ></v-select>
             </v-col>
             <v-col cols="12" lg="3">
@@ -54,6 +61,8 @@
                     :item-text="'Category'"
                     :item-value="'id'"
                     label="Auswahl Kategorie"
+                    required
+                    :rules="[v => !!v || 'Auswahl erforderlich']"
                 ></v-select>
             </v-col>
         </v-row>
@@ -120,7 +129,7 @@
                 :cableList="item"
                 :projectId="projectId"
                 @click="setActiveCableList(item.id)">
-                <router-link :to="'/projectApp/project/' + projectId + '/projectDocu/section/' + item.id"
+                <router-link :to="'/elboApp/project/' + projectId + '/projectDocu/section/' + item.id"
                    replace style="text-decoration:none">
                     <v-card>
                     <v-card-title v-if="filteredCableLists" class="subheading font-weight-bold"
@@ -153,6 +162,7 @@
     </v-data-iterator>
             
 </v-card>
+</div>
 </template>
 
 <script>
@@ -163,12 +173,24 @@ export default {
     ],
     data() {
         return {
+            valid: false,
             newCableListShow: false,
             cableList: '',
             search: '',
             filterCategories: [],
             filterObjects: [],
         }
+    },
+    created() {
+            this.$store.dispatch('getDocuObjectItems', this.projectId)
+
+            this.$store.dispatch('getDocuFloorItems', this.projectId)
+
+            this.$store.dispatch('getDocuRoomItems', this.projectId)
+            
+            this.$store.dispatch('getDocuCategoryItems', this.projectId)
+
+            this.$store.dispatch('getCableListItems', this.projectId)
     },
     computed: {
 
@@ -219,8 +241,10 @@ export default {
     },    
     methods: {
         getColor(categoryId) {
+            if(categoryId != null) {
             const category = this.$store.getters.DocuCategories.find(category => category.id === categoryId)
             return category.color
+            }
         },
         getCategory(categoryId) {
             const category = this.$store.getters.DocuCategories.find(category => category.id === categoryId)
@@ -249,10 +273,11 @@ export default {
                 ObjectId: this.activeObject,
                 FloorId: this.activeFloor
             }
-            this.$store.dispatch('addNewCableList', NewCableList)
-            this.newCableListShow = !this.newCableListShow
-            this.cableList= ''
-            
+            if(this.valid) {
+                this.$store.dispatch('addNewCableList', NewCableList)
+                this.newCableListShow = !this.newCableListShow
+                this.cableList= ''
+            }
         },
         setActiveCableList(cableListId) {
             this.$store.dispatch('setActiveCableList', cableListId)
